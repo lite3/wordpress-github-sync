@@ -76,6 +76,10 @@ class WordPress_GitHub_Sync_Payload {
 		return true;
 	}
 
+	public function get_before_commit_id() {
+		return $this->data->before ? $this->data->before : null;
+	}
+
 	/**
 	 * Returns the sha of the head commit.
 	 *

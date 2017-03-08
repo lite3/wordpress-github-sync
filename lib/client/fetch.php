@@ -55,6 +55,25 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	}
 
 	/**
+	 * Compare a commit by sha with master from the GitHub API
+	 *
+	 * @param string $sha Sha for commit to retrieve.
+	 *
+	 * @return WordPress_GitHub_Sync_Compare|WP_Error
+	 */
+	public function compare( $sha ) {
+		// https://api.github.com/repos/lite3/testwpsync/compare/861f87e8851b8debb78db548269d29f8da4d94ac...master
+		$endpoint = $this->compare_endpoint();
+		$data = $this->call( 'GET', "$endpoint/$sha...master" );
+
+		if ( is_wp_error( $data ) ) {
+			return $data;
+		}
+
+		return new WordPress_GitHub_Sync_Compare( $data )
+	}
+
+	/**
 	 * Calls the content API to get the post's contents and metadata
 	 *
 	 * Returns Object the response from the API

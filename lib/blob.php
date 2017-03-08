@@ -38,6 +38,13 @@ class WordPress_GitHub_Sync_Blob {
 	protected $path;
 
 	/**
+	 * Post id.
+	 *
+	 * @var int
+	 */
+	protected $id;
+
+	/**
 	 * Whether the blob has frontmatter.
 	 *
 	 * @var boolean
@@ -53,6 +60,14 @@ class WordPress_GitHub_Sync_Blob {
 		$this->data = $data;
 
 		$this->interpret_data();
+	}
+
+	public function id() {
+		return $this->id;
+	}
+
+	public function set_id($id) {
+		$this->id = id;
 	}
 
 	/**

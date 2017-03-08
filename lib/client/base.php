@@ -56,6 +56,9 @@ class WordPress_GitHub_Sync_Base_Client {
 				json_encode( $body );
 		}
 
+		$tmpbody = isset($args['body']) ? $args['body'] : '';
+		error_log("wp-github-sync-call method:$method endpoint:$endpoint body:$tmpbody");
+
 		$response = wp_remote_request( $endpoint, $args );
 		$status   = wp_remote_retrieve_header( $response, 'status' );
 		$body     = json_decode( wp_remote_retrieve_body( $response ) );
@@ -156,6 +159,16 @@ class WordPress_GitHub_Sync_Base_Client {
 	public function commit_endpoint() {
 		$url = $this->api_base() . '/repos/';
 		$url = $url . $this->repository() . '/git/commits';
+
+		return $url;
+	}
+
+	/**
+	 * Api to compare commits
+	 */
+	public function compare_endpoint() {
+		$url = $this->api_base() . '/repos/';
+		$url = $url . $this->repository() . '/compare';
 
 		return $url;
 	}

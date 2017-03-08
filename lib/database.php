@@ -142,8 +142,8 @@ class WordPress_GitHub_Sync_Database {
 	 * @return string|WP_Error
 	 */
 	public function save_posts( array $posts, $email ) {
-		$user    = $this->fetch_commit_user( $email );
-		$user_id = ! is_wp_error( $user ) ? $user->ID : 0;
+		// $user    = $this->fetch_commit_user( $email );
+		// $user_id = ! is_wp_error( $user ) ? $user->ID : 0;
 
 		/**
 		 * Whether an error has occurred.
@@ -172,7 +172,7 @@ class WordPress_GitHub_Sync_Database {
 				continue;
 			}
 
-			$this->set_revision_author( $post_id, $user_id );
+			// $this->set_revision_author( $post_id, $user_id );
 
 			if ( $post->is_new() ) {
 				$this->set_post_author( $post_id, $user_id );
@@ -259,6 +259,32 @@ class WordPress_GitHub_Sync_Database {
 			);
 		}
 
+		$result = wp_delete_post( $post_id );
+
+		// If deleting fails...
+		if ( false === $result ) {
+			$post = get_post( $post_id );
+
+			// ...and the post both exists and isn't in the trash...
+			if ( $post && 'trash' !== $post->post_status ) {
+				// ... then something went wrong.
+				return new WP_Error(
+					'db_error',
+					sprintf(
+						__( 'Failed to delete post ID %d.', 'wp-github-sync' ),
+						$post_id
+					)
+				);
+			}
+		}
+
+		return sprintf(
+			__( 'Successfully deleted post ID %d.', 'wp-github-sync' ),
+			$post_id
+		);
+	}
+
+	public function delete_post( $id ) {
 		$result = wp_delete_post( $post_id );
 
 		// If deleting fails...
