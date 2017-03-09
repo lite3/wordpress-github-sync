@@ -70,7 +70,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 			return $data;
 		}
 
-		return new WordPress_GitHub_Sync_Compare( $data )
+		return new WordPress_GitHub_Sync_Compare( $data );
 	}
 
 	/**
@@ -83,7 +83,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 * @return mixed
 	 */
 	public function remote_contents( $post ) {
-		return $this->call( 'GET', $this->content_endpoint() . $post->github_path() );
+		return $this->call( 'GET', $this->content_endpoint( $post->github_path() ) );
 	}
 
 	/**
@@ -147,7 +147,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 *
 	 * @return WordPress_GitHub_Sync_Blob|WP_Error
 	 */
-	protected function blob( $blob ) {
+	public function blob( $blob ) {
 		if ( $cache = $this->app->cache()->fetch_blob( $blob->sha ) ) {
 			return $cache;
 		}

@@ -141,9 +141,7 @@ class WordPress_GitHub_Sync_Database {
 	 *
 	 * @return string|WP_Error
 	 */
-	public function save_posts( array $posts, $email ) {
-		// $user    = $this->fetch_commit_user( $email );
-		// $user_id = ! is_wp_error( $user ) ? $user->ID : 0;
+	public function save_posts( array $posts ) {
 
 		/**
 		 * Whether an error has occurred.
@@ -175,6 +173,13 @@ class WordPress_GitHub_Sync_Database {
 			// $this->set_revision_author( $post_id, $user_id );
 
 			if ( $post->is_new() ) {
+				$author = false;
+				$meta = $post->get_meta();
+				if ( ! empty( $meta ) && ! empty( $meta['author'] ) ) {
+					$author = $meta['author'];
+				}
+				$user    = $this->fetch_commit_user( $author );
+				$user_id = ! is_wp_error( $user ) ? $user->ID : 0;
 				$this->set_post_author( $post_id, $user_id );
 			}
 
@@ -284,7 +289,7 @@ class WordPress_GitHub_Sync_Database {
 		);
 	}
 
-	public function delete_post( $id ) {
+	public function delete_post( $post_id ) {
 		$result = wp_delete_post( $post_id );
 
 		// If deleting fails...
@@ -373,19 +378,33 @@ class WordPress_GitHub_Sync_Database {
 	}
 
 	/**
-	 * Retrieves the commit user for a provided email address.
+	 * Retrieves the commit user for a provided display name
 	 *
-	 * Searches for a user with provided email address or returns
+	 * Searches for a user with provided display name or returns
 	 * the default user saved in the database.
 	 *
-	 * @param string $email User email address to search for.
+	 * @param string $display_name User display name to search for.
 	 *
 	 * @return WP_Error|WP_User
 	 */
-	protected function fetch_commit_user( $email ) {
+	protected function fetch_commit_user( $display_name ) {
 		// If we can't find a user and a default hasn't been set,
 		// we're just going to set the revision author to 0.
-		$user = get_user_by( 'email', $email );
+		$user = false;
+
+		if ( ! empty( $display_name ) ) {
+			$search_string = esc_attr( $display_name );
+			$query = new WP_User_Query( array(
+			    'search'         => "{$search_string}",
+			    'search_columns' => array(
+			        'display_name',
+			        'user_nicename',
+			        'user_login',
+			    )
+			) );
+			$users = $query->get_results();
+			$user = empty($users) ? false : $users[0];
+		}
 
 		if ( ! $user ) {
 			// Use the default user.

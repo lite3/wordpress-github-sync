@@ -77,8 +77,9 @@ class WordPress_GitHub_Sync_Import {
 		 * @var false|WP_Error $error
 		 */
 		$error = false;
+		$delete_ids = false;
 
-		$result = $this->compare_commit( $this->app->api()->fetch()->compare_commit( $payload->get_before_commit_id() ) );
+		$result = $this->compare( $this->app->api()->fetch()->compare( $payload->get_before_commit_id() ), $delete_ids );
 
 		if ( is_wp_error( $result ) ) {
 			$error = $result;
@@ -88,18 +89,20 @@ class WordPress_GitHub_Sync_Import {
 		foreach ( $payload->get_commits() as $commit ) {
 			$removed = array_merge( $removed, $commit->removed );
 		}
-		foreach ( array_unique( $removed ) as $path ) {
-			$result = $this->app->database()->delete_post_by_path( $path );
 
-			if ( is_wp_error( $result ) ) {
-				if ( $error ) {
-					$error->add( $result->get_error_code(), $result->get_error_message() );
-				} else {
-					$error = $result;
+		if ( ! empty( $delete_ids ) ) {
+			foreach ($delete_ids as $id) {
+				$result = $this->app->database()->delete_post( $id );
+				if ( is_wp_error( $result ) ) {
+					if ( $error ) {
+						$error->add( $result->get_error_code(), $result->get_error_message() );
+					} else {
+						$error = $result;
+					}
 				}
 			}
 		}
-
+		
 		if ( $error ) {
 			return $error;
 		}
@@ -164,14 +167,15 @@ class WordPress_GitHub_Sync_Import {
 	// 	return $posts;
 	// }
 
-	protected function compare_commit( $compare, &$delete_ids ) {
+	protected function compare( $compare, &$delete_ids ) {
 		if ( is_wp_error( $compare ) ) {
 			return $compare;
 		}
 
 		$posts = array();
 		$new   = array();
-		$delete_ids = array();
+
+		$idsmap = array();
 
 		foreach ( $compare->files() as $file ) {
 			if ( ! $this->importable_file( $file ) ) {
@@ -193,22 +197,18 @@ class WordPress_GitHub_Sync_Import {
 			if ( $file->status == 'removed' ) {
 				$id = $blob->id();
 				if ( ! empty($id) ) {
-					$delete_ids[] = $id;
+					$idsmap[$id] = true;
 				}
 			} elseif ( $post != false ) {
-				$posts = $post;
+				$posts[] = $post;
 				if ( $post->is_new() ) {
 					$new[] = $post;
 				}
 			}
 		}
 
-		$idsmap = array();
-		foreach ($delete_ids as $id) {
-			$idsmap[$id] = truesa
-		}
 		foreach ($posts as $post) {
-			if ( $idsmap[$post->id()] == true ) {
+			if ( $post->id() && $idsmap[$post->id()] ) {
 				unset($idsmap[$post->id()]);
 			}
 		}
@@ -243,7 +243,7 @@ class WordPress_GitHub_Sync_Import {
 	 *
 	 * @return bool
 	 */
-	protected function importable_file( WordPress_GitHub_Sync_File $file ) {
+	protected function importable_file( WordPress_GitHub_Sync_Compare_File $file ) {
 
 
 		// only _pages and _posts 
@@ -325,9 +325,9 @@ class WordPress_GitHub_Sync_Import {
 
 		$meta['_sha'] = $blob->sha();
 
-		if ( !empty($id) && ) {
+		if ( !empty($id) ) {
 			$old_sha = get_post_meta( $id, '_sha', true );
-			// dont save post when 
+			// dont save post when has same sha
 			if ( !empty( $old_sha ) && $old_sha == $meta['_sha'] ) {
 
 				return false;
@@ -335,7 +335,9 @@ class WordPress_GitHub_Sync_Import {
 		}
 
 		$post = new WordPress_GitHub_Sync_Post( $args, $this->app->api() );
+		$post->set_old_github_path( $blob->path() );
 		$post->set_meta( $meta );
+		$blob->set_id( $post->id() );
 
 		return $post;
 	}

@@ -67,7 +67,7 @@ class WordPress_GitHub_Sync_Blob {
 	}
 
 	public function set_id($id) {
-		$this->id = id;
+		$this->id = $id;
 	}
 
 	/**
@@ -174,19 +174,38 @@ class WordPress_GitHub_Sync_Blob {
 	 *
 	 * @return stdClass
 	 */
+	// public function to_body() {
+	// 	$data = new stdClass;
+
+	// 	$data->mode = '100644';
+	// 	$data->type = 'blob';
+
+	// 	$data->path = $this->path();
+
+	// 	if ( $this->sha() ) {
+	// 		$data->sha = $this->sha();
+	// 	} else {
+	// 		$data->content = $this->content();
+	// 	}
+
+	// 	return $data;
+	// }
+
+
+	/**
+	 * Formats the blob into an API call body.
+	 *
+	 * @return stdClass
+	 */
 	public function to_body() {
 		$data = new stdClass;
 
-		$data->mode = '100644';
-		$data->type = 'blob';
+		// $data->mode = '100644';
+		// $data->type = 'blob';
 
 		$data->path = $this->path();
-
-		if ( $this->sha() ) {
-			$data->sha = $this->sha();
-		} else {
-			$data->content = $this->content();
-		}
+		$data->content = base64_encode( $this->content() );
+		$data->sha = $this->sha;
 
 		return $data;
 	}

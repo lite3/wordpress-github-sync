@@ -49,6 +49,9 @@ class WordPress_GitHub_Sync_Post {
 	 */
 	protected $new = true;
 
+
+	protected $old_github_path;
+
 	/**
 	 * Instantiates a new Post object
 	 *
@@ -80,6 +83,10 @@ class WordPress_GitHub_Sync_Post {
 				}
 			}
 		}
+	}
+
+	public function id() {
+		return $this->id;
 	}
 
 	/**
@@ -148,6 +155,16 @@ class WordPress_GitHub_Sync_Post {
 
 		return apply_filters( 'wpghs_content_export', $content, $this );
 	}
+
+	public function old_github_path() {
+		return $this->old_github_path;
+	}
+
+	public function set_old_github_path( $path ) {
+		$this->old_github_path = $path;
+	}
+
+
 
 	/**
 	 * Retrieves or calculates the proper GitHub path for a given post
@@ -405,6 +422,7 @@ class WordPress_GitHub_Sync_Post {
 
 		$data->path    = $this->github_path();
 		$data->content = $this->github_content();
+		$data->sha     = $this->meta['_sha'];
 
 		return new WordPress_GitHub_Sync_Blob( $data );
 	}

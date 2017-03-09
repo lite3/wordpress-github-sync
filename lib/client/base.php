@@ -200,9 +200,13 @@ class WordPress_GitHub_Sync_Base_Client {
 	 *
 	 * Returns String the relative API call path
 	 */
-	public function content_endpoint() {
+	public function content_endpoint( $path = false ) {
 		$url = $this->api_base() . '/repos/';
-		$url = $url . $this->repository() . '/contents/';
+		$url = $url . $this->repository() . '/contents';
+
+		if ( ! empty($path) ) {
+			$url .= '/' . $path;
+		}
 
 		return $url;
 	}

@@ -116,4 +116,58 @@ class WordPress_GitHub_Sync_Persist_Client extends WordPress_GitHub_Sync_Base_Cl
 			'email' => $user->user_email,
 		);
 	}
+
+	/**
+	 * Delete the file.
+	 *
+	 * @return array
+	 */
+	public function delete_file( $path, $sha, $message ) {
+		$body = new stdClass();
+		$body->message = $message;
+		$body->sha = $sha;
+		$body->branch = 'master';
+
+		if ( $author = $this->export_user() ) {
+			$body->author = $author;
+		}
+
+		return $this->call( 'DELETE', $this->content_endpoint( $path ), $body );
+	}
+
+	/**
+	 * Create the file.
+	 *
+	 * @return array
+	 */
+	public function create_file( $blob, $message ) {
+		$body = $blob->to_body();
+		$body->message = $message;
+		$body->branch = 'master';
+		unset($body->sha);
+
+		if ( $author = $this->export_user() ) {
+			$body->author = $author;
+		}
+
+		return $this->call( 'PUT', $this->content_endpoint( $blob->path() ), $body );
+	}
+
+	/**
+	 * Update the file.
+	 *
+	 * @return array
+	 */
+	public function update_file( $blob, $message ) {
+		$body = $blob->to_body();
+		$body->message = $message;
+		$body->branch = 'master';
+		unset($body->sha);
+
+		if ( $author = $this->export_user() ) {
+			$body->author = $author;
+		}
+
+		return $this->call( 'PUT', $this->content_endpoint( $blob->path() ), $body );
+	}
 }

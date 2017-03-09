@@ -34,6 +34,8 @@ if ( ! function_exists( 'get_the_github_view_link' ) && file_exists( $path ) ) {
 	require_once $path;
 }
 
+require_once(dirname(__FILE__) . '/lib/compare.php');
+
 add_action( 'plugins_loaded', array( new WordPress_GitHub_Sync, 'boot' ) );
 
 class WordPress_GitHub_Sync {

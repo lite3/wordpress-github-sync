@@ -128,34 +128,74 @@ class WordPress_GitHub_Sync_Export {
 	 * @return string|WP_Error
 	 */
 	public function new_posts( array $posts ) {
-		$master = $this->app->api()->fetch()->master();
+		// $master = $this->app->api()->fetch()->master();
 
-		if ( is_wp_error( $master ) ) {
-			return $master;
-		}
+		// if ( is_wp_error( $master ) ) {
+		// 	return $master;
+		// }
+
+		$message = apply_filters(
+			'wpghs_commit_msg_new_posts',
+			sprintf(
+				'Updating new posts from WordPress at %s (%s)',
+				site_url(),
+				get_bloginfo( 'name' )
+			)
+		) . $this->get_commit_msg_tag();
+
+		$error = false;
+
+		$persist = $this->app->api()->persist();
 
 		foreach ( $posts as $post ) {
-			$master->tree()->add_post_to_tree( $post );
+			$result = $this->new_post( $post, $message, $persist );
+			if ( is_wp_error( $result ) ) {
+				if ( $error ) {
+					$error->add( $result->get_error_code(), $result->get_error_message() );
+				} else {
+					$error = $result;
+				}
+			}
 		}
 
-		$master->set_message(
-			apply_filters(
-				'wpghs_commit_msg_new_posts',
-				sprintf(
-					'Updating new posts from WordPress at %s (%s)',
-					site_url(),
-					get_bloginfo( 'name' )
-				)
-			) . $this->get_commit_msg_tag()
-		);
+		
 
-		$result = $this->app->api()->persist()->commit( $master );
+		// $result = $this->app->api()->persist()->commit( $master );
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
 
-		return $this->update_shas( $posts );
+		// return $this->update_shas( $posts );
+		return true;
+	}
+
+	protected function new_post( $post, $message, $persist ) {
+		$github_path = $post->github_path();
+		$blob = $post->to_blob();
+		$rename = $post->old_github_path() != $github_path;
+		$result = false;
+		if ( $rename ) {
+			$result = $persist->delete_file( $post->old_github_path(), $blob->sha(), $message );
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+
+			$result = $persist->create_file( $blob, $message );
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+		} else {
+			$result = $persist->update_file( $blob, $message );
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+		}
+
+		$sha = $result->content->sha;
+		$post->set_sha($sha);
+
+		return true;
 	}
 
 	/**
