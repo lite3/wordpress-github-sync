@@ -102,7 +102,7 @@ class WordPress_GitHub_Sync_Import {
 				}
 			}
 		}
-		
+
 		if ( $error ) {
 			return $error;
 		}
@@ -191,7 +191,7 @@ class WordPress_GitHub_Sync_Import {
 			if ( ! $this->importable_blob($blob) ) {
 				continue;
 			}
-			
+
 			$post = $this->blob_to_post( $blob );
 
 			if ( $file->status == 'removed' ) {
@@ -208,7 +208,7 @@ class WordPress_GitHub_Sync_Import {
 		}
 
 		foreach ($posts as $post) {
-			if ( $post->id() && $idsmap[$post->id()] ) {
+			if ( $post->id() && isset($idsmap[$post->id()]) ) {
 				unset($idsmap[$post->id()]);
 			}
 		}
@@ -216,7 +216,7 @@ class WordPress_GitHub_Sync_Import {
 		foreach ($idsmap as $id => $value) {
 			$delete_ids[] = $id;
 		}
-		
+
 		// $this->app->database()->save_posts( $posts, $commit->author_email() );
 
 		$result = $this->app->database()->save_posts( $posts );
@@ -246,12 +246,12 @@ class WordPress_GitHub_Sync_Import {
 	protected function importable_file( WordPress_GitHub_Sync_Compare_File $file ) {
 
 
-		// only _pages and _posts 
+		// only _pages and _posts
 		if ( strncasecmp($file->path, '_pages/', strlen('_pages/') ) != 0 &&
 			 strncasecmp($file->path, '_posts/', strlen('_posts/') ) != 0 ) {
 			return false;
 		}
-		
+
 
 		// if ( ! $file->has_frontmatter() ) {
 		// 	return false;
