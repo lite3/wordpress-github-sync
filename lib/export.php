@@ -182,7 +182,7 @@ class WordPress_GitHub_Sync_Export {
 			if ( is_wp_error( $result ) ) {
 				return $result;
 			}
-			$old_github_path = false
+			$old_github_path = false;
 		}
 
 		// create file
