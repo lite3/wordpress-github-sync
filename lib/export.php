@@ -172,7 +172,7 @@ class WordPress_GitHub_Sync_Export {
 
 	protected function new_post( $post, $message, $persist ) {
 		$github_path = $post->github_path();
-		$old_github_path = $post->old_github_path()
+		$old_github_path = $post->old_github_path();
 		$blob = $post->to_blob();
 		$result = false;
 
