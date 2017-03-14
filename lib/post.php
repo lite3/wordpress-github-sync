@@ -1,7 +1,7 @@
 <?php
 /**
  * The post object which represents both the GitHub and WordPress post
- * @package WordPress_GitHub_Sync
+ * @package WP_Writing_On_GitHub
  */
 
 /**
@@ -162,6 +162,7 @@ class WordPress_GitHub_Sync_Post {
 
 	public function set_old_github_path( $path ) {
 		$this->old_github_path = $path;
+		update_post_meta( $this->id, '_wogh_github_path', $path);
 	}
 
 
@@ -174,7 +175,7 @@ class WordPress_GitHub_Sync_Post {
 	public function github_path() {
 		$path = $this->github_directory() . $this->github_filename();
 
-		update_post_meta( $this->id, '_wpghs_github_path', $path );
+		// update_post_meta( $this->id, '_wpghs_github_path', $path );
 
 		return $path;
 	}
@@ -299,20 +300,20 @@ class WordPress_GitHub_Sync_Post {
 	 * Returns String the sha1 hash
 	 */
 	public function sha() {
-		$sha = get_post_meta( $this->id, '_sha', true );
+		$sha = get_post_meta( $this->id, '_wogh_sha', true );
 
 		// If we've done a full export and we have no sha
 		// then we should try a live check to see if it exists.
-		if ( ! $sha && 'yes' === get_option( '_wpghs_fully_exported' ) ) {
+		// if ( ! $sha && 'yes' === get_option( '_wpghs_fully_exported' ) ) {
 
-			// @todo could we eliminate this by calling down the full tree and searching it
-			$data = $this->api->fetch()->remote_contents( $this );
+		// 	// @todo could we eliminate this by calling down the full tree and searching it
+		// 	$data = $this->api->fetch()->remote_contents( $this );
 
-			if ( ! is_wp_error( $data ) ) {
-				update_post_meta( $this->id, '_sha', $data->sha );
-				$sha = $data->sha;
-			}
-		}
+		// 	if ( ! is_wp_error( $data ) ) {
+		// 		update_post_meta( $this->id, '_wogh_sha', $data->sha );
+		// 		$sha = $data->sha;
+		// 	}
+		// }
 
 		// if the sha still doesn't exist, then it's empty
 		if ( ! $sha || is_wp_error( $sha ) ) {
@@ -328,7 +329,7 @@ class WordPress_GitHub_Sync_Post {
 	 * @param string $sha
 	 */
 	public function set_sha( $sha ) {
-		update_post_meta( $this->id, '_sha', $sha );
+		update_post_meta( $this->id, '_wogh_sha', $sha );
 	}
 
 	/**
@@ -422,7 +423,7 @@ class WordPress_GitHub_Sync_Post {
 
 		$data->path    = $this->github_path();
 		$data->content = $this->github_content();
-		$data->sha     = $this->meta['_sha'];
+		$data->sha     = $this->meta['_wogh_sha'];
 
 		return new WordPress_GitHub_Sync_Blob( $data );
 	}

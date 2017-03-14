@@ -98,41 +98,6 @@ class WordPress_GitHub_Sync_Database {
 	}
 
 	/**
-	 * Queries for a post by provided sha.
-	 *
-	 * @param string $sha Post sha to fetch by.
-	 *
-	 * @return WordPress_GitHub_Sync_Post|WP_Error
-	 */
-	public function fetch_by_sha( $sha ) {
-		$query = new WP_Query( array(
-			'meta_key'       => '_sha',
-			'meta_value'     => $sha,
-			'meta_compare'   => '=',
-			'posts_per_page' => 1,
-			'fields'         => 'ids',
-		) );
-
-		$post_id = $query->get_posts();
-		$post_id = array_pop( $post_id );
-
-		if ( ! $post_id ) {
-			return new WP_Error(
-				'sha_not_found',
-				sprintf(
-					__(
-						'Post for sha %s not found.',
-						'wp-github-sync'
-					),
-					$sha
-				)
-			);
-		}
-
-		return new WordPress_GitHub_Sync_Post( $post_id, $this->app->api() );
-	}
-
-	/**
 	 * Saves an array of Post objects to the database
 	 * and associates their author as well as their latest
 	 *
@@ -152,7 +117,7 @@ class WordPress_GitHub_Sync_Database {
 
 		foreach ( $posts as $post ) {
 			$args    = apply_filters( 'wpghs_pre_import_args', $post->get_args(), $post );
-			
+
 			remove_filter('content_save_pre', 'wp_filter_post_kses');
 			$post_id = $post->is_new() ?
 				wp_insert_post( $args, true ) :
@@ -510,6 +475,6 @@ class WordPress_GitHub_Sync_Database {
 	 * @return bool|int
 	 */
 	public function set_post_sha( $post, $sha ) {
-		return update_post_meta( $post->id, '_sha', $sha );
+		return update_post_meta( $post->id, '_wogh_sha', $sha );
 	}
 }

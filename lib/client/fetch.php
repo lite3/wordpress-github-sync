@@ -86,6 +86,14 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 		return $this->call( 'GET', $this->content_endpoint( $post->github_path() ) );
 	}
 
+	public function exists( $path ) {
+		$result = $this->call( 'GET', $this->content_endpoint( $path ) );
+		if ( is_wp_error( $results ) ) {
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * Retrieves a tree by sha recursively from the GitHub API
 	 *

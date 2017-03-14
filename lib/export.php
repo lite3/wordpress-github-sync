@@ -73,6 +73,21 @@ class WordPress_GitHub_Sync_Export {
 		return $this->update_shas( $posts );
 	}
 
+
+	/**
+	 * Check if it exists in github
+	 * @param  int  $post_id
+	 * @return boolean
+	 */
+	protected function github_path( $post_id ) {
+		$github_path = get_post_meta( $post_id, '_wogh_github_path', true )
+		if ( $github_path && $this->app->fetch->exists( $github_path ) ) {
+			return $github_path;
+		}
+
+		return false;
+	}
+
 	/**
 	 * Updates the provided post ID in master.
 	 *
@@ -91,33 +106,17 @@ class WordPress_GitHub_Sync_Export {
 			return $this->delete( $post_id );
 		}
 
-		$master = $this->app->api()->fetch()->master();
-
-		if ( is_wp_error( $master ) ) {
-			return $master;
+		if ( $old_github_path = $this->github_path( $post->id() ) ) {
+			$post->set_old_github_path($old_github_path);
 		}
 
-		$master->tree()->add_post_to_tree( $post );
-		$master->set_message(
-			apply_filters(
-				'wpghs_commit_msg_single',
-				sprintf(
-					'Syncing %s from WordPress at %s (%s)',
-					$post->github_path(),
-					site_url(),
-					get_bloginfo( 'name' )
-				),
-				$post
-			) . $this->get_commit_msg_tag()
-		);
-
-		$result = $this->app->api()->persist()->commit( $master );
+		$result = $this->new_posts( array( $post ) );
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
 
-		return $this->update_shas( array( $post ) );
+		return __( 'Export to GitHub completed successfully.', 'writing-on-github' );
 	}
 
 	/**
@@ -158,7 +157,7 @@ class WordPress_GitHub_Sync_Export {
 			}
 		}
 
-		
+
 
 		// $result = $this->app->api()->persist()->commit( $master );
 
@@ -172,20 +171,29 @@ class WordPress_GitHub_Sync_Export {
 
 	protected function new_post( $post, $message, $persist ) {
 		$github_path = $post->github_path();
+		$old_github_path = $post->old_github_path()
 		$blob = $post->to_blob();
-		$rename = $post->old_github_path() != $github_path;
 		$result = false;
-		if ( $rename ) {
+
+		// delete old file
+		if ( $old_github_path && $old_github_path != $github_path ) {
 			$result = $persist->delete_file( $post->old_github_path(), $blob->sha(), $message );
 			if ( is_wp_error( $result ) ) {
 				return $result;
 			}
+			$old_github_path = false
+		}
 
+		// create file
+		if ( ! $old_github_path ) {
 			$result = $persist->create_file( $blob, $message );
 			if ( is_wp_error( $result ) ) {
 				return $result;
 			}
-		} else {
+		}
+
+		// update file
+		if ( $old_github_path ) {
 			$result = $persist->update_file( $blob, $message );
 			if ( is_wp_error( $result ) ) {
 				return $result;
@@ -194,6 +202,7 @@ class WordPress_GitHub_Sync_Export {
 
 		$sha = $result->content->sha;
 		$post->set_sha($sha);
+		$post->set_old_github_path($github_path);
 
 		return true;
 	}

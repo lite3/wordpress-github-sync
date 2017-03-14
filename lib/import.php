@@ -323,13 +323,13 @@ class WordPress_GitHub_Sync_Import {
 			}
 		}
 
-		$meta['_sha'] = $blob->sha();
+		$meta['_wogh_sha'] = $blob->sha();
 
-		if ( !empty($id) ) {
-			$old_sha = get_post_meta( $id, '_sha', true );
+		if ( $id ) {
+			$old_sha = get_post_meta( $id, '_wogh_sha', true );
+
 			// dont save post when has same sha
-			if ( !empty( $old_sha ) && $old_sha == $meta['_sha'] ) {
-
+			if ( $old_sha  && $old_sha == $meta['_wogh_sha'] ) {
 				return false;
 			}
 		}

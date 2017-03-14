@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: WordPress GitHub Sync
+ * Plugin Name: Writing on GitHub
  * Plugin URI: https://github.com/mAAdhaTTah/wordpress-github-sync
  * Description: A WordPress plugin to sync content with a GitHub repository (or Jekyll site).
  * Version: 1.7.5
