@@ -80,7 +80,8 @@ class WordPress_GitHub_Sync_Export {
 	 * @return boolean
 	 */
 	protected function github_path( $post_id ) {
-		$github_path = get_post_meta( $post_id, '_wogh_github_path', true )
+		$github_path = get_post_meta( $post_id, '_wogh_github_path', true );
+
 		if ( $github_path && $this->app->fetch->exists( $github_path ) ) {
 			return $github_path;
 		}
