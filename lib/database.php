@@ -65,7 +65,12 @@ class WordPress_GitHub_Sync_Database {
 
 		$results = array();
 		foreach ( $post_ids as $post_id ) {
-			$results[] = new WordPress_GitHub_Sync_Post( $post_id, $this->app->api() );
+			// Do not export posts that have already been exported
+			if ( ! get_post_meta( $post_id, '_wogh_sha', true ) ||
+				 ! get_post_meta( $post_id, '_wogh_github_path', true) ) {
+
+				$results[] = new WordPress_GitHub_Sync_Post( $post_id, $this->app->api() );
+			}
 		}
 
 		return $results;

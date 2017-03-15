@@ -43,34 +43,26 @@ class WordPress_GitHub_Sync_Export {
 			return $posts;
 		}
 
-		$master = $this->app->api()->fetch()->master();
+		$result = $this->new_posts($posts);
 
-		if ( is_wp_error( $master ) ) {
-			return $master;
-		}
+		// $master->set_message(
+		// 	apply_filters(
+		// 		'wpghs_commit_msg_full',
+		// 		sprintf(
+		// 			'Full export from WordPress at %s (%s)',
+		// 			site_url(),
+		// 			get_bloginfo( 'name' )
+		// 		)
+		// 	) . $this->get_commit_msg_tag()
+		// );
 
-		foreach ( $posts as $post ) {
-			$master->tree()->add_post_to_tree( $post );
-		}
-
-		$master->set_message(
-			apply_filters(
-				'wpghs_commit_msg_full',
-				sprintf(
-					'Full export from WordPress at %s (%s)',
-					site_url(),
-					get_bloginfo( 'name' )
-				)
-			) . $this->get_commit_msg_tag()
-		);
-
-		$result = $this->app->api()->persist()->commit( $master );
+		// $result = $this->app->api()->persist()->commit( $master );
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
 
-		return $this->update_shas( $posts );
+		return __( 'Export to GitHub completed successfully.', 'wp-github-sync' );
 	}
 
 
