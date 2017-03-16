@@ -75,7 +75,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 			$files[] = new Writing_On_GitHub_File_Info($file);
 		}
 
-		return &$files;
+		return $files;
 	}
 
 	/**
@@ -129,7 +129,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 			}
 		}
 
-		return &$files;
+		return $files;
 	}
 
 	/**
