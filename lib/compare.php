@@ -4,21 +4,6 @@
  * @package WordPress_GitHub_Sync
  */
 
-class WordPress_GitHub_Sync_Compare_File {
-
-	public function __construct( stdClass $data ) {
-		$this->sha 			= $data->sha;
-		$this->path 		= $data->filename;
-		$this->status 		= $data->status;
-		$this->contents_url = $data->contents_url;
-	}
-
-	public $sha;
-	public $path;
-	public $status;  // added removed modified
-	public $contents_url;
-}
-
 /**
  * Class WordPress_GitHub_Sync_Compare
  */
@@ -142,7 +127,7 @@ class WordPress_GitHub_Sync_Compare {
 		$this->base_sha  = isset( $this->data->base_commit ) ? $this->data->base_commit->sha : '';
 		$this->files = array();
 		foreach ($this->data->files as $file) {
-			$this->files[] = new WordPress_GitHub_Sync_Compare_File($file);
+			$this->files[] = new Writing_On_GitHub_File_Info($file);
 		}
 	}
 

@@ -70,7 +70,12 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 			return $data;
 		}
 
-		return new WordPress_GitHub_Sync_Compare( $data );
+		$files = array();
+		foreach ($data->files as $file) {
+			$files[] = new Writing_On_GitHub_File_Info($file);
+		}
+
+		return &$files;
 	}
 
 	/**
@@ -101,9 +106,10 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 *
 	 * @return WordPress_GitHub_Sync_Tree|WP_Error
 	 */
-	protected function tree_recursive( $sha ) {
-		if ( $cache = $this->app->cache()->fetch_tree( $sha ) ) {
-			return $cache;
+	protected function tree_recursive( $sha = 'root' ) {
+
+		if ( 'root' === $sha ) {
+			$sha = 'master';
 		}
 
 		$data = $this->call( 'GET', $this->tree_endpoint() . '/' . $sha . '?recursive=1' );
@@ -112,19 +118,18 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 			return $data;
 		}
 
+		$files = array();
+
 		foreach ( $data->tree as $index => $thing ) {
 			// We need to remove the trees because
 			// the recursive tree includes both
 			// the subtrees as well the subtrees' blobs.
-			if ( 'tree' === $thing->type ) {
-				unset( $data->tree[ $index ] );
+			if ( 'blob' === $thing->type ) {
+				$files[] = new Writing_On_GitHub_File_Info( $thing );
 			}
 		}
 
-		$tree = new WordPress_GitHub_Sync_Tree( $data );
-		$tree->set_blobs( $this->blobs( $data->tree ) );
-
-		return $this->app->cache()->set_tree( $sha, $tree );
+		return &$files;
 	}
 
 	/**

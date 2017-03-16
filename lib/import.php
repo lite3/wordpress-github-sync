@@ -71,26 +71,39 @@ class WordPress_GitHub_Sync_Import {
 	// }
 
 	public function payload( WordPress_GitHub_Sync_Payload $payload ) {
-		/**
-		 * Whether there's an error during import.
-		 *
-		 * @var false|WP_Error $error
-		 */
-		$error = false;
-		$delete_ids = false;
 
-		$result = $this->compare( $this->app->api()->fetch()->compare( $payload->get_before_commit_id() ), $delete_ids );
+		$result = $this->app->api()->fetch()->compare( $payload->get_before_commit_id() );
 
 		if ( is_wp_error( $result ) ) {
-			$error = $result;
+			return $result;
 		}
 
-		$removed = array();
-		foreach ( $payload->get_commits() as $commit ) {
-			$removed = array_merge( $removed, $commit->removed );
+		$result = $this->import_files( $result );
+
+		if ( is_wp_error( $files ) ) {
+			return $files;
 		}
 
-		if ( ! empty( $delete_ids ) ) {
+		return __( 'Payload processed', 'wp-github-sync' );
+	}
+
+	/**
+	 * import blob by files
+	 * @param  array $files [Writing_On_GitHub_File_Info]
+	 * @return string|WP_ERROR
+	 */
+	protected function import_files( $files ) {
+
+		$error 		= false;
+		$delete_ids = false;
+
+		$result = $this->compare( $files, $delete_ids );
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
+		if ( $delete_ids ) {
 			foreach ($delete_ids as $id) {
 				$result = $this->app->database()->delete_post( $id );
 				if ( is_wp_error( $result ) ) {
@@ -103,11 +116,7 @@ class WordPress_GitHub_Sync_Import {
 			}
 		}
 
-		if ( $error ) {
-			return $error;
-		}
-
-		return __( 'Payload processed', 'wp-github-sync' );
+		return $error;
 	}
 
 	/**
@@ -116,60 +125,28 @@ class WordPress_GitHub_Sync_Import {
 	 * @return string|WP_Error
 	 */
 	public function master() {
-		return $this->commit( $this->app->api()->fetch()->master() );
+		$files = $this->app->api()->fetch()->tree_recursive();
+
+		if ( is_wp_error( $files ) ) {
+			return $files;
+		}
+
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
+		$result = $this->import_files( $result );
+
+		if ( is_wp_error( $files ) ) {
+			return $files;
+		}
+
+		return __( 'Payload processed', 'wp-github-sync' );
 	}
 
-	/**
-	 * Imports a provided commit into the database.
-	 *
-	 * @param WordPress_GitHub_Sync_Commit|WP_Error $commit Commit to import.
-	 *
-	 * @return string|WP_Error
-	 */
-	// protected function commit( $commit ) {
-	// 	if ( is_wp_error( $commit ) ) {
-	// 		return $commit;
-	// 	}
-
-	// 	if ( $commit->already_synced() ) {
-	// 		return new WP_Error( 'commit_synced', __( 'Already synced this commit.', 'wp-github-sync' ) );
-	// 	}
-
-	// 	$posts = array();
-	// 	$new   = array();
-
-	// 	foreach ( $commit->tree()->blobs() as $blob ) {
-	// 		if ( ! $this->importable_blob( $blob ) ) {
-	// 			continue;
-	// 		}
-
-	// 		$posts[] = $post = $this->blob_to_post( $blob );
-
-	// 		if ( $post->is_new() ) {
-	// 			$new[] = $post;
-	// 		}
-	// 	}
-
-	// 	$result = $this->app->database()->save_posts( $posts, $commit->author_email() );
-
-	// 	if ( is_wp_error( $result ) ) {
-	// 		return $result;
-	// 	}
-
-	// 	if ( $new ) {
-	// 		$result = $this->app->export()->new_posts( $new );
-
-	// 		if ( is_wp_error( $result ) ) {
-	// 			return $result;
-	// 		}
-	// 	}
-
-	// 	return $posts;
-	// }
-
-	protected function compare( $compare, &$delete_ids ) {
-		if ( is_wp_error( $compare ) ) {
-			return $compare;
+	protected function compare( $files, &$delete_ids ) {
+		if ( is_wp_error( $files ) ) {
+			return $files;
 		}
 
 		$posts = array();
@@ -177,7 +154,7 @@ class WordPress_GitHub_Sync_Import {
 
 		$idsmap = array();
 
-		foreach ( $compare->files() as $file ) {
+		foreach ( $files as $file ) {
 			if ( ! $this->importable_file( $file ) ) {
 				continue;
 			}
@@ -243,7 +220,7 @@ class WordPress_GitHub_Sync_Import {
 	 *
 	 * @return bool
 	 */
-	protected function importable_file( WordPress_GitHub_Sync_Compare_File $file ) {
+	protected function importable_file( Writing_On_GitHub_File_Info $file ) {
 
 
 		// only _pages and _posts
