@@ -24,6 +24,12 @@ class WordPress_GitHub_Sync_Request {
 	protected $raw_data;
 
 	/**
+	 * Headers
+	 * @var array
+	 */
+	protected $headers;
+
+	/**
 	 * WordPress_GitHub_Sync_Request constructor.
 	 *
 	 * @param WordPress_GitHub_Sync $app Application container.
@@ -48,7 +54,64 @@ class WordPress_GitHub_Sync_Request {
 			return false;
 		}
 
+		// 		[X-Hub-Signature] => sha1=3cf3da70de401f7dfff053392f60cc534efed3b4
+		//     [Content-Type] => application/json
+		//     [X-Github-Delivery] => b2102500-0acf-11e7-8acb-fd86a3497c2f
+		//     [X-Github-Event] => ping
+
 		return true;
+	}
+
+	/**
+	 * Validates the ping event.
+	 * @return boolean
+	 */
+	public function is_ping() {
+		$headers = $this->headers();
+
+		print_r($headers);
+
+		foreach ($headers as $key => $value) {
+			echo "key:$key    value:$value\n";
+			echo strlen($value);
+			echo "\n";
+		}
+		echo "ping: " . $headers['X-Github-Event'];
+		echo "\nheaders ping $headers{'X-GitHub-Event'}\n";
+
+		// echo "headers\n";
+		// var_dump($headers);
+		// echo "\nheaders end\n";
+
+			echo "ping: " . $headers['X-Github-Event'];
+			echo "\ntype: ";
+			echo gettype($headers['X-GitHub-Event']);
+			echo "\n";
+		// if ( isset( $headers['X-GitHub-Event'] ) ) {
+			// return 'ping' === $headers['X-GitHub-Event'];
+		// }
+		if ( 'ping' === $headers['X-GitHub-Event'] ) {
+			echo "isping\n";
+			return true;
+		}
+
+		return false;
+
+		// return false;
+	}
+
+	/**
+	 * Validates the push event.
+	 * @return boolean
+	 */
+	public function is_push() {
+		$headers = $this->headers();
+
+		if ( isset( $headers['X-GitHub-Event'] ) ) {
+			return 'push' == $headers['X-GitHub-Event'];
+		}
+
+		return false;
 	}
 
 	/**
@@ -68,21 +131,27 @@ class WordPress_GitHub_Sync_Request {
 	 * @return array
 	 */
 	protected function headers() {
+		// if ( $this->headers ) {
+		// 	return $this->headers;
+		// }
+
 		if ( function_exists( 'getallheaders' ) ) {
-			return getallheaders();
+
+			$this->headers = getallheaders();
+			return $this->headers;
 		}
 		/**
 		 * Nginx and pre 5.4 workaround.
 		 * @see http://www.php.net/manual/en/function.getallheaders.php
 		 */
-		$headers = array();
+		$this->headers = array();
 		foreach ( $_SERVER as $name => $value ) {
 			if ( 'HTTP_' === substr( $name, 0, 5 ) ) {
-				$headers[ str_replace( ' ', '-', ucwords( strtolower( str_replace( '_', ' ', substr( $name, 5 ) ) ) ) ) ] = $value;
+				$this->headers[ str_replace( ' ', '-', ucwords( strtolower( str_replace( '_', ' ', substr( $name, 5 ) ) ) ) ) ] = $value;
 			}
 		}
 
-		return $headers;
+		return $this->headers;
 	}
 
 	/**

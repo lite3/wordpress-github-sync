@@ -106,7 +106,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 *
 	 * @return WordPress_GitHub_Sync_Tree|WP_Error
 	 */
-	protected function tree_recursive( $sha = 'root' ) {
+	public function tree_recursive( $sha = 'root' ) {
 
 		if ( 'root' === $sha ) {
 			$sha = 'master';
