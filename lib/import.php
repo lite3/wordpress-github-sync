@@ -125,11 +125,7 @@ class WordPress_GitHub_Sync_Import {
 	 * @return string|WP_Error
 	 */
 	public function master() {
-		$files = $this->app->api()->fetch()->tree_recursive();
-
-		if ( is_wp_error( $files ) ) {
-			return $files;
-		}
+		$result = $this->app->api()->fetch()->tree_recursive();
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
@@ -137,8 +133,8 @@ class WordPress_GitHub_Sync_Import {
 
 		$result = $this->import_files( $result );
 
-		if ( is_wp_error( $files ) ) {
-			return $files;
+		if ( is_wp_error( $result ) ) {
+			return $result;
 		}
 
 		return __( 'Payload processed', 'wp-github-sync' );
