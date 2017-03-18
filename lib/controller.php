@@ -50,7 +50,7 @@ class WordPress_GitHub_Sync_Controller {
 
 		// ping
 		if ( $this->app->request()->is_ping() ) {
-			return $this->app->response()->error( __( 'Wordpress is ready.', 'wp-github-sync' ) );
+			return $this->app->response()->success( __( 'Wordpress is ready.', 'wp-github-sync' ) );
 		}
 
 		// push

@@ -69,35 +69,8 @@ class WordPress_GitHub_Sync_Request {
 	public function is_ping() {
 		$headers = $this->headers();
 
-		print_r($headers);
-
-		foreach ($headers as $key => $value) {
-			echo "key:$key    value:$value\n";
-			echo strlen($value);
-			echo "\n";
-		}
-		echo "ping: " . $headers['X-Github-Event'];
-		echo "\nheaders ping $headers{'X-GitHub-Event'}\n";
-
-		// echo "headers\n";
-		// var_dump($headers);
-		// echo "\nheaders end\n";
-
-			echo "ping: " . $headers['X-Github-Event'];
-			echo "\ntype: ";
-			echo gettype($headers['X-GitHub-Event']);
-			echo "\n";
-		// if ( isset( $headers['X-GitHub-Event'] ) ) {
-			// return 'ping' === $headers['X-GitHub-Event'];
-		// }
-		if ( 'ping' === $headers['X-GitHub-Event'] ) {
-			echo "isping\n";
-			return true;
-		}
-
-		return false;
-
-		// return false;
+		$event = $headers['X-Github-Event'];
+		return 'ping' == $event;
 	}
 
 	/**
@@ -107,11 +80,8 @@ class WordPress_GitHub_Sync_Request {
 	public function is_push() {
 		$headers = $this->headers();
 
-		if ( isset( $headers['X-GitHub-Event'] ) ) {
-			return 'push' == $headers['X-GitHub-Event'];
-		}
-
-		return false;
+		$event = $headers['X-Github-Event'];
+		return 'push' == $event;
 	}
 
 	/**
@@ -131,9 +101,9 @@ class WordPress_GitHub_Sync_Request {
 	 * @return array
 	 */
 	protected function headers() {
-		// if ( $this->headers ) {
-		// 	return $this->headers;
-		// }
+		if ( $this->headers ) {
+			return $this->headers;
+		}
 
 		if ( function_exists( 'getallheaders' ) ) {
 
