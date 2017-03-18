@@ -80,7 +80,7 @@ class WordPress_GitHub_Sync_Import {
 
 		$result = $this->import_files( $result );
 
-		if ( is_wp_error( $files ) ) {
+		if ( is_wp_error( $result ) ) {
 			return $files;
 		}
 
