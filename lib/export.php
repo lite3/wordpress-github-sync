@@ -154,8 +154,8 @@ class WordPress_GitHub_Sync_Export {
 
 		// $result = $this->app->api()->persist()->commit( $master );
 
-		if ( is_wp_error( $result ) ) {
-			return $result;
+		if ( is_wp_error( $error ) ) {
+			return $error;
 		}
 
 		// return $this->update_shas( $posts );

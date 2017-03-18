@@ -168,9 +168,8 @@ class WordPress_GitHub_Sync_Import {
 			$post = $this->blob_to_post( $blob );
 
 			if ( $file->status == 'removed' ) {
-				$id = $blob->id();
-				if ( ! empty($id) ) {
-					$idsmap[$id] = true;
+				if ( $blob->id() ) {
+					$idsmap[$blob->id()] = true;
 				}
 			} elseif ( $post != false ) {
 				$posts[] = $post;
@@ -181,8 +180,8 @@ class WordPress_GitHub_Sync_Import {
 		}
 
 		foreach ($posts as $post) {
-			if ( $post->id() && isset($idsmap[$post->id()]) ) {
-				unset($idsmap[$post->id()]);
+			if ( $post->id() && isset( $idsmap[$post->id()] ) ) {
+				unset( $idsmap[$post->id()] );
 			}
 		}
 		$delete_ids = array();
@@ -217,7 +216,6 @@ class WordPress_GitHub_Sync_Import {
 	 * @return bool
 	 */
 	protected function importable_file( Writing_On_GitHub_File_Info $file ) {
-
 
 		// only _pages and _posts
 		if ( strncasecmp($file->path, '_pages/', strlen('_pages/') ) != 0 &&
@@ -300,9 +298,11 @@ class WordPress_GitHub_Sync_Import {
 
 		if ( $id ) {
 			$old_sha = get_post_meta( $id, '_wogh_sha', true );
+			$old_github_path = get_post_meta( $id, '_wogh_github_path', true );
 
 			// dont save post when has same sha
-			if ( $old_sha  && $old_sha == $meta['_wogh_sha'] ) {
+			if ( $old_sha  && $old_sha == $meta['_wogh_sha'] &&
+				 $old_github_path && $old_github_path == $blob->path() ) {
 				return false;
 			}
 		}

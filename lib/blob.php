@@ -10,13 +10,6 @@
 class WordPress_GitHub_Sync_Blob {
 
 	/**
-	 * Raw blob data.
-	 *
-	 * @var stdClass
-	 */
-	protected $data;
-
-	/**
 	 * Complete blob content.
 	 *
 	 * @var string
@@ -57,9 +50,7 @@ class WordPress_GitHub_Sync_Blob {
 	 * @param stdClass $data Raw blob data.
 	 */
 	public function __construct( stdClass $data ) {
-		$this->data = $data;
-
-		$this->interpret_data();
+		$this->interpret_data( $data );
 	}
 
 	public function id() {
@@ -213,13 +204,13 @@ class WordPress_GitHub_Sync_Blob {
 	/**
 	 * Interprets the blob's data into properties.
 	 */
-	protected function interpret_data() {
-		$this->sha  = isset( $this->data->sha ) ? $this->data->sha : '';
-		$this->path = isset( $this->data->path ) ? $this->data->path : '';
+	protected function interpret_data( $data ) {
+		$this->sha  = isset( $data->sha  ) ? $data->sha  : '';
+		$this->path = isset( $data->path ) ? $data->path : '';
 
 		$this->set_content(
-			isset( $this->data->content ) ? trim( $this->data->content ) : '',
-			isset( $this->data->encoding ) && 'base64' === $this->data->encoding ? true : false
+			isset( $data->content ) ? trim( $data->content ) : '',
+			isset( $data->encoding ) && 'base64' === $data->encoding ? true : false
 		);
 	}
 }
