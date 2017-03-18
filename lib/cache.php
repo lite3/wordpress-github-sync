@@ -55,35 +55,6 @@ class WordPress_GitHub_Sync_Cache {
 	}
 
 	/**
-	 * Fetch commit from cache by sha.
-	 *
-	 * @param string $sha Commit sha to fetch from cache.
-	 *
-	 * @return false|WordPress_GitHub_Sync_Commit
-	 */
-	public function fetch_commit( $sha ) {
-		$commit = $this->get( 'commits', $sha );
-
-		if ( $commit instanceof WordPress_GitHub_Sync_Commit ) {
-			return $commit;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Save commit to cache by sha.
-	 *
-	 * @param string                       $sha Commit sha to cache by.
-	 * @param WordPress_GitHub_Sync_Commit $commit Commit to cache.
-	 *
-	 * @return WordPress_GitHub_Sync_Commit
-	 */
-	public function set_commit( $sha, WordPress_GitHub_Sync_Commit $commit ) {
-		return $this->save( 'commits', $sha, $commit, 0 );
-	}
-
-	/**
 	 * Fetch tree from cache by sha.
 	 *
 	 * @param string $sha Tree sha to fetch from cache.

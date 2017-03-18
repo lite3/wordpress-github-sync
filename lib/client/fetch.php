@@ -10,51 +10,6 @@
 class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Client {
 
 	/**
-	 * Retrieve the last commit in the repository
-	 *
-	 * @return WordPress_GitHub_Sync_Commit|WP_Error
-	 */
-	public function master() {
-		$data = $this->call( 'GET', $this->reference_endpoint() );
-
-		if ( is_wp_error( $data ) ) {
-			return $data;
-		}
-
-		return $this->commit( $data->object->sha );
-	}
-
-	/**
-	 * Retrieves a commit by sha from the GitHub API
-	 *
-	 * @param string $sha Sha for commit to retrieve.
-	 *
-	 * @return WordPress_GitHub_Sync_Commit|WP_Error
-	 */
-	public function commit( $sha ) {
-		if ( $cache = $this->app->cache()->fetch_commit( $sha ) ) {
-			return $cache;
-		}
-
-		$data = $this->call( 'GET', $this->commit_endpoint() . '/' . $sha );
-
-		if ( is_wp_error( $data ) ) {
-			return $data;
-		}
-
-		$commit = new WordPress_GitHub_Sync_Commit( $data );
-		$tree   = $this->tree_recursive( $commit->tree_sha() );
-
-		if ( is_wp_error( $tree ) ) {
-			return $tree;
-		}
-
-		$commit->set_tree( $tree );
-
-		return $this->app->cache()->set_commit( $sha, $commit );
-	}
-
-	/**
 	 * Compare a commit by sha with master from the GitHub API
 	 *
 	 * @param string $sha Sha for commit to retrieve.
