@@ -59,7 +59,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 *
 	 * @param string $sha Sha for commit to retrieve.
 	 *
-	 * @return WordPress_GitHub_Sync_Compare|WP_Error
+	 * @return array[Writing_On_GitHub_File_Info]|WP_Error
 	 */
 	public function compare( $sha ) {
 		// https://api.github.com/repos/lite3/testwpsync/compare/861f87e8851b8debb78db548269d29f8da4d94ac...master
