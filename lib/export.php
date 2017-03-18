@@ -74,7 +74,7 @@ class WordPress_GitHub_Sync_Export {
 	protected function github_path( $post_id ) {
 		$github_path = get_post_meta( $post_id, '_wogh_github_path', true );
 
-		if ( $github_path && $this->app->fetch->exists( $github_path ) ) {
+		if ( $github_path && $this->app->api()->fetch()->exists( $github_path ) ) {
 			return $github_path;
 		}
 

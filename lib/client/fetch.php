@@ -49,7 +49,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 
 	public function exists( $path ) {
 		$result = $this->call( 'GET', $this->content_endpoint( $path ) );
-		if ( is_wp_error( $results ) ) {
+		if ( is_wp_error( $result ) ) {
 			return false;
 		}
 		return true;
