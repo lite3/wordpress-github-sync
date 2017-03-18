@@ -72,6 +72,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 
 		$files = array();
 		foreach ($data->files as $file) {
+			$file->path = $file->filename;
 			$files[] = new Writing_On_GitHub_File_Info($file);
 		}
 
@@ -125,6 +126,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 			// the recursive tree includes both
 			// the subtrees as well the subtrees' blobs.
 			if ( 'blob' === $thing->type ) {
+				$thing->status = '';
 				$files[] = new Writing_On_GitHub_File_Info( $thing );
 			}
 		}

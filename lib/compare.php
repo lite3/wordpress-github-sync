@@ -127,6 +127,7 @@ class WordPress_GitHub_Sync_Compare {
 		$this->base_sha  = isset( $this->data->base_commit ) ? $this->data->base_commit->sha : '';
 		$this->files = array();
 		foreach ($this->data->files as $file) {
+			$file->path = $file->filename;
 			$this->files[] = new Writing_On_GitHub_File_Info($file);
 		}
 	}
