@@ -423,7 +423,7 @@ class WordPress_GitHub_Sync_Post {
 
 		$data->path    = $this->github_path();
 		$data->content = $this->github_content();
-		$data->sha     = $this->meta['_wogh_sha'];
+		$data->sha     = $this->sha();
 
 		return new WordPress_GitHub_Sync_Blob( $data );
 	}

@@ -102,7 +102,6 @@ class WordPress_GitHub_Sync_Export {
 		if ( $old_github_path = $this->github_path( $post->id() ) ) {
 			error_log("old_github_path: $old_github_path");
 			$post->set_old_github_path($old_github_path);
-			$post->set_meta( $post->meta() );
 		}
 
 		$result = $this->new_posts( array( $post ) );

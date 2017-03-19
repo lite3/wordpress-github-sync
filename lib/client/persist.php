@@ -94,7 +94,6 @@ class WordPress_GitHub_Sync_Persist_Client extends WordPress_GitHub_Sync_Base_Cl
 		$body = $blob->to_body();
 		$body->message = $message;
 		$body->branch = 'master';
-		unset($body->sha);
 
 		if ( $author = $this->export_user() ) {
 			$body->author = $author;
