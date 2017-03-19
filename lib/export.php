@@ -121,11 +121,6 @@ class WordPress_GitHub_Sync_Export {
 	 * @return string|WP_Error
 	 */
 	public function new_posts( array $posts ) {
-		// $master = $this->app->api()->fetch()->master();
-
-		// if ( is_wp_error( $master ) ) {
-		// 	return $master;
-		// }
 
 		$message = apply_filters(
 			'wpghs_commit_msg_new_posts',
@@ -244,39 +239,6 @@ class WordPress_GitHub_Sync_Export {
 		return __( 'Export to GitHub completed successfully.', 'wp-github-sync' );
 	}
 
-	/**
-	 * Use the new tree to save sha data
-	 * for all the updated posts.
-	 *
-	 * @param WordPress_GitHub_Sync_Post[] $posts Posts to fetch updated shas for.
-	 *
-	 * @return string|WP_Error
-	 */
-	protected function update_shas( array $posts ) {
-		$master   = $this->app->api()->fetch()->master();
-		$attempts = 1;
-
-		while ( is_wp_error( $master ) && $attempts < 5 ) {
-			$master = $this->app->api()->fetch()->master();
-			$attempts ++;
-		}
-
-		if ( is_wp_error( $master ) ) {
-			// @todo throw a big warning! not having the latest shas is BAD
-			// Solution: Show error message and link to kick off sha importing.
-			return $master;
-		}
-
-		foreach ( $posts as $post ) {
-			$blob = $master->tree()->get_blob_by_path( $post->github_path() );
-
-			if ( $blob ) {
-				$this->app->database()->set_post_sha( $post, $blob->sha() );
-			}
-		}
-
-		return __( 'Export to GitHub completed successfully.', 'wp-github-sync' );
-	}
 
 	/**
 	 * Saves the export user to the database.

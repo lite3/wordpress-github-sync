@@ -16,19 +16,6 @@ class WordPress_GitHub_Sync_Cache {
 	 */
 	protected $blobs = array();
 
-	/**
-	 * Cached trees.
-	 *
-	 * @var array
-	 */
-	protected $trees = array();
-
-	/**
-	 * Cached commits.
-	 *
-	 * @var array
-	 */
-	protected $commits = array();
 
 	/**
 	 * Clean out previous version of API data.
@@ -52,36 +39,6 @@ class WordPress_GitHub_Sync_Cache {
 		if ( get_option( '_wpghs_api_cache' ) ) {
 			delete_option( '_wpghs_api_cache' );
 		}
-	}
-
-	/**
-	 * Fetch tree from cache by sha.
-	 *
-	 * @param string $sha Tree sha to fetch from cache.
-	 *
-	 * @return false|WordPress_GitHub_Sync_Tree
-	 */
-	public function fetch_tree( $sha ) {
-		$tree = $this->get( 'trees', $sha );
-
-		if ( $tree instanceof WordPress_GitHub_Sync_Tree ) {
-			return $tree;
-		}
-
-		return false;
-	}
-
-
-	/**
-	 * Save tree to cache by sha.
-	 *
-	 * @param string                     $sha Tree sha to cache by.
-	 * @param WordPress_GitHub_Sync_Tree $tree Tree to cache.
-	 *
-	 * @return WordPress_GitHub_Sync_Tree
-	 */
-	public function set_tree( $sha, WordPress_GitHub_Sync_Tree $tree ) {
-		return $this->save( 'trees', $sha, $tree, DAY_IN_SECONDS * 3 );
 	}
 
 	/**

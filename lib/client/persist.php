@@ -10,17 +10,6 @@
 class WordPress_GitHub_Sync_Persist_Client extends WordPress_GitHub_Sync_Base_Client {
 
 	/**
-	 * Create the tree by a set of blob ids.
-	 *
-	 * @param WordPress_GitHub_Sync_Tree $tree Tree to create.
-	 *
-	 * @return stdClass|WP_Error
-	 */
-	protected function create_tree( WordPress_GitHub_Sync_Tree $tree ) {
-		return $this->call( 'POST', $this->tree_endpoint(), $tree->to_body() );
-	}
-
-	/**
 	 * Get the data for the current user.
 	 *
 	 * @return array
