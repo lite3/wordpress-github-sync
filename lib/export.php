@@ -210,27 +210,20 @@ class WordPress_GitHub_Sync_Export {
 			return $post;
 		}
 
-		$master = $this->app->api()->fetch()->master();
+		$message = apply_filters(
+			'wpghs_commit_msg_delete',
+			sprintf(
+				'Deleting %s via WordPress at %s (%s)',
+				$post->github_path(),
+				site_url(),
+				get_bloginfo( 'name' )
+			),
+			$post
+		) . $this->get_commit_msg_tag();
 
-		if ( is_wp_error( $master ) ) {
-			return $master;
-		}
+		$github_path = get_post_meta( $post_id, '_wogh_github_path', true );
 
-		$master->tree()->remove_post_from_tree( $post );
-		$master->set_message(
-			apply_filters(
-				'wpghs_commit_msg_delete',
-				sprintf(
-					'Deleting %s via WordPress at %s (%s)',
-					$post->github_path(),
-					site_url(),
-					get_bloginfo( 'name' )
-				),
-				$post
-			) . $this->get_commit_msg_tag()
-		);
-
-		$result = $this->app->api()->persist()->commit( $master );
+		$result = $this->app->api()->persist()->delete_file( $github_path, $post->sha(), $message );
 
 		if ( is_wp_error( $result ) ) {
 			return $result;
