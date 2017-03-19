@@ -166,10 +166,22 @@ class WordPress_GitHub_Sync {
 		add_action( 'wp_ajax_nopriv_wpghs_sync_request', array( $this->controller, 'pull_posts' ) );
 		add_action( 'wpghs_export', array( $this->controller, 'export_all' ) );
 		add_action( 'wpghs_import', array( $this->controller, 'import_master' ) );
+		add_filter( 'get_edit_post_link', array( $this, 'edit_post_link' ), 10, 3 );
 
 		add_shortcode( 'wpghs', 'write_wpghs_link' );
 
 		do_action( 'wpghs_boot', $this );
+	}
+
+	public function edit_post_link($link, $postID, $context) {
+		if ( ! wp_is_post_revision( $postID ) ) {
+			$post = new WordPress_GitHub_Sync_Post( $postID, WordPress_GitHub_Sync::$instance->api() );
+			if ( $post->is_on_github() ) {
+				return $post->github_edit_url();
+			}
+		}
+
+	    return $link;
 	}
 
 	/**

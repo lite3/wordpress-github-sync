@@ -175,8 +175,6 @@ class WordPress_GitHub_Sync_Post {
 	public function github_path() {
 		$path = $this->github_directory() . $this->github_filename();
 
-		// update_post_meta( $this->id, '_wpghs_github_path', $path );
-
 		return $path;
 	}
 
@@ -245,12 +243,28 @@ class WordPress_GitHub_Sync_Post {
 	}
 
 	/**
+	 * is put on github
+	 * @return boolean
+	 */
+	public function is_on_github() {
+		$sha = get_post_meta( $this->id, '_wogh_sha', true );
+		$github_path = get_post_meta( $this->id, '_wogh_github_path', true );
+		if ( $sha && $github_path ) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
 	 * Returns the URL for the post on GitHub.
 	 *
 	 * @return string
 	 */
 	public function github_view_url() {
-		return 'https://github.com/' . $this->api->fetch()->repository() . '/blob/master/' . $this->github_path();
+		$github_path = get_post_meta( $this->id, '_wogh_github_path', true );
+		$repository = $this->api->fetch()->repository();
+
+		return "https://github.com/$repository/blob/master/$github_path";
 	}
 
 	/**
@@ -259,7 +273,10 @@ class WordPress_GitHub_Sync_Post {
 	 * @return string
 	 */
 	public function github_edit_url() {
-		return 'https://github.com/' . $this->api->fetch()->repository() . '/edit/master/' . $this->github_path();
+		$github_path = get_post_meta( $this->id, '_wogh_github_path', true );
+		$repository = $this->api->fetch()->repository();
+
+		return "https://github.com/$repository/edit/master/$github_path";
 	}
 
 	/**
