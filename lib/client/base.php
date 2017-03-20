@@ -144,7 +144,7 @@ class Writing_On_GitHub_Base_Client {
 		$sync_branch = apply_filters( 'wogh_sync_branch', 'master' );
 
 		if ( ! $sync_branch ) {
-			throw new Exception( __( 'Sync branch not set. Filter `wpghs_sync_branch` misconfigured.', 'wp-github-sync' ) );
+			throw new Exception( __( 'Sync branch not set. Filter `wogh_sync_branch` misconfigured.', 'wp-github-sync' ) );
 		}
 
 		$url = $this->api_base() . '/repos/';

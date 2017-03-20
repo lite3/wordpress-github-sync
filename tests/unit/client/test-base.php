@@ -10,7 +10,7 @@ abstract class Writing_On_GitHub_Base_Client_Test extends Writing_On_GitHub_Test
 	/**
 	 * @var string
 	 */
-	const REPO_OPTION_VALUE = 'wpghstest/wpghs-test';
+	const REPO_OPTION_VALUE = 'woghtest/wogh-test';
 
 	/**
 	 * @var string

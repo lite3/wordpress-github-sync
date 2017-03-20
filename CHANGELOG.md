@@ -25,8 +25,8 @@ This change log follows the [Keep a Changelog standards][]. Versions follows [Se
 ### [1.6.0][] ###
 
 * New filters:
-    * `wpghs_pre_fetch_all_supported`: Filter the query args before all supported posts are queried.
-    * `wpghs_is_post_supported`: Determines whether the post is supported by importing/exporting.
+    * `wogh_pre_fetch_all_supported`: Filter the query args before all supported posts are queried.
+    * `wogh_is_post_supported`: Determines whether the post is supported by importing/exporting.
 * Bugfix: Set secret to password field. See [#124].
 * Bugfix: Fix error when importing branch-deletion webhooks.
 * Bugfix: Fix "semaphore is locked" response from webhook. See [#121].
@@ -44,8 +44,8 @@ This change log follows the [Keep a Changelog standards][]. Versions follows [Se
 * New WP-CLI command:
     * `prime`: Forces WPGHS to fetch the latest commit and save it in the cache.
 * New filters:
-    * `wpghs_sync_branch`: Branch the WordPress install should sync itself with.
-    * `wpghs_commit_msg_tag`: Tag appended to the end of the commit message. Split from message with ` - `. Used to determine if commit has been synced already.
+    * `wogh_sync_branch`: Branch the WordPress install should sync itself with.
+    * `wogh_commit_msg_tag`: Tag appended to the end of the commit message. Split from message with ` - `. Used to determine if commit has been synced already.
 * These two new filters allow you to use WPGHS to keep multiple sites in sync.
     * This is an _advanced feature_. Your configuration may or may not be fully supported. **Use at your own risk.**
 * Eliminated some direct database calls in exchange for WP_Query usage.
@@ -63,12 +63,12 @@ This change log follows the [Keep a Changelog standards][]. Versions follows [Se
     * Improved speed.
         * Upgraded caching implementation means updates happen faster.
 * Line-endings are now normalize to Unix-style.
-    * New filter: `wpghs_line_endings` to set preferred line endings.
-* New filter: `wpghs_pre_import_args`
+    * New filter: `wogh_line_endings` to set preferred line endings.
+* New filter: `wogh_pre_import_args`
     * Called before post arguments are passed for an imported post.
-* New filter: `wpghs_pre_import_meta`
+* New filter: `wogh_pre_import_meta`
     * Called before post meta is imported from a post.
-* BREAKING: Remove reference to global `$wpghs` variable.
+* BREAKING: Remove reference to global `$wogh` variable.
     * Use `Writing_On_GitHub::$instance` instead.
 
 ### [1.3.4][] ###

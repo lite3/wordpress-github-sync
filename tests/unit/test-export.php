@@ -73,7 +73,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 			->shouldReceive( 'set_message' )
 			->once()
-			->with( $msg . ' - wpghs' );
+			->with( $msg . ' - wogh' );
 		$this->persist
 			->shouldReceive( 'commit' )
 			->with( $this->commit )
@@ -108,7 +108,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 			->shouldReceive( 'set_message' )
 			->once()
-			->with( $msg . ' - wpghs' );
+			->with( $msg . ' - wogh' );
 		$this->persist
 			->shouldReceive( 'commit' )
 			->with( $this->commit )
@@ -146,7 +146,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 			->shouldReceive( 'set_message' )
 			->once()
-			->with( $msg . ' - wpghs' );
+			->with( $msg . ' - wogh' );
 		$this->persist
 			->shouldReceive( 'commit' )
 			->with( $this->commit )
@@ -234,7 +234,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 			->shouldReceive( 'set_message' )
 			->once()
-			->with( $msg . ' - wpghs' );
+			->with( $msg . ' - wogh' );
 		$path = '_posts/2015-10-25-github-path.md';
 		$this->post
 			->shouldReceive( 'github_path' )
@@ -276,7 +276,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 			->shouldReceive( 'set_message' )
 			->once()
-			->with( $msg . ' - wpghs' );
+			->with( $msg . ' - wogh' );
 		$path = '_posts/2015-10-25-github-path.md';
 		$this->post
 			->shouldReceive( 'github_path' )
@@ -321,7 +321,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 			->shouldReceive( 'set_message' )
 			->once()
-			->with( $msg . ' - wpghs' );
+			->with( $msg . ' - wogh' );
 		$this->persist
 			->shouldReceive( 'commit' )
 			->with( $this->commit )
@@ -385,7 +385,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 				->shouldReceive( 'set_message' )
 				->once()
-				->with( $msg . ' - wpghs' );
+				->with( $msg . ' - wogh' );
 		$path = '_posts/2015-10-25-github-path.md';
 		$this->persist
 				->shouldReceive( 'commit' )
@@ -417,7 +417,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 				->shouldReceive( 'set_message' )
 				->once()
-				->with( $msg . ' - wpghs' );
+				->with( $msg . ' - wogh' );
 		$path = '_posts/2015-10-25-github-path.md';
 		$this->persist
 				->shouldReceive( 'commit' )
@@ -453,7 +453,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 				->shouldReceive( 'set_message' )
 				->once()
-				->with( $msg . ' - wpghs' );
+				->with( $msg . ' - wogh' );
 		$this->persist
 				->shouldReceive( 'commit' )
 				->with( $this->commit )
@@ -541,7 +541,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 			->shouldReceive( 'set_message' )
 			->once()
-			->with( $msg . ' - wpghs' );
+			->with( $msg . ' - wogh' );
 		$path = '_posts/2015-10-25-github-path.md';
 		$this->post
 			->shouldReceive( 'github_path' )
@@ -587,7 +587,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$this->commit
 			->shouldReceive( 'set_message' )
 			->once()
-			->with( $msg . ' - wpghs' );
+			->with( $msg . ' - wogh' );
 		$this->persist
 			->shouldReceive( 'commit' )
 			->with( $this->commit )

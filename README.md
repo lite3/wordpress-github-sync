@@ -77,7 +77,7 @@ Install the plugin and activate it via WordPress's plugin settings page.
 1. [Create a personal oauth token](https://github.com/settings/tokens/new) with the `public_repo` scope. If you'd prefer not to use your account, you can create another GitHub account for this.
 2. Configure your GitHub host, repository, secret (defined in the next step),  and OAuth Token on the WordPress <--> GitHub sync settings page within WordPress's administrative interface. Make sure the repository has an initial commit or the export will fail.
 3. Create a WebHook within your repository with the provided callback URL and callback secret, using `application/json` as the content type. To set up a webhook on GitHub, head over to the **Settings** page of your repository, and click on **Webhooks & services**. After that, click on **Add webhook**.
-4. Click `Export to GitHub` or if you use WP-CLI, run `wp wpghs export all #` from the command line, where # = the user ID you'd like to commit as.
+4. Click `Export to GitHub` or if you use WP-CLI, run `wp wogh export all #` from the command line, where # = the user ID you'd like to commit as.
 
 ## Frequently Asked Questions ##
 
@@ -108,9 +108,9 @@ If WordPress <--> GitHub Sync cannot find the author for a given import, it will
 
 By default, WordPress <--> GitHub Sync only exports published posts and pages. However, it provides a number of [hooks](https://codex.wordpress.org/Plugin_API) in order to customize its functionality. Check out the [wiki](https://github.com/mAAdhaTTah/wordpress-github-sync/wiki) for complete documentation for these actions and filters.
 
-If you want to export additional post types or draft posts, you'll have to hook into the filters `wpghs_whitelisted_post_types` or `wpghs_whitelisted_post_statuses` respectively.
+If you want to export additional post types or draft posts, you'll have to hook into the filters `wogh_whitelisted_post_types` or `wogh_whitelisted_post_statuses` respectively.
 
-In `wp-content`, create or open the `mu-plugins` folder and create a plugin file there called `wpghs-custom-filters.php`. In it, paste and modify the below code:
+In `wp-content`, create or open the `mu-plugins` folder and create a plugin file there called `wogh-custom-filters.php`. In it, paste and modify the below code:
 
     <?php
     /**
@@ -149,8 +149,8 @@ If you want to add a link to your posts on GitHub, there are 4 functions WordPre
 All four of these functions must be used in the loop. If you'd like to retrieve these URLs outside of the loop, instantiate a new `Writing_On_GitHub_Post` object and call `github_edit_url` or `github_view_url` respectively on it:
 
     // $id can be retrieved from a query or elsewhere
-    $wpghs_post = new Writing_On_GitHub_Post( $id );
-    $url = $wpghs_post->github_view_url();
+    $wogh_post = new Writing_On_GitHub_Post( $id );
+    $url = $wogh_post->github_view_url();
 
 If you'd like to include an edit link without modifying your theme directly, you can add one of these functions to `the_content` like so:
 
@@ -165,7 +165,7 @@ If you'd like to include an edit link without modifying your theme directly, you
 
 If you wish to add either the bare URL or a link referencing the URL to an individual post, without editing themes, you can add a [shortcode](https://codex.wordpress.org/Shortcode_API) anywhere in your post;
 
-`[wpghs]`
+`[wogh]`
 
 The following optional attributes can also be included in the shortcode
 * `target=`
@@ -180,7 +180,7 @@ The following optional attributes can also be included in the shortcode
 
 For example,
 
-`[wpghs target='view' type='link' text='Here is my post on GitHub']` will produce a HTML anchor tag with href set to the 'view' URL of the post on GitHub, and the link text set to 'Here is my post on GitHub', i.e.
+`[wogh target='view' type='link' text='Here is my post on GitHub']` will produce a HTML anchor tag with href set to the 'view' URL of the post on GitHub, and the link text set to 'Here is my post on GitHub', i.e.
 
 `<a href="https://github.com/USERNAME/REPO/blob/master/_posts/YOURPOST.md">Here is my post on GitHub</a>`
 

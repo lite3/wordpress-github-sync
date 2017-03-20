@@ -37,8 +37,8 @@ class Writing_On_GitHub_CLI extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp wpghs export all 1
-	 *     wp wpghs export 1 1
+	 *     wp wogh export all 1
+	 *     wp wogh export 1 1
 	 *
 	 * @synopsis <post_id|all> <user_id>
 	 *
@@ -80,7 +80,7 @@ class Writing_On_GitHub_CLI extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp wpghs import 1
+	 *     wp wogh import 1
 	 *
 	 * @synopsis <user_id>
 	 *
@@ -111,8 +111,8 @@ class Writing_On_GitHub_CLI extends WP_CLI_Command {
 	 *
 	 * ## EXAMPLES
 	 *
-	 *     wp wpghs prime --branch=master
-	 *     wp wpghs prime --sha=<commit_sha>
+	 *     wp wogh prime --branch=master
+	 *     wp wogh prime --sha=<commit_sha>
 	 *
 	 * @synopsis [--sha=<commit_sha>] [--branch]
 	 *

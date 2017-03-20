@@ -250,10 +250,10 @@ class Writing_On_GitHub_Export {
 	 * @return string
 	 */
 	protected function get_commit_msg_tag() {
-		$tag = apply_filters( 'wogh_commit_msg_tag', 'wpghs' );
+		$tag = apply_filters( 'wogh_commit_msg_tag', 'wogh' );
 
 		if ( ! $tag ) {
-			throw new Exception( __( 'Commit message tag not set. Filter `wpghs_commit_msg_tag` misconfigured.', 'wp-github-sync' ) );
+			throw new Exception( __( 'Commit message tag not set. Filter `wogh_commit_msg_tag` misconfigured.', 'wp-github-sync' ) );
 		}
 
 		return ' - ' . $tag;

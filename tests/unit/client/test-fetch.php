@@ -206,7 +206,7 @@ class Writing_On_GitHub_Fetch_Client_Test extends Writing_On_GitHub_Base_Client_
 		$this->assertSame( '2015-11-02T00:36:54Z', $master->author()->date );
 		$this->assertSame( 'test@test.com', $master->committer()->email );
 		$this->assertSame( '2015-11-02T00:36:54Z', $master->committer()->date );
-		$this->assertSame( 'Initial full site export - wpghs', $master->message() );
+		$this->assertSame( 'Initial full site export - wogh', $master->message() );
 		$this->assertCount( 1, $parents = $master->parents() );
 		$this->assertSame( 'db2510854e6aeab68ead26b48328b19f4bdf926e', $parents[0]->sha );
 
