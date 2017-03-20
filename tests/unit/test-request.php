@@ -19,7 +19,7 @@ class Writing_On_GitHub_Request_Test extends Writing_On_GitHub_TestCase {
 		parent::setUp();
 
 		$this->secret = '1234567890qwertyuiopasdfghjklzxcvbnm';
-		update_option( 'wpghs_secret', $this->secret );
+		update_option( 'wogh_secret', $this->secret );
 
 		$this->request = new Writing_On_GitHub_Request_Stub( $this->app );
 		$this->request->set_data_dir( $this->data_dir );

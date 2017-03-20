@@ -9,9 +9,9 @@
  */
 class Writing_On_GitHub_Base_Client {
 
-	const TOKEN_OPTION_KEY = 'wpghs_oauth_token';
-	const REPO_OPTION_KEY = 'wpghs_repository';
-	const HOST_OPTION_KEY = 'wpghs_host';
+	const TOKEN_OPTION_KEY = 'wogh_oauth_token';
+	const REPO_OPTION_KEY = 'wogh_repository';
+	const HOST_OPTION_KEY = 'wogh_host';
 
 	/**
 	 * Application container.
@@ -141,7 +141,7 @@ class Writing_On_GitHub_Base_Client {
 	 * API endpoint for the master branch reference
 	 */
 	public function reference_endpoint() {
-		$sync_branch = apply_filters( 'wpghs_sync_branch', 'master' );
+		$sync_branch = apply_filters( 'wogh_sync_branch', 'master' );
 
 		if ( ! $sync_branch ) {
 			throw new Exception( __( 'Sync branch not set. Filter `wpghs_sync_branch` misconfigured.', 'wp-github-sync' ) );

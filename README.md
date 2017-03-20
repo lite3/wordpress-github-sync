@@ -123,14 +123,14 @@ In `wp-content`, create or open the `mu-plugins` folder and create a plugin file
      * License:      GPL2
      */
 
-    add_filter('wpghs_whitelisted_post_types', function ($supported_post_types) {
+    add_filter('wogh_whitelisted_post_types', function ($supported_post_types) {
       return array_merge($supported_post_types, array(
         // add your custom post types here
         'gistpen'
       ));
     });
 
-    add_filter('wpghs_whitelisted_post_statuses', function ($supported_post_statuses) {
+    add_filter('wogh_whitelisted_post_statuses', function ($supported_post_statuses) {
       return array_merge($supported_post_statuses, array(
         // additional statuses available: https://codex.wordpress.org/Post_Status
         'draft'

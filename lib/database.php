@@ -52,7 +52,7 @@ class Writing_On_GitHub_Database {
 			'fields'      => 'ids',
 		);
 
-		$query = new WP_Query( apply_filters( 'wpghs_pre_fetch_all_supported', $args ) );
+		$query = new WP_Query( apply_filters( 'wogh_pre_fetch_all_supported', $args ) );
 
 		$post_ids = $query->get_posts();
 
@@ -121,7 +121,7 @@ class Writing_On_GitHub_Database {
 		$error = false;
 
 		foreach ( $posts as $post ) {
-			$args    = apply_filters( 'wpghs_pre_import_args', $post->get_args(), $post );
+			$args    = apply_filters( 'wogh_pre_import_args', $post->get_args(), $post );
 
 			remove_filter('content_save_pre', 'wp_filter_post_kses');
 			$post_id = $post->is_new() ?
@@ -155,7 +155,7 @@ class Writing_On_GitHub_Database {
 
 			$post->set_post( get_post( $post_id ) );
 
-			$meta = apply_filters( 'wpghs_pre_import_meta', $post->get_meta(), $post );
+			$meta = apply_filters( 'wogh_pre_import_meta', $post->get_meta(), $post );
 
 			foreach ( $meta as $key => $value ) {
 				update_post_meta( $post_id, $key, $value );
@@ -291,7 +291,7 @@ class Writing_On_GitHub_Database {
 	 * @return array
 	 */
 	protected function get_whitelisted_post_types() {
-		return apply_filters( 'wpghs_whitelisted_post_types', $this->whitelisted_post_types );
+		return apply_filters( 'wogh_whitelisted_post_types', $this->whitelisted_post_types );
 	}
 
 	/**
@@ -300,7 +300,7 @@ class Writing_On_GitHub_Database {
 	 * @return array
 	 */
 	protected function get_whitelisted_post_statuses() {
-		return apply_filters( 'wpghs_whitelisted_post_statuses', $this->whitelisted_post_statuses );
+		return apply_filters( 'wogh_whitelisted_post_statuses', $this->whitelisted_post_statuses );
 	}
 
 	/**
@@ -344,7 +344,7 @@ class Writing_On_GitHub_Database {
 			return false;
 		}
 
-		return apply_filters( 'wpghs_is_post_supported', true, $post );
+		return apply_filters( 'wogh_is_post_supported', true, $post );
 	}
 
 	/**
@@ -378,7 +378,7 @@ class Writing_On_GitHub_Database {
 
 		if ( ! $user ) {
 			// Use the default user.
-			$user = get_user_by( 'id', (int) get_option( 'wpghs_default_user' ) );
+			$user = get_user_by( 'id', (int) get_option( 'wogh_default_user' ) );
 		}
 
 		if ( ! $user ) {

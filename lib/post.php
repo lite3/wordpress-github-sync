@@ -123,7 +123,7 @@ class Writing_On_GitHub_Post {
 	 */
 	public function github_content() {
 		$content = $this->front_matter() . $this->post_content();
-		$ending  = apply_filters( 'wpghs_line_endings', "\n" );
+		$ending  = apply_filters( 'wogh_line_endings', "\n" );
 
 		return preg_replace( '~(*BSR_ANYCRLF)\R~', $ending, $content );
 	}
@@ -153,7 +153,7 @@ class Writing_On_GitHub_Post {
 			}
 		}
 
-		return apply_filters( 'wpghs_content_export', $content, $this );
+		return apply_filters( 'wogh_content_export', $content, $this );
 	}
 
 	public function old_github_path() {
@@ -185,7 +185,7 @@ class Writing_On_GitHub_Post {
 	 */
 	public function github_directory() {
 		if ( 'publish' !== $this->status() ) {
-			return apply_filters( 'wpghs_directory_unpublished', '_drafts/', $this );
+			return apply_filters( 'wogh_directory_unpublished', '_drafts/', $this );
 		}
 
 		$name = '';
@@ -213,7 +213,7 @@ class Writing_On_GitHub_Post {
 			$name = '_' . $name . '/';
 		}
 
-		return apply_filters( 'wpghs_directory_published', $name, $this );
+		return apply_filters( 'wogh_directory_published', $name, $this );
 	}
 
 	/**
@@ -226,7 +226,7 @@ class Writing_On_GitHub_Post {
 			$filename = $this->get_name() . '.md';
 		}
 
-		return apply_filters( 'wpghs_filename', $filename, $this );
+		return apply_filters( 'wogh_filename', $filename, $this );
 	}
 
 	/**
@@ -377,7 +377,7 @@ class Writing_On_GitHub_Post {
 
 		}
 
-		return apply_filters( 'wpghs_post_meta', $meta, $this );
+		return apply_filters( 'wogh_post_meta', $meta, $this );
 	}
 
 	/**

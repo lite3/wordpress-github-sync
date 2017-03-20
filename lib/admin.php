@@ -36,42 +36,42 @@ class Writing_On_GitHub_Admin {
 			Writing_On_GitHub::$text_domain
 		);
 
-		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_host' );
-		add_settings_field( 'wpghs_host', __( 'GitHub hostname', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wogh_host' );
+		add_settings_field( 'wogh_host', __( 'GitHub hostname', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => 'https://api.github.com',
-				'name'      => 'wpghs_host',
+				'name'      => 'wogh_host',
 				'help_text' => __( 'The GitHub host to use. This only needs to be changed to support a GitHub Enterprise installation.', 'wp-github-sync' ),
 			)
 		);
 
-		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_repository' );
-		add_settings_field( 'wpghs_repository', __( 'Repository', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wogh_repository' );
+		add_settings_field( 'wogh_repository', __( 'Repository', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
-				'name'      => 'wpghs_repository',
+				'name'      => 'wogh_repository',
 				'help_text' => __( 'The GitHub repository to commit to, with owner (<code>[OWNER]/[REPOSITORY]</code>), e.g., <code>github/hubot.github.com</code>. The repository should contain an initial commit, which is satisfied by including a README when you create the repository on GitHub.', 'wp-github-sync' ),
 			)
 		);
 
-		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_oauth_token' );
-		add_settings_field( 'wpghs_oauth_token', __( 'Oauth Token', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wogh_oauth_token' );
+		add_settings_field( 'wogh_oauth_token', __( 'Oauth Token', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
-				'name'      => 'wpghs_oauth_token',
+				'name'      => 'wogh_oauth_token',
 				'help_text' => __( "A <a href='https://github.com/settings/tokens/new'>personal oauth token</a> with <code>public_repo</code> scope.", 'wp-github-sync' ),
 			)
 		);
 
-		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_secret' );
-		add_settings_field( 'wpghs_secret', __( 'Webhook Secret', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wogh_secret' );
+		add_settings_field( 'wogh_secret', __( 'Webhook Secret', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
-				'name'      => 'wpghs_secret',
+				'name'      => 'wogh_secret',
 				'help_text' => __( "The webhook's secret phrase. This should be password strength, as it is used to verify the webhook's payload.", 'wp-github-sync' ),
 			)
 		);
 
-		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_default_user' );
-		add_settings_field( 'wpghs_default_user', __( 'Default Import User', 'wp-github-sync' ), array( &$this, 'user_field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wogh_default_user' );
+		add_settings_field( 'wogh_default_user', __( 'Default Import User', 'wp-github-sync' ), array( &$this, 'user_field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
-				'name'      => 'wpghs_default_user',
+				'name'      => 'wogh_default_user',
 				'help_text' => __( 'The fallback user for import, in case WordPress <--> GitHub Sync cannot find the committer in the database.', 'wp-github-sync' ),
 			)
 		);

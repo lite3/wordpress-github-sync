@@ -51,7 +51,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 	public function test_should_fail_full_export_if_cant_create_new_commit() {
 		$error = new WP_Error( 'api_fail', 'API failed.' );
 		$msg   = 'Commit message';
-		add_filter( 'wpghs_commit_msg_full', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_full', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->database
@@ -86,7 +86,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 	public function test_should_fail_full_export_if_cant_retrieve_new_commit() {
 		$error = new WP_Error( 'api_fail', 'API failed.' );
 		$msg   = 'Commit message';
-		add_filter( 'wpghs_commit_msg_full', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_full', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->database
@@ -124,7 +124,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 
 	public function test_should_successfully_full_export() {
 		$msg = 'Commit message';
-		add_filter( 'wpghs_commit_msg_full', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_full', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->database
@@ -211,7 +211,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$id    = 123456789;
 		$error = new WP_Error( 'api_fail', 'API failed.' );
 		$msg   = 'Commit message';
-		add_filter( 'wpghs_commit_msg_single', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_single', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->database
@@ -253,7 +253,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$id    = 123456789;
 		$error = new WP_Error( 'api_fail', 'API failed.' );
 		$msg   = 'Commit message';
-		add_filter( 'wpghs_commit_msg_single', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_single', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->database
@@ -298,7 +298,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 	public function test_should_successfully_update_export() {
 		$id  = 123456789;
 		$msg = 'Commit message';
-		add_filter( 'wpghs_commit_msg_single', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_single', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->database
@@ -367,7 +367,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 	public function test_should_fail_export_new_posts_if_cant_create_new_commit() {
 		$error = new WP_Error( 'api_fail', 'API failed.' );
 		$msg   = 'Commit message';
-		add_filter( 'wpghs_commit_msg_new_posts', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_new_posts', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->fetch
@@ -399,7 +399,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 	public function test_should_fail_export_new_posts_if_cant_retrieve_new_commit() {
 		$error = new WP_Error( 'api_fail', 'API failed.' );
 		$msg   = 'Commit message';
-		add_filter( 'wpghs_commit_msg_new_posts', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_new_posts', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->fetch
@@ -435,7 +435,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 	public function test_should_successfully_export_new_posts() {
 		$id  = 123456789;
 		$msg = 'Commit message';
-		add_filter( 'wpghs_commit_msg_new_posts', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_new_posts', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->fetch
@@ -518,7 +518,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 		$id    = 123456789;
 		$error = new WP_Error( 'api_fail', 'API failed.' );
 		$msg   = 'Commit message';
-		add_filter( 'wpghs_commit_msg_delete', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_delete', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->database
@@ -559,7 +559,7 @@ class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 	public function test_should_successfully_delete_export() {
 		$id  = 123456789;
 		$msg = 'Commit message';
-		add_filter( 'wpghs_commit_msg_delete', function () use ( $msg ) {
+		add_filter( 'wogh_commit_msg_delete', function () use ( $msg ) {
 			return $msg;
 		} );
 		$this->database

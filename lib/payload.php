@@ -48,7 +48,7 @@ class Writing_On_GitHub_Payload {
 		// The last term in the ref is the payload_branch name.
 		$refs   = explode( '/', $this->data->ref );
 		$payload_branch = array_pop( $refs );
-		$sync_branch = apply_filters( 'wpghs_sync_branch', 'master' );
+		$sync_branch = apply_filters( 'wogh_sync_branch', 'master' );
 
 		if ( ! $sync_branch ) {
 			throw new Exception( __( 'Sync branch not set. Filter `wpghs_sync_branch` misconfigured.', 'wp-github-sync' ) );
@@ -59,7 +59,7 @@ class Writing_On_GitHub_Payload {
 		}
 
 		// We add a tag to commits we push out, so we shouldn't pull them in again.
-		$tag = apply_filters( 'wpghs_commit_msg_tag', 'wpghs' );
+		$tag = apply_filters( 'wogh_commit_msg_tag', 'wpghs' );
 
 		if ( ! $tag ) {
 			throw new Exception( __( 'Commit message tag not set. Filter `wpghs_commit_msg_tag` misconfigured.', 'wp-github-sync' ) );

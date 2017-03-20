@@ -12,7 +12,7 @@ class Writing_On_GitHub_Semaphore {
 	/**
 	 * Sempahore's option key.
 	 */
-	const KEY = 'wpghs_semaphore_lock';
+	const KEY = 'wogh_semaphore_lock';
 
 	/**
 	 * Option key when semaphore is locked.

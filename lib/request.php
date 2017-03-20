@@ -139,6 +139,6 @@ class Writing_On_GitHub_Request {
 	 * @return string
 	 */
 	protected function secret() {
-		return get_option( 'wpghs_secret' );
+		return get_option( 'wogh_secret' );
 	}
 }

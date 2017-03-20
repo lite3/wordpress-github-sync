@@ -31,9 +31,9 @@ abstract class Writing_On_GitHub_Base_Client_Test extends Writing_On_GitHub_Test
 		parent::setUp();
 
 		WP_HTTP_TestCase::init();
-		update_option( 'wpghs_repository', self::REPO_OPTION_VALUE );
-		update_option( 'wpghs_oauth_token', self::TOKEN_OPTION_VALUE );
-		update_option( 'wpghs_host', self::HOST_OPTION_VALUE );
+		update_option( 'wogh_repository', self::REPO_OPTION_VALUE );
+		update_option( 'wogh_oauth_token', self::TOKEN_OPTION_VALUE );
+		update_option( 'wogh_host', self::HOST_OPTION_VALUE );
 		$this->http_responder = array( $this, 'mock_github_api' );
 	}
 

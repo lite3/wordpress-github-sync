@@ -14,7 +14,7 @@ class Writing_On_GitHub_Post_Test extends Writing_On_GitHub_TestCase {
 
 	public function setUp() {
 		parent::setUp();
-		update_option( 'wpghs_repository', 'owner/repo' );
+		update_option( 'wogh_repository', 'owner/repo' );
 		$this->id   = $this->factory->post->create();
 		$this->post = get_post( $this->id );
 

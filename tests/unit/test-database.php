@@ -139,7 +139,7 @@ class Writing_On_GitHub_Database_Test extends Writing_On_GitHub_TestCase {
 	public function test_should_save_new_post_with_default_user() {
 		$email   = 'randomemailaddress@example.com';
 		$user_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
-		update_option( 'wpghs_default_user', (int) $user_id );
+		update_option( 'wogh_default_user', (int) $user_id );
 		$this->factory->user->create( array( 'role' => 'administrator' ) );
 		$sha = '1234567890qwertyuiop';
 		/** @var WP_Post $result_post */
@@ -269,7 +269,7 @@ class Writing_On_GitHub_Database_Test extends Writing_On_GitHub_TestCase {
 		$email   = 'randomemailaddress@example.com';
 		$post_id = $this->factory->post->create();
 		$user_id = $this->factory->user->create( array( 'role' => 'administrator' ) );
-		update_option( 'wpghs_default_user', (int) $user_id );
+		update_option( 'wogh_default_user', (int) $user_id );
 		$this->factory->user->create( array( 'role' => 'administrator' ) );
 		// create a revision for existing post
 		wp_update_post( array( 'ID' => $post_id ) );

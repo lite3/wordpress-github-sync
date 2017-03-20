@@ -47,7 +47,7 @@ class Writing_On_GitHub_Export {
 
 		// $master->set_message(
 		// 	apply_filters(
-		// 		'wpghs_commit_msg_full',
+		// 		'wogh_commit_msg_full',
 		// 		sprintf(
 		// 			'Full export from WordPress at %s (%s)',
 		// 			site_url(),
@@ -123,7 +123,7 @@ class Writing_On_GitHub_Export {
 	public function new_posts( array $posts ) {
 
 		$message = apply_filters(
-			'wpghs_commit_msg_new_posts',
+			'wogh_commit_msg_new_posts',
 			sprintf(
 				'Updating new posts from WordPress at %s (%s)',
 				site_url(),
@@ -211,7 +211,7 @@ class Writing_On_GitHub_Export {
 		}
 
 		$message = apply_filters(
-			'wpghs_commit_msg_delete',
+			'wogh_commit_msg_delete',
 			sprintf(
 				'Deleting %s via WordPress at %s (%s)',
 				$post->github_path(),
@@ -250,7 +250,7 @@ class Writing_On_GitHub_Export {
 	 * @return string
 	 */
 	protected function get_commit_msg_tag() {
-		$tag = apply_filters( 'wpghs_commit_msg_tag', 'wpghs' );
+		$tag = apply_filters( 'wogh_commit_msg_tag', 'wpghs' );
 
 		if ( ! $tag ) {
 			throw new Exception( __( 'Commit message tag not set. Filter `wpghs_commit_msg_tag` misconfigured.', 'wp-github-sync' ) );

@@ -267,7 +267,7 @@ class Writing_On_GitHub_Import_Test extends Writing_On_GitHub_TestCase {
 
 		if ( ! isset( $this->blob_meta['ID'] ) ) {
 			$msg = 'Commit message';
-			add_filter( 'wpghs_commit_msg_new_posts', function () use ( $msg ) {
+			add_filter( 'wogh_commit_msg_new_posts', function () use ( $msg ) {
 				return $msg;
 			} );
 			$this->export

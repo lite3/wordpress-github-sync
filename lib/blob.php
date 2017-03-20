@@ -135,7 +135,7 @@ class Writing_On_GitHub_Blob {
 		/**
 		 * Filters the content for import.
 		 */
-		return apply_filters( 'wpghs_content_import', trim( $content ) );
+		return apply_filters( 'wogh_content_import', trim( $content ) );
 	}
 
 	/**
