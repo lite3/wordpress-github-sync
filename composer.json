@@ -21,7 +21,7 @@
     }
   ],
   "autoload": {
-    "classmap": ["lib/"],
+    "classmap": ["lib/"]
   },
   "autoload-dev": {
     "classmap": ["tests/"]
