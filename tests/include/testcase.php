@@ -48,11 +48,6 @@ abstract class WordPress_GitHub_Sync_TestCase extends WP_HTTP_TestCase {
 	protected $api;
 
 	/**
-	 * @var WordPress_GitHub_Sync_Commit|Mockery\Mock
-	 */
-	protected $commit;
-
-	/**
 	 * @var WordPress_GitHub_Sync_Semaphore|Mockery\Mock
 	 */
 	protected $semaphore;
@@ -66,11 +61,6 @@ abstract class WordPress_GitHub_Sync_TestCase extends WP_HTTP_TestCase {
 	 * @var WordPress_GitHub_Sync_Post|Mockery\Mock
 	 */
 	protected $post;
-
-	/**
-	 * @var WordPress_GitHub_Sync_Tree|Mockery\Mock
-	 */
-	protected $tree;
 
 	/**
 	 * @var WordPress_GitHub_Sync_Blob|Mockery\Mock
@@ -105,11 +95,9 @@ abstract class WordPress_GitHub_Sync_TestCase extends WP_HTTP_TestCase {
 		$this->response   = Mockery::mock( 'WordPress_GitHub_Sync_Response' );
 		$this->payload    = Mockery::mock( 'WordPress_GitHub_Sync_Payload' );
 		$this->api        = Mockery::mock( 'WordPress_GitHub_Sync_Api' );
-		$this->commit     = Mockery::mock( 'WordPress_GitHub_Sync_Commit' );
 		$this->semaphore  = Mockery::mock( 'WordPress_GitHub_Sync_Semaphore' );
 		$this->database   = Mockery::mock( 'WordPress_GitHub_Sync_Database' );
 		$this->post       = Mockery::mock( 'WordPress_GitHub_Sync_Post' );
-		$this->tree       = Mockery::mock( 'WordPress_GitHub_Sync_Tree' );
 		$this->blob       = Mockery::mock( 'WordPress_GitHub_Sync_Blob' );
 		$this->api_cache  = Mockery::mock( 'WordPress_GitHub_Sync_Cache' );
 		$this->fetch      = Mockery::mock( 'WordPress_GitHub_Sync_Fetch_Client' );

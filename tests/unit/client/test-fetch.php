@@ -11,14 +11,6 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 
 		$this->fetch = new WordPress_GitHub_Sync_Fetch_Client( $this->app );
 		$this->api_cache
-			->shouldReceive( 'fetch_commit' )
-			->andReturn( false )
-			->byDefault();
-		$this->api_cache
-			->shouldReceive( 'fetch_tree' )
-			->andReturn( false )
-			->byDefault();
-		$this->api_cache
 			->shouldReceive( 'fetch_blob' )
 			->andReturn( false )
 			->byDefault();
@@ -27,7 +19,7 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 	public function test_should_fail_if_missing_token() {
 		delete_option( Base::TOKEN_OPTION_KEY );
 
-		$this->assertInstanceOf( 'WP_Error', $error = $this->fetch->master() );
+		$this->assertInstanceOf( 'WP_Error', $error = $this->fetch->tree_recursive() );
 		$this->assertSame( 'missing_token', $error->get_error_code() );
 	}
 
@@ -42,13 +34,6 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 		// If you find a particular name passing that shouldn't,
 		// add it to the list here and make it pass.
 		$this->malformed_repo( 'repositoryname' );
-	}
-
-	public function test_should_fail_if_cant_fetch_master() {
-		$this->set_get_refs_heads_master( false );
-
-		$this->assertInstanceOf( 'WP_Error', $error = $this->fetch->master() );
-		$this->assertSame( '404_not_found', $error->get_error_code() );
 	}
 
 	public function test_should_return_commit_from_cache() {
@@ -256,7 +241,7 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 	protected function malformed_repo( $repo ) {
 		update_option( Base::REPO_OPTION_KEY, $repo );
 
-		$this->assertInstanceOf( 'WP_Error', $error = $this->fetch->master() );
+		$this->assertInstanceOf( 'WP_Error', $error = $this->fetch->tree_recursive() );
 		$this->assertSame( 'malformed_repository', $error->get_error_code() );
 	}
 }
