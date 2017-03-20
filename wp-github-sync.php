@@ -162,7 +162,7 @@ class Writing_On_GitHub {
 		// Controller actions.
 		add_action( 'save_post', array( $this->controller, 'export_post' ) );
 		add_action( 'delete_post', array( $this->controller, 'delete_post' ) );
-		add_action( 'wp_ajax_nopriv_wogh_sync_request', array( $this->controller, 'pull_posts' ) );
+		add_action( 'wp_ajax_nopriv_wogh_push_request', array( $this->controller, 'pull_posts' ) );
 		add_action( 'wogh_export', array( $this->controller, 'export_all' ) );
 		add_action( 'wogh_import', array( $this->controller, 'import_master' ) );
 		add_filter( 'get_edit_post_link', array( $this, 'edit_post_link' ), 10, 3 );

@@ -14,7 +14,7 @@
 		<table class="form-table">
 			<tr>
 				<th scope="row"><?php esc_html_e( 'Webhook callback', 'writing-on-github' ); ?></th>
-				<td><code><?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>?action=wogh_sync_request</code></td>
+				<td><code><?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>?action=wogh_push_request</code></td>
 			</tr>
 			<tr>
 				<th scope="row"><?php esc_html_e( 'Bulk actions', 'writing-on-github' ); ?></th>
