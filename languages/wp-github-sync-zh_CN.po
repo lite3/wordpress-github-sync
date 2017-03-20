@@ -130,8 +130,8 @@ msgid "Querying for supported posts returned no results."
 msgstr "无法找到有效格式的文章。"
 
 #: lib/database.php:88
-msgid "Post ID %s is not supported by WPGHS. See wiki to find out how to add support."
-msgstr "ID为%s的文章格式不被WPGHS支持同步，请前往Wiki寻找同步办法。"
+msgid "Post ID %s is not supported by WOGH. See wiki to find out how to add support."
+msgstr "ID为%s的文章格式不被WOGH支持同步，请前往Wiki寻找同步办法。"
 
 #: lib/database.php:119
 msgid "Post for sha %s not found."

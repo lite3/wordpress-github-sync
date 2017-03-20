@@ -156,10 +156,10 @@ msgstr "Suche nach unterstützten Posts fand keine Ergebnisse."
 
 #: lib/database.php:88
 msgid ""
-"Post ID %s is not supported by WPGHS. See wiki to find out how to add "
+"Post ID %s is not supported by WOGH. See wiki to find out how to add "
 "support."
 msgstr ""
-"Der Post mit der ID %s wird nicht von WPGHS unterstützt. Bitte sehe ins "
+"Der Post mit der ID %s wird nicht von WOGH unterstützt. Bitte sehe ins "
 "Wiki, um herauszufinden, wie man das ändert."
 
 #: lib/database.php:119

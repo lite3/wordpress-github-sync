@@ -37,7 +37,7 @@ class Writing_On_GitHub_Response {
 
 		$this->log( $error );
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && defined( 'WPGHS_AJAX' ) && WPGHS_AJAX ) {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && defined( 'WOGH_AJAX' ) && WOGH_AJAX ) {
 			/**
 			 * WordPress 4.1.0 introduced allowing WP_Error objects to be
 			 * passed directly into `wp_send_json_error`. This shims in
@@ -71,7 +71,7 @@ class Writing_On_GitHub_Response {
 	public function success( $success ) {
 		$this->log( $success );
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && defined( 'WPGHS_AJAX' ) && WPGHS_AJAX ) {
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX && defined( 'WOGH_AJAX' ) && WOGH_AJAX ) {
 			wp_send_json_success( $success );
 		}
 

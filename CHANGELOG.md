@@ -42,18 +42,18 @@ This change log follows the [Keep a Changelog standards][]. Versions follows [Se
 ### [1.5.0][] ###
 
 * New WP-CLI command:
-    * `prime`: Forces WPGHS to fetch the latest commit and save it in the cache.
+    * `prime`: Forces WOGH to fetch the latest commit and save it in the cache.
 * New filters:
     * `wogh_sync_branch`: Branch the WordPress install should sync itself with.
     * `wogh_commit_msg_tag`: Tag appended to the end of the commit message. Split from message with ` - `. Used to determine if commit has been synced already.
-* These two new filters allow you to use WPGHS to keep multiple sites in sync.
+* These two new filters allow you to use WOGH to keep multiple sites in sync.
     * This is an _advanced feature_. Your configuration may or may not be fully supported. **Use at your own risk.**
 * Eliminated some direct database calls in exchange for WP_Query usage.
 
 ### [1.4.1][] ###
 
 * Fix Database error handling
-* Fix bug where WPGHS would interfere with other plugins' AJAX hooks.
+* Fix bug where WOGH would interfere with other plugins' AJAX hooks.
 * Fix transient key length to <40.
 
 ### [1.4.0][] ###
@@ -105,7 +105,7 @@ This change log follows the [Keep a Changelog standards][]. Versions follows [Se
 
 ### [1.1.1][] ###
 
-* Add WPGHS_Post as param to export content filter.
+* Add WOGH_Post as param to export content filter.
 
 ### [1.1.0][] ###
 

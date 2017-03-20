@@ -215,8 +215,8 @@ class Writing_On_GitHub_Controller {
 	 * than just returning data.
 	 */
 	protected function set_ajax() {
-		if ( ! defined( 'WPGHS_AJAX' ) ) {
-			define( 'WPGHS_AJAX', true );
+		if ( ! defined( 'WOGH_AJAX' ) ) {
+			define( 'WOGH_AJAX', true );
 		}
 	}
 }

@@ -91,7 +91,7 @@ class Writing_On_GitHub_Database {
 				'unsupported_post',
 				sprintf(
 					__(
-						'Post ID %s is not supported by WPGHS. See wiki to find out how to add support.',
+						'Post ID %s is not supported by WOGH. See wiki to find out how to add support.',
 						'wp-github-sync'
 					),
 					$post_id

@@ -178,7 +178,7 @@ msgid "Querying for supported posts returned no results."
 msgstr ""
 
 #: lib/database.php:88
-msgid "Post ID %s is not supported by WPGHS. See wiki to find out how to add support."
+msgid "Post ID %s is not supported by WOGH. See wiki to find out how to add support."
 msgstr ""
 
 #: lib/database.php:123
