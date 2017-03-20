@@ -7,7 +7,7 @@ if ( ! $_tests_dir ) {
 require_once $_tests_dir . '/includes/functions.php';
 
 function _manually_load_plugin() {
-	require dirname( __FILE__ ) . '/../../wp-github-sync.php';
+	require dirname( __FILE__ ) . '/../../writing-on-github.php';
 	remove_action( 'plugins_loaded', array( Writing_On_GitHub::$instance, 'boot' ) );
 }
 

@@ -62,7 +62,7 @@ class Writing_On_GitHub_Export {
 			return $result;
 		}
 
-		return __( 'Export to GitHub completed successfully.', 'wp-github-sync' );
+		return __( 'Export to GitHub completed successfully.', 'writing-on-github' );
 	}
 
 
@@ -229,7 +229,7 @@ class Writing_On_GitHub_Export {
 			return $result;
 		}
 
-		return __( 'Export to GitHub completed successfully.', 'wp-github-sync' );
+		return __( 'Export to GitHub completed successfully.', 'writing-on-github' );
 	}
 
 
@@ -253,7 +253,7 @@ class Writing_On_GitHub_Export {
 		$tag = apply_filters( 'wogh_commit_msg_tag', 'wogh' );
 
 		if ( ! $tag ) {
-			throw new Exception( __( 'Commit message tag not set. Filter `wogh_commit_msg_tag` misconfigured.', 'wp-github-sync' ) );
+			throw new Exception( __( 'Commit message tag not set. Filter `wogh_commit_msg_tag` misconfigured.', 'writing-on-github' ) );
 		}
 
 		return ' - ' . $tag;

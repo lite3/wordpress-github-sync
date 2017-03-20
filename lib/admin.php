@@ -37,42 +37,42 @@ class Writing_On_GitHub_Admin {
 		);
 
 		register_setting( Writing_On_GitHub::$text_domain, 'wogh_host' );
-		add_settings_field( 'wogh_host', __( 'GitHub hostname', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		add_settings_field( 'wogh_host', __( 'GitHub hostname', 'writing-on-github' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => 'https://api.github.com',
 				'name'      => 'wogh_host',
-				'help_text' => __( 'The GitHub host to use. This only needs to be changed to support a GitHub Enterprise installation.', 'wp-github-sync' ),
+				'help_text' => __( 'The GitHub host to use. This only needs to be changed to support a GitHub Enterprise installation.', 'writing-on-github' ),
 			)
 		);
 
 		register_setting( Writing_On_GitHub::$text_domain, 'wogh_repository' );
-		add_settings_field( 'wogh_repository', __( 'Repository', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		add_settings_field( 'wogh_repository', __( 'Repository', 'writing-on-github' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wogh_repository',
-				'help_text' => __( 'The GitHub repository to commit to, with owner (<code>[OWNER]/[REPOSITORY]</code>), e.g., <code>github/hubot.github.com</code>. The repository should contain an initial commit, which is satisfied by including a README when you create the repository on GitHub.', 'wp-github-sync' ),
+				'help_text' => __( 'The GitHub repository to commit to, with owner (<code>[OWNER]/[REPOSITORY]</code>), e.g., <code>github/hubot.github.com</code>. The repository should contain an initial commit, which is satisfied by including a README when you create the repository on GitHub.', 'writing-on-github' ),
 			)
 		);
 
 		register_setting( Writing_On_GitHub::$text_domain, 'wogh_oauth_token' );
-		add_settings_field( 'wogh_oauth_token', __( 'Oauth Token', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		add_settings_field( 'wogh_oauth_token', __( 'Oauth Token', 'writing-on-github' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wogh_oauth_token',
-				'help_text' => __( "A <a href='https://github.com/settings/tokens/new'>personal oauth token</a> with <code>public_repo</code> scope.", 'wp-github-sync' ),
+				'help_text' => __( "A <a href='https://github.com/settings/tokens/new'>personal oauth token</a> with <code>public_repo</code> scope.", 'writing-on-github' ),
 			)
 		);
 
 		register_setting( Writing_On_GitHub::$text_domain, 'wogh_secret' );
-		add_settings_field( 'wogh_secret', __( 'Webhook Secret', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		add_settings_field( 'wogh_secret', __( 'Webhook Secret', 'writing-on-github' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wogh_secret',
-				'help_text' => __( "The webhook's secret phrase. This should be password strength, as it is used to verify the webhook's payload.", 'wp-github-sync' ),
+				'help_text' => __( "The webhook's secret phrase. This should be password strength, as it is used to verify the webhook's payload.", 'writing-on-github' ),
 			)
 		);
 
 		register_setting( Writing_On_GitHub::$text_domain, 'wogh_default_user' );
-		add_settings_field( 'wogh_default_user', __( 'Default Import User', 'wp-github-sync' ), array( &$this, 'user_field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+		add_settings_field( 'wogh_default_user', __( 'Default Import User', 'writing-on-github' ), array( &$this, 'user_field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wogh_default_user',
-				'help_text' => __( 'The fallback user for import, in case WordPress <--> GitHub Sync cannot find the committer in the database.', 'wp-github-sync' ),
+				'help_text' => __( 'The fallback user for import, in case WordPress <--> GitHub Sync cannot find the committer in the database.', 'writing-on-github' ),
 			)
 		);
 	}
@@ -105,42 +105,42 @@ class Writing_On_GitHub_Admin {
 
 		if ( 'yes' === get_option( '_wogh_export_started' ) ) { ?>
 			<div class="updated">
-				<p><?php esc_html_e( 'Export to GitHub started.', 'wp-github-sync' ); ?></p>
+				<p><?php esc_html_e( 'Export to GitHub started.', 'writing-on-github' ); ?></p>
 			</div><?php
 			delete_option( '_wogh_export_started' );
 		}
 
 		if ( $message = get_option( '_wogh_export_error' ) ) { ?>
 			<div class="error">
-				<p><?php esc_html_e( 'Export to GitHub failed with error:', 'wp-github-sync' ); ?> <?php echo esc_html( $message );?></p>
+				<p><?php esc_html_e( 'Export to GitHub failed with error:', 'writing-on-github' ); ?> <?php echo esc_html( $message );?></p>
 			</div><?php
 			delete_option( '_wogh_export_error' );
 		}
 
 		if ( 'yes' === get_option( '_wogh_export_complete' ) ) { ?>
 			<div class="updated">
-				<p><?php esc_html_e( 'Export to GitHub completed successfully.', 'wp-github-sync' );?></p>
+				<p><?php esc_html_e( 'Export to GitHub completed successfully.', 'writing-on-github' );?></p>
 			</div><?php
 			delete_option( '_wogh_export_complete' );
 		}
 
 		if ( 'yes' === get_option( '_wogh_import_started' ) ) { ?>
 			<div class="updated">
-			<p><?php esc_html_e( 'Import from GitHub started.', 'wp-github-sync' ); ?></p>
+			<p><?php esc_html_e( 'Import from GitHub started.', 'writing-on-github' ); ?></p>
 			</div><?php
 			delete_option( '_wogh_import_started' );
 		}
 
 		if ( $message = get_option( '_wogh_import_error' ) ) { ?>
 			<div class="error">
-			<p><?php esc_html_e( 'Import from GitHub failed with error:', 'wp-github-sync' ); ?> <?php echo esc_html( $message );?></p>
+			<p><?php esc_html_e( 'Import from GitHub failed with error:', 'writing-on-github' ); ?> <?php echo esc_html( $message );?></p>
 			</div><?php
 			delete_option( '_wogh_import_error' );
 		}
 
 		if ( 'yes' === get_option( '_wogh_import_complete' ) ) { ?>
 			<div class="updated">
-			<p><?php esc_html_e( 'Import from GitHub completed successfully.', 'wp-github-sync' );?></p>
+			<p><?php esc_html_e( 'Import from GitHub completed successfully.', 'writing-on-github' );?></p>
 			</div><?php
 			delete_option( '_wogh_import_complete' );
 		}
@@ -151,8 +151,8 @@ class Writing_On_GitHub_Admin {
 	 */
 	public function add_admin_menu() {
 		add_options_page(
-			__( 'WordPress <--> GitHub Sync', 'wp-github-sync' ),
-			__( 'GitHub Sync', 'wp-github-sync' ),
+			__( 'WordPress <--> GitHub Sync', 'writing-on-github' ),
+			__( 'GitHub Sync', 'writing-on-github' ),
 			'manage_options',
 			Writing_On_GitHub::$text_domain,
 			array( $this, 'settings_page' )
@@ -183,7 +183,7 @@ class Writing_On_GitHub_Admin {
 			Writing_On_GitHub::$instance->start_import();
 		}
 
-		wp_redirect( admin_url( 'options-general.php?page=wp-github-sync' ) );
+		wp_redirect( admin_url( 'options-general.php?page=writing-on-github' ) );
 		die;
 	}
 }

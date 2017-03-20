@@ -48,24 +48,24 @@ class Writing_On_GitHub_CLI extends WP_CLI_Command {
 		list( $post_id, $user_id ) = $args;
 
 		if ( ! is_numeric( $user_id ) ) {
-			WP_CLI::error( __( 'Invalid user ID', 'wp-github-sync' ) );
+			WP_CLI::error( __( 'Invalid user ID', 'writing-on-github' ) );
 		}
 
 		$this->app->export()->set_user( $user_id );
 
 		if ( 'all' === $post_id ) {
-			WP_CLI::line( __( 'Starting full export to GitHub.', 'wp-github-sync' ) );
+			WP_CLI::line( __( 'Starting full export to GitHub.', 'writing-on-github' ) );
 			$this->app->controller()->export_all();
 		} elseif ( is_numeric( $post_id ) ) {
 			WP_CLI::line(
 				sprintf(
-					__( 'Exporting post ID to GitHub: %d', 'wp-github-sync' ),
+					__( 'Exporting post ID to GitHub: %d', 'writing-on-github' ),
 					$post_id
 				)
 			);
 			$this->app->controller()->export_post( (int) $post_id );
 		} else {
-			WP_CLI::error( __( 'Invalid post ID', 'wp-github-sync' ) );
+			WP_CLI::error( __( 'Invalid post ID', 'writing-on-github' ) );
 		}
 	}
 
@@ -90,12 +90,12 @@ class Writing_On_GitHub_CLI extends WP_CLI_Command {
 		list( $user_id ) = $args;
 
 		if ( ! is_numeric( $user_id ) ) {
-			WP_CLI::error( __( 'Invalid user ID', 'wp-github-sync' ) );
+			WP_CLI::error( __( 'Invalid user ID', 'writing-on-github' ) );
 		}
 
 		update_option( '_wogh_export_user_id', (int) $user_id );
 
-		WP_CLI::line( __( 'Starting import from GitHub.', 'wp-github-sync' ) );
+		WP_CLI::line( __( 'Starting import from GitHub.', 'writing-on-github' ) );
 
 		$this->app->controller()->import_master();
 	}
@@ -121,21 +121,21 @@ class Writing_On_GitHub_CLI extends WP_CLI_Command {
 	 */
 	public function prime( $args, $assoc_args ) {
 		if ( isset( $assoc_args['branch'] ) ) {
-			WP_CLI::line( __( 'Starting branch import.', 'wp-github-sync' ) );
+			WP_CLI::line( __( 'Starting branch import.', 'writing-on-github' ) );
 
 			$commit = $this->app->api()->fetch()->master();
 
 			if ( is_wp_error( $commit ) ) {
 				WP_CLI::error(
 					sprintf(
-						__( 'Failed to import and cache branch with error: %s', 'wp-github-sync' ),
+						__( 'Failed to import and cache branch with error: %s', 'writing-on-github' ),
 						$commit->get_error_message()
 					)
 				);
 			} else {
 				WP_CLI::success(
 					sprintf(
-						__( 'Successfully imported and cached commit %s from branch.', 'wp-github-sync' ),
+						__( 'Successfully imported and cached commit %s from branch.', 'writing-on-github' ),
 						$commit->sha()
 					)
 				);
@@ -147,7 +147,7 @@ class Writing_On_GitHub_CLI extends WP_CLI_Command {
 
 			WP_CLI::success(
 				sprintf(
-					__( 'Successfully imported and cached commit %s.', 'wp-github-sync' ),
+					__( 'Successfully imported and cached commit %s.', 'writing-on-github' ),
 					$commit->sha()
 				)
 			);

@@ -57,7 +57,7 @@ class Writing_On_GitHub_Base_Client {
 		}
 
 		$tmpbody = isset($args['body']) ? $args['body'] : '';
-		error_log("wp-github-sync-call method:$method endpoint:$endpoint body:$tmpbody");
+		error_log("writing-on-github-call method:$method endpoint:$endpoint body:$tmpbody");
 
 		$response = wp_remote_request( $endpoint, $args );
 		$status   = wp_remote_retrieve_header( $response, 'status' );
@@ -67,7 +67,7 @@ class Writing_On_GitHub_Base_Client {
 			return new WP_Error(
 				strtolower( str_replace( ' ', '_', $status ) ),
 				sprintf(
-					__( 'Method %s to endpoint %s failed with error: %s', 'wp-github-sync' ),
+					__( 'Method %s to endpoint %s failed with error: %s', 'writing-on-github' ),
 					$method,
 					$endpoint,
 					$body && $body->message ? $body->message : 'Unknown error'
@@ -87,7 +87,7 @@ class Writing_On_GitHub_Base_Client {
 		if ( ! $this->oauth_token() ) {
 			return new WP_Error(
 				'missing_token',
-				__( 'WordPress-GitHub-Sync needs an auth token. Please update your settings.', 'wp-github-sync' )
+				__( 'WordPress-GitHub-Sync needs an auth token. Please update your settings.', 'writing-on-github' )
 			);
 		}
 
@@ -96,7 +96,7 @@ class Writing_On_GitHub_Base_Client {
 		if ( ! $repo ) {
 			return new WP_Error(
 				'missing_repository',
-				__( 'WordPress-GitHub-Sync needs a repository. Please update your settings.', 'wp-github-sync' )
+				__( 'WordPress-GitHub-Sync needs a repository. Please update your settings.', 'writing-on-github' )
 			);
 		}
 
@@ -105,7 +105,7 @@ class Writing_On_GitHub_Base_Client {
 		if ( 2 !== count( $parts ) ) {
 			return new WP_Error(
 				'malformed_repository',
-				__( 'WordPress-GitHub-Sync needs a properly formed repository. Please update your settings.', 'wp-github-sync' )
+				__( 'WordPress-GitHub-Sync needs a properly formed repository. Please update your settings.', 'writing-on-github' )
 			);
 		}
 
@@ -144,7 +144,7 @@ class Writing_On_GitHub_Base_Client {
 		$sync_branch = apply_filters( 'wogh_sync_branch', 'master' );
 
 		if ( ! $sync_branch ) {
-			throw new Exception( __( 'Sync branch not set. Filter `wogh_sync_branch` misconfigured.', 'wp-github-sync' ) );
+			throw new Exception( __( 'Sync branch not set. Filter `wogh_sync_branch` misconfigured.', 'writing-on-github' ) );
 		}
 
 		$url = $this->api_base() . '/repos/';

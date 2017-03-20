@@ -51,7 +51,7 @@ class Writing_On_GitHub_Payload {
 		$sync_branch = apply_filters( 'wogh_sync_branch', 'master' );
 
 		if ( ! $sync_branch ) {
-			throw new Exception( __( 'Sync branch not set. Filter `wogh_sync_branch` misconfigured.', 'wp-github-sync' ) );
+			throw new Exception( __( 'Sync branch not set. Filter `wogh_sync_branch` misconfigured.', 'writing-on-github' ) );
 		}
 
 		if ( $sync_branch !== $payload_branch ) {
@@ -62,7 +62,7 @@ class Writing_On_GitHub_Payload {
 		$tag = apply_filters( 'wogh_commit_msg_tag', 'wogh' );
 
 		if ( ! $tag ) {
-			throw new Exception( __( 'Commit message tag not set. Filter `wogh_commit_msg_tag` misconfigured.', 'wp-github-sync' ) );
+			throw new Exception( __( 'Commit message tag not set. Filter `wogh_commit_msg_tag` misconfigured.', 'writing-on-github' ) );
 		}
 
 		if ( $tag === substr( $this->message(), -1 * strlen( $tag ) ) ) {

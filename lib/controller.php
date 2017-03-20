@@ -37,27 +37,27 @@ class Writing_On_GitHub_Controller {
 		if ( ! $this->app->semaphore()->is_open() ) {
 			return $this->app->response()->error( new WP_Error(
 				'semaphore_locked',
-				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'wp-github-sync' ), 'Controller::pull_posts()' )
+				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'writing-on-github' ), 'Controller::pull_posts()' )
 			) );
 		}
 
 		if ( ! $this->app->request()->is_secret_valid() ) {
 			return $this->app->response()->error( new WP_Error(
 				'invalid_headers',
-				__( 'Failed to validate secret.', 'wp-github-sync' )
+				__( 'Failed to validate secret.', 'writing-on-github' )
 			) );
 		}
 
 		// ping
 		if ( $this->app->request()->is_ping() ) {
-			return $this->app->response()->success( __( 'Wordpress is ready.', 'wp-github-sync' ) );
+			return $this->app->response()->success( __( 'Wordpress is ready.', 'writing-on-github' ) );
 		}
 
 		// push
 		if ( ! $this->app->request()->is_push() ) {
 			return $this->app->response()->error( new WP_Error(
 				'invalid_headers',
-				__( 'Failed to validate webhook event.', 'wp-github-sync' )
+				__( 'Failed to validate webhook event.', 'writing-on-github' )
 			) );
 		}
 		$payload = $this->app->request()->payload();
@@ -66,7 +66,7 @@ class Writing_On_GitHub_Controller {
 			return $this->app->response()->error( new WP_Error(
 				'invalid_payload',
 				sprintf(
-					__( "%s won't be imported.", 'wp-github-sync' ),
+					__( "%s won't be imported.", 'writing-on-github' ),
 					strtolower( $payload->get_commit_id() ) ? : '[Missing Commit ID]'
 				)
 			) );
@@ -96,7 +96,7 @@ class Writing_On_GitHub_Controller {
 		if ( ! $this->app->semaphore()->is_open() ) {
 			return $this->app->response()->error( new WP_Error(
 				'semaphore_locked',
-				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'wp-github-sync' ), 'Controller::import_master()' )
+				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'writing-on-github' ), 'Controller::import_master()' )
 			) );
 		}
 
@@ -128,7 +128,7 @@ class Writing_On_GitHub_Controller {
 		if ( ! $this->app->semaphore()->is_open() ) {
 			return $this->app->response()->error( new WP_Error(
 				'semaphore_locked',
-				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'wp-github-sync' ), 'Controller::export_all()' )
+				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'writing-on-github' ), 'Controller::export_all()' )
 			) );
 		}
 
@@ -166,7 +166,7 @@ class Writing_On_GitHub_Controller {
 		if ( ! $this->app->semaphore()->is_open() ) {
 			return $this->app->response()->error( new WP_Error(
 				'semaphore_locked',
-				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'wp-github-sync' ), 'Controller::export_post()' )
+				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'writing-on-github' ), 'Controller::export_post()' )
 			) );
 		}
 
@@ -194,7 +194,7 @@ class Writing_On_GitHub_Controller {
 		if ( ! $this->app->semaphore()->is_open() ) {
 			return $this->app->response()->error( new WP_Error(
 				'semaphore_locked',
-				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'wp-github-sync' ), 'Controller::delete_post()' )
+				sprintf( __( '%s : Semaphore is locked, import/export already in progress.', 'writing-on-github' ), 'Controller::delete_post()' )
 			) );
 		}
 

@@ -6,24 +6,24 @@
 
 ?>
 <div class="wrap">
-	<h2><?php esc_html_e( 'WordPress <--> GitHub Sync', 'wp-github-sync' ); ?></h2>
+	<h2><?php esc_html_e( 'WordPress <--> GitHub Sync', 'writing-on-github' ); ?></h2>
 
 	<form method="post" action="options.php">
 		<?php settings_fields( Writing_On_GitHub::$text_domain ); ?>
 		<?php do_settings_sections( Writing_On_GitHub::$text_domain ); ?>
 		<table class="form-table">
 			<tr>
-				<th scope="row"><?php esc_html_e( 'Webhook callback', 'wp-github-sync' ); ?></th>
+				<th scope="row"><?php esc_html_e( 'Webhook callback', 'writing-on-github' ); ?></th>
 				<td><code><?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>?action=wogh_sync_request</code></td>
 			</tr>
 			<tr>
-				<th scope="row"><?php esc_html_e( 'Bulk actions', 'wp-github-sync' ); ?></th>
+				<th scope="row"><?php esc_html_e( 'Bulk actions', 'writing-on-github' ); ?></th>
 				<td>
 					<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'export' ) ) ); ?>">
-						<?php esc_html_e( 'Export to GitHub', 'wp-github-sync' ); ?>
+						<?php esc_html_e( 'Export to GitHub', 'writing-on-github' ); ?>
 					</a> |
 					<a href="<?php echo esc_url( add_query_arg( array( 'action' => 'import' ) ) ); ?>">
-						<?php esc_html_e( 'Import from GitHub', 'wp-github-sync' ); ?>
+						<?php esc_html_e( 'Import from GitHub', 'writing-on-github' ); ?>
 					</a>
 				</td>
 		</table>

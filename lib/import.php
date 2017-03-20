@@ -67,7 +67,7 @@ class Writing_On_GitHub_Import {
 	// 		return $error;
 	// 	}
 
-	// 	return __( 'Payload processed', 'wp-github-sync' );
+	// 	return __( 'Payload processed', 'writing-on-github' );
 	// }
 
 	public function payload( Writing_On_GitHub_Payload $payload ) {
@@ -84,7 +84,7 @@ class Writing_On_GitHub_Import {
 			return $files;
 		}
 
-		return __( 'Payload processed', 'wp-github-sync' );
+		return __( 'Payload processed', 'writing-on-github' );
 	}
 
 	/**
@@ -137,7 +137,7 @@ class Writing_On_GitHub_Import {
 			return $result;
 		}
 
-		return __( 'Payload processed', 'wp-github-sync' );
+		return __( 'Payload processed', 'writing-on-github' );
 	}
 
 	protected function compare( $files, &$delete_ids ) {

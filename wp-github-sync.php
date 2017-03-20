@@ -8,7 +8,7 @@
  * Author URI: http://jamesdigioia.com
  * License: GPLv2
  * Domain Path: /languages
- * Text Domain: wp-github-sync
+ * Text Domain: writing-on-github
  */
 
 /*  Copyright 2014  James DiGioia  (email : jamesorodig@gmail.com)
@@ -50,7 +50,7 @@ class Writing_On_GitHub {
 	 * Language text domain
 	 * @var string
 	 */
-	public static $text_domain = 'wp-github-sync';
+	public static $text_domain = 'writing-on-github';
 
 	/**
 	 * Current version
@@ -226,7 +226,7 @@ class Writing_On_GitHub {
 			<p>
 				<?php
 					printf(
-						__( 'To set up your site to sync with GitHub, update your <a href="%s">settings</a> and click "Export to GitHub."', 'wp-github-sync' ),
+						__( 'To set up your site to sync with GitHub, update your <a href="%s">settings</a> and click "Export to GitHub."', 'writing-on-github' ),
 						admin_url( 'options-general.php?page=' . static::$text_domain)
 					);
 				?>

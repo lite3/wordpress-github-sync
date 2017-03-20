@@ -59,7 +59,7 @@ class Writing_On_GitHub_Database {
 		if ( ! $post_ids ) {
 			return new WP_Error(
 				'no_results',
-				__( 'Querying for supported posts returned no results.', 'wp-github-sync' )
+				__( 'Querying for supported posts returned no results.', 'writing-on-github' )
 			);
 		}
 
@@ -92,7 +92,7 @@ class Writing_On_GitHub_Database {
 				sprintf(
 					__(
 						'Post ID %s is not supported by WOGH. See wiki to find out how to add support.',
-						'wp-github-sync'
+						'writing-on-github'
 					),
 					$post_id
 				)
@@ -166,7 +166,7 @@ class Writing_On_GitHub_Database {
 			return $error;
 		}
 
-		return __( 'Successfully saved posts.', 'wp-github-sync' );
+		return __( 'Successfully saved posts.', 'writing-on-github' );
 	}
 
 	/**
@@ -228,7 +228,7 @@ class Writing_On_GitHub_Database {
 			return new WP_Error(
 				'path_not_found',
 				sprintf(
-					__( 'Post not found for path %s.', 'wp-github-sync' ),
+					__( 'Post not found for path %s.', 'writing-on-github' ),
 					$path
 				)
 			);
@@ -246,7 +246,7 @@ class Writing_On_GitHub_Database {
 				return new WP_Error(
 					'db_error',
 					sprintf(
-						__( 'Failed to delete post ID %d.', 'wp-github-sync' ),
+						__( 'Failed to delete post ID %d.', 'writing-on-github' ),
 						$post_id
 					)
 				);
@@ -254,7 +254,7 @@ class Writing_On_GitHub_Database {
 		}
 
 		return sprintf(
-			__( 'Successfully deleted post ID %d.', 'wp-github-sync' ),
+			__( 'Successfully deleted post ID %d.', 'writing-on-github' ),
 			$post_id
 		);
 	}
@@ -272,7 +272,7 @@ class Writing_On_GitHub_Database {
 				return new WP_Error(
 					'db_error',
 					sprintf(
-						__( 'Failed to delete post ID %d.', 'wp-github-sync' ),
+						__( 'Failed to delete post ID %d.', 'writing-on-github' ),
 						$post_id
 					)
 				);
@@ -280,7 +280,7 @@ class Writing_On_GitHub_Database {
 		}
 
 		return sprintf(
-			__( 'Successfully deleted post ID %d.', 'wp-github-sync' ),
+			__( 'Successfully deleted post ID %d.', 'writing-on-github' ),
 			$post_id
 		);
 	}
@@ -385,7 +385,7 @@ class Writing_On_GitHub_Database {
 			return new WP_Error(
 				'user_not_found',
 				sprintf(
-					__( 'Commit user not found for email %s', 'wp-github-sync' ),
+					__( 'Commit user not found for email %s', 'writing-on-github' ),
 					$email
 				)
 			);
@@ -458,7 +458,7 @@ class Writing_On_GitHub_Database {
 
 		if ( 0 === $result ) {
 			return sprintf(
-				__( 'No change for post ID %d.', 'wp-github-sync' ),
+				__( 'No change for post ID %d.', 'writing-on-github' ),
 				$post_id
 			);
 		}
@@ -466,7 +466,7 @@ class Writing_On_GitHub_Database {
 		clean_post_cache( $post_id );
 
 		return sprintf(
-			__( 'Successfully updated post ID %d.', 'wp-github-sync' ),
+			__( 'Successfully updated post ID %d.', 'writing-on-github' ),
 			$post_id
 		);
 	}
