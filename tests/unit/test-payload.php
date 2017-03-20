@@ -3,7 +3,7 @@
 /**
  * @group payload
  */
-class WordPress_GitHub_Sync_Payload_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Payload_Test extends Writing_On_GitHub_TestCase {
 
 	public function setUp() {
 		parent::setUp();
@@ -15,7 +15,7 @@ class WordPress_GitHub_Sync_Payload_Test extends WordPress_GitHub_Sync_TestCase 
 	}
 
 	public function test_should_not_import_invalid_repository() {
-		$payload = new WordPress_GitHub_Sync_Payload(
+		$payload = new Writing_On_GitHub_Payload(
 			$this->app,
 			file_get_contents( $this->data_dir . 'payload-invalid-repo.json' )
 		);
@@ -24,7 +24,7 @@ class WordPress_GitHub_Sync_Payload_Test extends WordPress_GitHub_Sync_TestCase 
 	}
 
 	public function test_should_not_import_invalid_branch() {
-		$payload = new WordPress_GitHub_Sync_Payload(
+		$payload = new Writing_On_GitHub_Payload(
 			$this->app,
 			file_get_contents( $this->data_dir . 'payload-invalid-branch.json' )
 		);
@@ -33,7 +33,7 @@ class WordPress_GitHub_Sync_Payload_Test extends WordPress_GitHub_Sync_TestCase 
 	}
 
 	public function test_should_not_import_synced_commit() {
-		$payload = new WordPress_GitHub_Sync_Payload(
+		$payload = new Writing_On_GitHub_Payload(
 			$this->app,
 			file_get_contents( $this->data_dir . 'payload-synced-commit.json' )
 		);
@@ -42,7 +42,7 @@ class WordPress_GitHub_Sync_Payload_Test extends WordPress_GitHub_Sync_TestCase 
 	}
 
 	public function test_should_be_valid_payload() {
-		$payload = new WordPress_GitHub_Sync_Payload(
+		$payload = new Writing_On_GitHub_Payload(
 			$this->app,
 			file_get_contents( $this->data_dir . 'payload-valid.json' )
 		);

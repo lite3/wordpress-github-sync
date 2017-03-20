@@ -3,7 +3,7 @@
 /**
  * @group managers
  */
-class WordPress_GitHub_Sync_Import_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Import_Test extends Writing_On_GitHub_TestCase {
 
 	/**
 	 * @var string
@@ -33,7 +33,7 @@ class WordPress_GitHub_Sync_Import_Test extends WordPress_GitHub_Sync_TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->import = new WordPress_GitHub_Sync_Import( $this->app );
+		$this->import = new Writing_On_GitHub_Import( $this->app );
 	}
 
 	public function test_should_fail_payload_import_if_api_fails() {
@@ -261,7 +261,7 @@ class WordPress_GitHub_Sync_Import_Test extends WordPress_GitHub_Sync_TestCase {
 					return false;
 				}
 
-				return $argument[0] instanceof WordPress_GitHub_Sync_Post;
+				return $argument[0] instanceof Writing_On_GitHub_Post;
 
 			} ), $email );
 
@@ -278,7 +278,7 @@ class WordPress_GitHub_Sync_Import_Test extends WordPress_GitHub_Sync_TestCase {
 						return false;
 					}
 
-					return $argument[0] instanceof WordPress_GitHub_Sync_Post;
+					return $argument[0] instanceof Writing_On_GitHub_Post;
 
 				} ) )
 				->andReturn( 'Successful export' );

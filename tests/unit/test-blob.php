@@ -4,7 +4,7 @@
  * @group api
  * @group models
  */
-class WordPress_GitHub_Sync_Blob_Test extends WordPress_GitHub_Sync_Base_Client_Test {
+class Writing_On_GitHub_Blob_Test extends Writing_On_GitHub_Base_Client_Test {
 
 	/**
 	 * @var stdClass
@@ -39,7 +39,7 @@ MD
 		);
 		$this->blob_data->encoding = 'base64';
 
-		$this->blob = new WordPress_GitHub_Sync_Blob( $this->blob_data );
+		$this->blob = new Writing_On_GitHub_Blob( $this->blob_data );
 
 		$this->content['utf8'] = <<<MD
 ---
@@ -51,7 +51,7 @@ MD;
 	}
 
 	public function test_should_create_empty_blob() {
-		$this->blob = new WordPress_GitHub_Sync_Blob( new stdClass );
+		$this->blob = new Writing_On_GitHub_Blob( new stdClass );
 
 		$this->assertSame( '', $this->blob->sha() );
 		$this->assertSame( '', $this->blob->path() );
@@ -85,7 +85,7 @@ MD;
 
 	public function test_should_generate_body_with_content() {
 		unset( $this->blob_data->sha );
-		$this->blob = new WordPress_GitHub_Sync_Blob( $this->blob_data );
+		$this->blob = new Writing_On_GitHub_Blob( $this->blob_data );
 
 		$body = $this->blob->to_body();
 

@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package Wordpress_Github_Sync
+ * @package Writing_On_GitHub
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );

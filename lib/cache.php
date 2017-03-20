@@ -1,13 +1,13 @@
 <?php
 /**
  * The cache object which reads and writes the GitHub api data
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Cache
+ * Class Writing_On_GitHub_Cache
  */
-class WordPress_GitHub_Sync_Cache {
+class Writing_On_GitHub_Cache {
 
 	/**
 	 * Cached blobs.
@@ -46,12 +46,12 @@ class WordPress_GitHub_Sync_Cache {
 	 *
 	 * @param string $sha Blob sha to fetch from cache.
 	 *
-	 * @return false|WordPress_GitHub_Sync_Blob
+	 * @return false|Writing_On_GitHub_Blob
 	 */
 	public function fetch_blob( $sha ) {
 		$blob = $this->get( 'blobs', $sha );
 
-		if ( $blob instanceof WordPress_GitHub_Sync_Blob ) {
+		if ( $blob instanceof Writing_On_GitHub_Blob ) {
 			return $blob;
 		}
 
@@ -62,11 +62,11 @@ class WordPress_GitHub_Sync_Cache {
 	 * Save blob to cache by sha.
 	 *
 	 * @param string                     $sha Blob sha to cache by.
-	 * @param WordPress_GitHub_Sync_Blob $blob Blob to cache.
+	 * @param Writing_On_GitHub_Blob $blob Blob to cache.
 	 *
-	 * @return WordPress_GitHub_Sync_Blob
+	 * @return Writing_On_GitHub_Blob
 	 */
-	public function set_blob( $sha, WordPress_GitHub_Sync_Blob $blob ) {
+	public function set_blob( $sha, Writing_On_GitHub_Blob $blob ) {
 		return $this->save( 'blobs', $sha, $blob, 3 * DAY_IN_SECONDS );
 	}
 

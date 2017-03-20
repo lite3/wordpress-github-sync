@@ -1,13 +1,13 @@
 <?php
 /**
  * Locks and unlock the import/export process.
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Semaphore
+ * Class Writing_On_GitHub_Semaphore
  */
-class WordPress_GitHub_Sync_Semaphore {
+class Writing_On_GitHub_Semaphore {
 
 	/**
 	 * Sempahore's option key.

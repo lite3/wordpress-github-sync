@@ -3,12 +3,12 @@
 /**
  * @group semaphore
  */
-class WordPress_GitHub_Sync_Semaphore_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Semaphore_Test extends Writing_On_GitHub_TestCase {
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->semaphore = new WordPress_GitHub_Sync_Semaphore( $this->app );
+		$this->semaphore = new Writing_On_GitHub_Semaphore( $this->app );
 	}
 
 	public function test_should_default_to_open() {
@@ -16,7 +16,7 @@ class WordPress_GitHub_Sync_Semaphore_Test extends WordPress_GitHub_Sync_TestCas
 	}
 
 	public function test_should_unlock() {
-		set_transient( WordPress_GitHub_Sync_Semaphore::KEY, WordPress_GitHub_Sync_Semaphore::VALUE_LOCKED );
+		set_transient( Writing_On_GitHub_Semaphore::KEY, Writing_On_GitHub_Semaphore::VALUE_LOCKED );
 
 		$this->semaphore->unlock();
 
@@ -24,7 +24,7 @@ class WordPress_GitHub_Sync_Semaphore_Test extends WordPress_GitHub_Sync_TestCas
 	}
 
 	public function test_should_lock() {
-		set_transient( WordPress_GitHub_Sync_Semaphore::KEY, WordPress_GitHub_Sync_Semaphore::VALUE_UNLOCKED );
+		set_transient( Writing_On_GitHub_Semaphore::KEY, Writing_On_GitHub_Semaphore::VALUE_UNLOCKED );
 
 		$this->semaphore->lock();
 

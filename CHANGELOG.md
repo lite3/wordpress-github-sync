@@ -69,7 +69,7 @@ This change log follows the [Keep a Changelog standards][]. Versions follows [Se
 * New filter: `wpghs_pre_import_meta`
     * Called before post meta is imported from a post.
 * BREAKING: Remove reference to global `$wpghs` variable.
-    * Use `WordPress_GitHub_Sync::$instance` instead.
+    * Use `Writing_On_GitHub::$instance` instead.
 
 ### [1.3.4][] ###
 

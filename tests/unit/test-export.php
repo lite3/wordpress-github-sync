@@ -3,7 +3,7 @@
 /**
  * @group managers
  */
-class WordPress_GitHub_Sync_Export_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Export_Test extends Writing_On_GitHub_TestCase {
 
 	/**
 	 * @var array
@@ -18,7 +18,7 @@ class WordPress_GitHub_Sync_Export_Test extends WordPress_GitHub_Sync_TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->export = new WordPress_GitHub_Sync_Export( $this->app );
+		$this->export = new Writing_On_GitHub_Export( $this->app );
 		$this->post
 			->shouldReceive( 'status' )
 			->andReturn( 'publish' );

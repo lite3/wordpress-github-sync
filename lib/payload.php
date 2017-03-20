@@ -1,18 +1,18 @@
 <?php
 /**
  * GitHub Webhook payload.
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Payload
+ * Class Writing_On_GitHub_Payload
  */
-class WordPress_GitHub_Sync_Payload {
+class Writing_On_GitHub_Payload {
 
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	protected $app;
 
@@ -24,12 +24,12 @@ class WordPress_GitHub_Sync_Payload {
 	protected $data;
 
 	/**
-	 * WordPress_GitHub_Sync_Payload constructor.
+	 * Writing_On_GitHub_Payload constructor.
 	 *
-	 * @param WordPress_GitHub_Sync $app      Application container.
+	 * @param Writing_On_GitHub $app      Application container.
 	 * @param string                $raw_data Raw request data.
 	 */
-	public function __construct( WordPress_GitHub_Sync $app, $raw_data ) {
+	public function __construct( Writing_On_GitHub $app, $raw_data ) {
 		$this->app  = $app;
 		$this->data = json_decode( $raw_data );
 	}

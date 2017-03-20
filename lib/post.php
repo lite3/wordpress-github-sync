@@ -5,14 +5,14 @@
  */
 
 /**
- * Class WordPress_GitHub_Sync_Post
+ * Class Writing_On_GitHub_Post
  */
-class WordPress_GitHub_Sync_Post {
+class Writing_On_GitHub_Post {
 
 	/**
 	 * Api object
 	 *
-	 * @var WordPress_GitHub_Sync_Api
+	 * @var Writing_On_GitHub_Api
 	 */
 	public $api;
 
@@ -56,11 +56,11 @@ class WordPress_GitHub_Sync_Post {
 	 * Instantiates a new Post object
 	 *
 	 * @param int|array                 $id_or_args Either a post ID or an array of arguments.
-	 * @param WordPress_GitHub_Sync_Api $api API object.
+	 * @param Writing_On_GitHub_Api $api API object.
 	 *
 	 * @todo remove database operations from this method
 	 */
-	public function __construct( $id_or_args, WordPress_GitHub_Sync_Api $api ) {
+	public function __construct( $id_or_args, Writing_On_GitHub_Api $api ) {
 		$this->api = $api;
 
 		if ( is_numeric( $id_or_args ) ) {
@@ -433,7 +433,7 @@ class WordPress_GitHub_Sync_Post {
 	/**
 	 * Transforms the Post into a Blob.
 	 *
-	 * @return WordPress_GitHub_Sync_Blob
+	 * @return Writing_On_GitHub_Blob
 	 */
 	public function to_blob() {
 		$data = new stdClass;
@@ -442,6 +442,6 @@ class WordPress_GitHub_Sync_Post {
 		$data->content = $this->github_content();
 		$data->sha     = $this->sha();
 
-		return new WordPress_GitHub_Sync_Blob( $data );
+		return new Writing_On_GitHub_Blob( $data );
 	}
 }

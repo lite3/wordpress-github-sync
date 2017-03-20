@@ -1,13 +1,13 @@
 <?php
 /**
  * API Persist client.
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Persist_Client
+ * Class Writing_On_GitHub_Persist_Client
  */
-class WordPress_GitHub_Sync_Persist_Client extends WordPress_GitHub_Sync_Base_Client {
+class Writing_On_GitHub_Persist_Client extends Writing_On_GitHub_Base_Client {
 
 	/**
 	 * Get the data for the current user.

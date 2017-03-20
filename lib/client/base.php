@@ -1,13 +1,13 @@
 <?php
 /**
  * Base API client class.
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Base_Client
+ * Class Writing_On_GitHub_Base_Client
  */
-class WordPress_GitHub_Sync_Base_Client {
+class Writing_On_GitHub_Base_Client {
 
 	const TOKEN_OPTION_KEY = 'wpghs_oauth_token';
 	const REPO_OPTION_KEY = 'wpghs_repository';
@@ -16,16 +16,16 @@ class WordPress_GitHub_Sync_Base_Client {
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	protected $app;
 
 	/**
 	 * Instantiates a new Api object.
 	 *
-	 * @param WordPress_GitHub_Sync $app Application container.
+	 * @param Writing_On_GitHub $app Application container.
 	 */
-	public function __construct( WordPress_GitHub_Sync $app ) {
+	public function __construct( Writing_On_GitHub $app ) {
 		$this->app = $app;
 	}
 

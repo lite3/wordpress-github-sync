@@ -1,13 +1,13 @@
 <?php
 
-class WordPress_GitHub_Sync_Response_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Response_Test extends Writing_On_GitHub_TestCase {
 	const TMP_LOG = '/tmp/debug.log';
 
 	public function setUp() {
 		parent::setUp();
 		ini_set( 'error_log', self::TMP_LOG );
 
-		$this->response = new WordPress_GitHub_Sync_Response( $this->app );
+		$this->response = new Writing_On_GitHub_Response( $this->app );
 	}
 
 	public function test_should_log_success() {

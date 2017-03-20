@@ -1,15 +1,15 @@
 <?php
-use WordPress_GitHub_Sync_Base_Client as Base;
+use Writing_On_GitHub_Base_Client as Base;
 
 /**
  * @group api
  */
-class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base_Client_Test {
+class Writing_On_GitHub_Fetch_Client_Test extends Writing_On_GitHub_Base_Client_Test {
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->fetch = new WordPress_GitHub_Sync_Fetch_Client( $this->app );
+		$this->fetch = new Writing_On_GitHub_Fetch_Client( $this->app );
 		$this->api_cache
 			->shouldReceive( 'fetch_blob' )
 			->andReturn( false )
@@ -66,12 +66,12 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 		$this->api_cache
 			->shouldReceive( 'set_commit' )
 			->once()
-			->with( 'db2510854e6aeab68ead26b48328b19f4bdf926e', Mockery::type( 'WordPress_GitHub_Sync_Commit' ) )
+			->with( 'db2510854e6aeab68ead26b48328b19f4bdf926e', Mockery::type( 'Writing_On_GitHub_Commit' ) )
 			->andReturnUsing( function ( $sha, $commit ) {
 				return $commit;
 			} );
 
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Commit', $master = $this->fetch->master() );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Commit', $master = $this->fetch->master() );
 		$this->assertSame( $this->tree, $master->tree() );
 	}
 
@@ -116,20 +116,20 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 		$this->api_cache
 			->shouldReceive( 'set_tree' )
 			->once()
-			->with( '9108868e3800bec6763e51beb0d33e15036c3626', Mockery::type( 'WordPress_GitHub_Sync_Tree' ) )
+			->with( '9108868e3800bec6763e51beb0d33e15036c3626', Mockery::type( 'Writing_On_GitHub_Tree' ) )
 			->andReturnUsing( function ( $sha, $commit ) {
 				return $commit;
 			} );
 		$this->api_cache
 			->shouldReceive( 'set_commit' )
 			->once()
-			->with( 'db2510854e6aeab68ead26b48328b19f4bdf926e', Mockery::type( 'WordPress_GitHub_Sync_Commit' ) )
+			->with( 'db2510854e6aeab68ead26b48328b19f4bdf926e', Mockery::type( 'Writing_On_GitHub_Commit' ) )
 			->andReturnUsing( function ( $sha, $commit ) {
 				return $commit;
 			} );
 
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Commit', $master = $this->fetch->master() );
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Tree', $tree = $master->tree() );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Commit', $master = $this->fetch->master() );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Tree', $tree = $master->tree() );
 		$this->assertCount( 3, $blobs = $tree->blobs() );
 
 		foreach ( $blobs as $blob ) {
@@ -145,20 +145,20 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 		$this->api_cache
 			->shouldReceive( 'set_tree' )
 			->once()
-			->with( '9108868e3800bec6763e51beb0d33e15036c3626', Mockery::type( 'WordPress_GitHub_Sync_Tree' ) )
+			->with( '9108868e3800bec6763e51beb0d33e15036c3626', Mockery::type( 'Writing_On_GitHub_Tree' ) )
 			->andReturnUsing( function ( $sha, $tree ) {
 				return $tree;
 			} );
 		$this->api_cache
 			->shouldReceive( 'set_commit' )
 			->once()
-			->with( 'db2510854e6aeab68ead26b48328b19f4bdf926e', Mockery::type( 'WordPress_GitHub_Sync_Commit' ) )
+			->with( 'db2510854e6aeab68ead26b48328b19f4bdf926e', Mockery::type( 'Writing_On_GitHub_Commit' ) )
 			->andReturnUsing( function ( $sha, $commit ) {
 				return $commit;
 			} );
 
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Commit', $master = $this->fetch->master() );
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Tree', $tree = $master->tree() );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Commit', $master = $this->fetch->master() );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Tree', $tree = $master->tree() );
 		$this->assertCount( 0, $tree->blobs() );
 	}
 
@@ -176,7 +176,7 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 					'8d9b2e6fd93761211dc03abd71f4a9189d680fd0',
 					'2d73165945b0ccbe4932f1363457986b0ed49f19'
 				),
-				Mockery::type( 'WordPress_GitHub_Sync_Blob' )
+				Mockery::type( 'Writing_On_GitHub_Blob' )
 			)
 			->andReturnUsing( function ( $sha, $blob ) {
 				return $blob;
@@ -184,19 +184,19 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 		$this->api_cache
 			->shouldReceive( 'set_tree' )
 			->once()
-			->with( '9108868e3800bec6763e51beb0d33e15036c3626', Mockery::type( 'WordPress_GitHub_Sync_Tree' ) )
+			->with( '9108868e3800bec6763e51beb0d33e15036c3626', Mockery::type( 'Writing_On_GitHub_Tree' ) )
 			->andReturnUsing( function ( $sha, $tree ) {
 				return $tree;
 			} );
 		$this->api_cache
 			->shouldReceive( 'set_commit' )
 			->once()
-			->with( 'db2510854e6aeab68ead26b48328b19f4bdf926e', Mockery::type( 'WordPress_GitHub_Sync_Commit' ) )
+			->with( 'db2510854e6aeab68ead26b48328b19f4bdf926e', Mockery::type( 'Writing_On_GitHub_Commit' ) )
 			->andReturnUsing( function ( $sha, $commit ) {
 				return $commit;
 			} );
 
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Commit', $master = $this->fetch->master() );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Commit', $master = $this->fetch->master() );
 
 		/**
 		 * Validate the commit's api data mapped correctly.
@@ -210,7 +210,7 @@ class WordPress_GitHub_Sync_Fetch_Client_Test extends WordPress_GitHub_Sync_Base
 		$this->assertCount( 1, $parents = $master->parents() );
 		$this->assertSame( 'db2510854e6aeab68ead26b48328b19f4bdf926e', $parents[0]->sha );
 
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Tree', $tree = $master->tree() );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Tree', $tree = $master->tree() );
 
 		/**
 		 * Validate the tree's api data mapped correctly.

@@ -1,52 +1,52 @@
 <?php
 /**
  * Interfaces with the GitHub API
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Api
+ * Class Writing_On_GitHub_Api
  */
-class WordPress_GitHub_Sync_Api {
+class Writing_On_GitHub_Api {
 
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	protected $app;
 
 	/**
 	 * GitHub fetch client.
 	 *
-	 * @var WordPress_GitHub_Sync_Fetch_Client
+	 * @var Writing_On_GitHub_Fetch_Client
 	 */
 	protected $fetch;
 
 	/**
 	 * Github persist client.
 	 *
-	 * @var WordPress_GitHub_Sync_Persist_Client
+	 * @var Writing_On_GitHub_Persist_Client
 	 */
 	protected $persist;
 
 	/**
 	 * Instantiates a new Api object.
 	 *
-	 * @param WordPress_GitHub_Sync $app Application container.
+	 * @param Writing_On_GitHub $app Application container.
 	 */
-	public function __construct( WordPress_GitHub_Sync $app ) {
+	public function __construct( Writing_On_GitHub $app ) {
 		$this->app = $app;
 	}
 
 	/**
 	 * Lazy-load fetch client.
 	 *
-	 * @return WordPress_GitHub_Sync_Fetch_Client
+	 * @return Writing_On_GitHub_Fetch_Client
 	 */
 	public function fetch() {
 		if ( ! $this->fetch ) {
-			$this->fetch = new WordPress_GitHub_Sync_Fetch_Client( $this->app );
+			$this->fetch = new Writing_On_GitHub_Fetch_Client( $this->app );
 		}
 
 		return $this->fetch;
@@ -55,11 +55,11 @@ class WordPress_GitHub_Sync_Api {
 	/**
 	 * Lazy-load persist client.
 	 *
-	 * @return WordPress_GitHub_Sync_Persist_Client
+	 * @return Writing_On_GitHub_Persist_Client
 	 */
 	public function persist() {
 		if ( ! $this->persist ) {
-			$this->persist = new WordPress_GitHub_Sync_Persist_Client( $this->app );
+			$this->persist = new Writing_On_GitHub_Persist_Client( $this->app );
 		}
 
 		return $this->persist;

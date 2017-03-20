@@ -1,13 +1,13 @@
 <?php
 /**
  * API Blob model.
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Blob
+ * Class Writing_On_GitHub_Blob
  */
-class WordPress_GitHub_Sync_Blob {
+class Writing_On_GitHub_Blob {
 
 	/**
 	 * Complete blob content.

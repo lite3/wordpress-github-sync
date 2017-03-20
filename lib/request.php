@@ -1,18 +1,18 @@
 <?php
 /**
  * Request management object.
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Request
+ * Class Writing_On_GitHub_Request
  */
-class WordPress_GitHub_Sync_Request {
+class Writing_On_GitHub_Request {
 
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	protected $app;
 
@@ -30,11 +30,11 @@ class WordPress_GitHub_Sync_Request {
 	protected $headers;
 
 	/**
-	 * WordPress_GitHub_Sync_Request constructor.
+	 * Writing_On_GitHub_Request constructor.
 	 *
-	 * @param WordPress_GitHub_Sync $app Application container.
+	 * @param Writing_On_GitHub $app Application container.
 	 */
-	public function __construct( WordPress_GitHub_Sync $app ) {
+	public function __construct( Writing_On_GitHub $app ) {
 		$this->app = $app;
 	}
 
@@ -87,10 +87,10 @@ class WordPress_GitHub_Sync_Request {
 	/**
 	 * Returns a payload object for the given request.
 	 *
-	 * @return WordPress_GitHub_Sync_Payload
+	 * @return Writing_On_GitHub_Payload
 	 */
 	public function payload() {
-		return new WordPress_GitHub_Sync_Payload( $this->app, $this->raw_data );
+		return new Writing_On_GitHub_Payload( $this->app, $this->raw_data );
 	}
 
 	/**

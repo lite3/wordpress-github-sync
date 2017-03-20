@@ -1,6 +1,6 @@
 <?php
 
-class WordPress_GitHub_Sync_Cache_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Cache_Test extends Writing_On_GitHub_TestCase {
 
 	/**
 	 * @var string
@@ -11,7 +11,7 @@ class WordPress_GitHub_Sync_Cache_Test extends WordPress_GitHub_Sync_TestCase {
 		parent::setUp();
 
 		update_option( '_wogh_api_cache', 'data' );
-		$this->api_cache = new WordPress_GitHub_Sync_Cache;
+		$this->api_cache = new Writing_On_GitHub_Cache;
 		$this->sha       = '1234567890qwertyuiop';
 	}
 

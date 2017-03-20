@@ -1,6 +1,6 @@
 <?php
 
-abstract class WordPress_GitHub_Sync_Base_Client_Test extends WordPress_GitHub_Sync_TestCase {
+abstract class Writing_On_GitHub_Base_Client_Test extends Writing_On_GitHub_TestCase {
 
 	/**
 	 * @var string

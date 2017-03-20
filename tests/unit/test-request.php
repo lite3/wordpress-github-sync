@@ -3,7 +3,7 @@
 /**
  * @group http
  */
-class WordPress_GitHub_Sync_Request_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Request_Test extends Writing_On_GitHub_TestCase {
 
 	/**
 	 * @var string
@@ -21,7 +21,7 @@ class WordPress_GitHub_Sync_Request_Test extends WordPress_GitHub_Sync_TestCase 
 		$this->secret = '1234567890qwertyuiopasdfghjklzxcvbnm';
 		update_option( 'wpghs_secret', $this->secret );
 
-		$this->request = new WordPress_GitHub_Sync_Request_Stub( $this->app );
+		$this->request = new Writing_On_GitHub_Request_Stub( $this->app );
 		$this->request->set_data_dir( $this->data_dir );
 	}
 
@@ -43,7 +43,7 @@ class WordPress_GitHub_Sync_Request_Test extends WordPress_GitHub_Sync_TestCase 
 	}
 }
 
-class WordPress_GitHub_Sync_Request_Stub extends WordPress_GitHub_Sync_Request {
+class Writing_On_GitHub_Request_Stub extends Writing_On_GitHub_Request {
 	/**
 	 * @var string
 	 */

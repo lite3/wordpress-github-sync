@@ -1,9 +1,9 @@
 <?php
 
-class WordPress_GitHub_Sync_Helpers_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Helpers_Test extends Writing_On_GitHub_TestCase {
 
 	/**
-	 * @var WordPress_GitHub_Sync_Post
+	 * @var Writing_On_GitHub_Post
 	 */
 	public $post;
 
@@ -11,7 +11,7 @@ class WordPress_GitHub_Sync_Helpers_Test extends WordPress_GitHub_Sync_TestCase 
 		global $post;
 		parent::setUp();
 		$post       = $this->factory->post->create_and_get();
-		$this->post = new WordPress_GitHub_Sync_Post( $post->ID, $this->api );
+		$this->post = new Writing_On_GitHub_Post( $post->ID, $this->api );
 		$this->fetch
 			->shouldReceive( 'repository' )
 			->andReturn( 'owner/repo' );

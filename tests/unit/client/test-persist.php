@@ -3,12 +3,12 @@
 /**
  * @group api
  */
-class WordPress_GitHub_Sync_Persist_Client_Test extends WordPress_GitHub_Sync_Base_Client_Test {
+class Writing_On_GitHub_Persist_Client_Test extends Writing_On_GitHub_Base_Client_Test {
 
 	public function setUp() {
 		parent::setUp();
 
-		$this->persist = new WordPress_GitHub_Sync_Persist_Client( $this->app );
+		$this->persist = new Writing_On_GitHub_Persist_Client( $this->app );
 		$this->commit
 			->shouldReceive( 'tree' )
 			->andReturn( $this->tree );

@@ -1,6 +1,6 @@
 <?php
 
-class WordPress_GitHub_Sync_Main_Test extends WP_UnitTestCase {
+class Writing_On_GitHub_Main_Test extends WP_UnitTestCase {
 
 	public function setUp() {
 		parent::setUp();

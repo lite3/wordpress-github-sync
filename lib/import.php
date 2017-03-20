@@ -2,38 +2,38 @@
 /**
  * GitHub Import Manager
  *
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Import
+ * Class Writing_On_GitHub_Import
  */
-class WordPress_GitHub_Sync_Import {
+class Writing_On_GitHub_Import {
 
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	protected $app;
 
 	/**
 	 * Initializes a new import manager.
 	 *
-	 * @param WordPress_GitHub_Sync $app Application container.
+	 * @param Writing_On_GitHub $app Application container.
 	 */
-	public function __construct( WordPress_GitHub_Sync $app ) {
+	public function __construct( Writing_On_GitHub $app ) {
 		$this->app = $app;
 	}
 
 	/**
 	 * Imports a payload.
 	 *
-	 * @param WordPress_GitHub_Sync_Payload $payload GitHub payload object.
+	 * @param Writing_On_GitHub_Payload $payload GitHub payload object.
 	 *
 	 * @return string|WP_Error
 	 */
-	// public function payload( WordPress_GitHub_Sync_Payload $payload ) {
+	// public function payload( Writing_On_GitHub_Payload $payload ) {
 	// 	/**
 	// 	 * Whether there's an error during import.
 	// 	 *
@@ -70,7 +70,7 @@ class WordPress_GitHub_Sync_Import {
 	// 	return __( 'Payload processed', 'wp-github-sync' );
 	// }
 
-	public function payload( WordPress_GitHub_Sync_Payload $payload ) {
+	public function payload( Writing_On_GitHub_Payload $payload ) {
 
 		$result = $this->app->api()->fetch()->compare( $payload->get_before_commit_id() );
 
@@ -211,7 +211,7 @@ class WordPress_GitHub_Sync_Import {
 	/**
 	 * Checks whether the provided blob should be imported.
 	 *
-	 * @param WordPress_GitHub_Sync_Blob $blob Blob to validate.
+	 * @param Writing_On_GitHub_Blob $blob Blob to validate.
 	 *
 	 * @return bool
 	 */
@@ -234,11 +234,11 @@ class WordPress_GitHub_Sync_Import {
 	/**
 	 * Checks whether the provided blob should be imported.
 	 *
-	 * @param WordPress_GitHub_Sync_Blob $blob Blob to validate.
+	 * @param Writing_On_GitHub_Blob $blob Blob to validate.
 	 *
 	 * @return bool
 	 */
-	protected function importable_blob( WordPress_GitHub_Sync_Blob $blob ) {
+	protected function importable_blob( Writing_On_GitHub_Blob $blob ) {
 		// global $wpdb;
 
 		// // Skip the repo's readme.
@@ -261,11 +261,11 @@ class WordPress_GitHub_Sync_Import {
 	/**
 	 * Imports a single blob content into matching post.
 	 *
-	 * @param WordPress_GitHub_Sync_Blob $blob Blob to transform into a Post.
+	 * @param Writing_On_GitHub_Blob $blob Blob to transform into a Post.
 	 *
-	 * @return WordPress_GitHub_Sync_Post
+	 * @return Writing_On_GitHub_Post
 	 */
-	protected function blob_to_post( WordPress_GitHub_Sync_Blob $blob ) {
+	protected function blob_to_post( Writing_On_GitHub_Blob $blob ) {
 		$args = array( 'post_content' => $blob->content_import() );
 		$meta = $blob->meta();
 
@@ -307,7 +307,7 @@ class WordPress_GitHub_Sync_Import {
 			}
 		}
 
-		$post = new WordPress_GitHub_Sync_Post( $args, $this->app->api() );
+		$post = new Writing_On_GitHub_Post( $args, $this->app->api() );
 		$post->set_old_github_path( $blob->path() );
 		$post->set_meta( $meta );
 		$blob->set_id( $post->id() );

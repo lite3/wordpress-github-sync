@@ -3,11 +3,11 @@
 /**
  * @group database
  */
-class WordPress_GitHub_Sync_Database_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Database_Test extends Writing_On_GitHub_TestCase {
 
 	public function setUp() {
 		parent::setUp();
-		$this->database = new WordPress_GitHub_Sync_Database( $this->app );
+		$this->database = new Writing_On_GitHub_Database( $this->app );
 		register_post_type( 'gistpen', array() );
 	}
 
@@ -75,7 +75,7 @@ class WordPress_GitHub_Sync_Database_Test extends WordPress_GitHub_Sync_TestCase
 	public function test_should_fetch_by_id() {
 		$post_id = $this->factory->post->create();
 
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Post', $post = $this->database->fetch_by_id( $post_id ) );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Post', $post = $this->database->fetch_by_id( $post_id ) );
 		$this->assertEquals( $post_id, $post->id );
 	}
 
@@ -92,7 +92,7 @@ class WordPress_GitHub_Sync_Database_Test extends WordPress_GitHub_Sync_TestCase
 		$post_id = $this->factory->post->create();
 		update_post_meta( $post_id, '_sha', $sha );
 
-		$this->assertInstanceOf( 'WordPress_GitHub_Sync_Post', $post = $this->database->fetch_by_sha( $sha ) );
+		$this->assertInstanceOf( 'Writing_On_GitHub_Post', $post = $this->database->fetch_by_sha( $sha ) );
 		$this->assertEquals( $post_id, $post->id );
 	}
 
@@ -424,7 +424,7 @@ class WordPress_GitHub_Sync_Database_Test extends WordPress_GitHub_Sync_TestCase
 
 	public function test_should_update_post_sha() {
 		$post_id = $this->factory->post->create();
-		$post    = new WordPress_GitHub_Sync_Post( $post_id, $this->api );
+		$post    = new Writing_On_GitHub_Post( $post_id, $this->api );
 		$sha     = '1234567890qwertyuiop';
 
 		$this->database->set_post_sha( $post, $sha );

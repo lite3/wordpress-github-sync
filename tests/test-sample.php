@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package Wordpress_Github_Sync
+ * @package Writing_On_GitHub
  */
 
 /**

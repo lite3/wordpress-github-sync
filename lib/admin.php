@@ -1,13 +1,13 @@
 <?php
 /**
  * Administrative UI views and callbacks
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Admin
+ * Class Writing_On_GitHub_Admin
  */
-class WordPress_GitHub_Sync_Admin {
+class Writing_On_GitHub_Admin {
 
 	/**
 	 * Hook into GitHub API
@@ -33,43 +33,43 @@ class WordPress_GitHub_Sync_Admin {
 			'general',
 			'General Settings',
 			array( $this, 'section_callback' ),
-			WordPress_GitHub_Sync::$text_domain
+			Writing_On_GitHub::$text_domain
 		);
 
-		register_setting( WordPress_GitHub_Sync::$text_domain, 'wpghs_host' );
-		add_settings_field( 'wpghs_host', __( 'GitHub hostname', 'wp-github-sync' ), array( $this, 'field_callback' ), WordPress_GitHub_Sync::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_host' );
+		add_settings_field( 'wpghs_host', __( 'GitHub hostname', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => 'https://api.github.com',
 				'name'      => 'wpghs_host',
 				'help_text' => __( 'The GitHub host to use. This only needs to be changed to support a GitHub Enterprise installation.', 'wp-github-sync' ),
 			)
 		);
 
-		register_setting( WordPress_GitHub_Sync::$text_domain, 'wpghs_repository' );
-		add_settings_field( 'wpghs_repository', __( 'Repository', 'wp-github-sync' ), array( $this, 'field_callback' ), WordPress_GitHub_Sync::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_repository' );
+		add_settings_field( 'wpghs_repository', __( 'Repository', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wpghs_repository',
 				'help_text' => __( 'The GitHub repository to commit to, with owner (<code>[OWNER]/[REPOSITORY]</code>), e.g., <code>github/hubot.github.com</code>. The repository should contain an initial commit, which is satisfied by including a README when you create the repository on GitHub.', 'wp-github-sync' ),
 			)
 		);
 
-		register_setting( WordPress_GitHub_Sync::$text_domain, 'wpghs_oauth_token' );
-		add_settings_field( 'wpghs_oauth_token', __( 'Oauth Token', 'wp-github-sync' ), array( $this, 'field_callback' ), WordPress_GitHub_Sync::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_oauth_token' );
+		add_settings_field( 'wpghs_oauth_token', __( 'Oauth Token', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wpghs_oauth_token',
 				'help_text' => __( "A <a href='https://github.com/settings/tokens/new'>personal oauth token</a> with <code>public_repo</code> scope.", 'wp-github-sync' ),
 			)
 		);
 
-		register_setting( WordPress_GitHub_Sync::$text_domain, 'wpghs_secret' );
-		add_settings_field( 'wpghs_secret', __( 'Webhook Secret', 'wp-github-sync' ), array( $this, 'field_callback' ), WordPress_GitHub_Sync::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_secret' );
+		add_settings_field( 'wpghs_secret', __( 'Webhook Secret', 'wp-github-sync' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wpghs_secret',
 				'help_text' => __( "The webhook's secret phrase. This should be password strength, as it is used to verify the webhook's payload.", 'wp-github-sync' ),
 			)
 		);
 
-		register_setting( WordPress_GitHub_Sync::$text_domain, 'wpghs_default_user' );
-		add_settings_field( 'wpghs_default_user', __( 'Default Import User', 'wp-github-sync' ), array( &$this, 'user_field_callback' ), WordPress_GitHub_Sync::$text_domain, 'general', array(
+		register_setting( Writing_On_GitHub::$text_domain, 'wpghs_default_user' );
+		add_settings_field( 'wpghs_default_user', __( 'Default Import User', 'wp-github-sync' ), array( &$this, 'user_field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wpghs_default_user',
 				'help_text' => __( 'The fallback user for import, in case WordPress <--> GitHub Sync cannot find the committer in the database.', 'wp-github-sync' ),
@@ -99,7 +99,7 @@ class WordPress_GitHub_Sync_Admin {
 	 * Displays settings messages from background processes
 	 */
 	public function section_callback() {
-		if ( get_current_screen()->id !== 'settings_page_' . WordPress_GitHub_Sync::$text_domain ) {
+		if ( get_current_screen()->id !== 'settings_page_' . Writing_On_GitHub::$text_domain ) {
 			return;
 		}
 
@@ -154,7 +154,7 @@ class WordPress_GitHub_Sync_Admin {
 			__( 'WordPress <--> GitHub Sync', 'wp-github-sync' ),
 			__( 'GitHub Sync', 'wp-github-sync' ),
 			'manage_options',
-			WordPress_GitHub_Sync::$text_domain,
+			Writing_On_GitHub::$text_domain,
 			array( $this, 'settings_page' )
 		);
 	}
@@ -167,7 +167,7 @@ class WordPress_GitHub_Sync_Admin {
 			return;
 		}
 
-		if ( get_current_screen()->id !== 'settings_page_' . WordPress_GitHub_Sync::$text_domain ) {
+		if ( get_current_screen()->id !== 'settings_page_' . Writing_On_GitHub::$text_domain ) {
 			return;
 		}
 
@@ -176,11 +176,11 @@ class WordPress_GitHub_Sync_Admin {
 		}
 
 		if ( 'export' === $_GET['action'] ) {
-			WordPress_GitHub_Sync::$instance->start_export();
+			Writing_On_GitHub::$instance->start_export();
 		}
 
 		if ( 'import' === $_GET['action'] ) {
-			WordPress_GitHub_Sync::$instance->start_import();
+			Writing_On_GitHub::$instance->start_import();
 		}
 
 		wp_redirect( admin_url( 'options-general.php?page=wp-github-sync' ) );

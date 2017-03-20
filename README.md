@@ -146,10 +146,10 @@ If you want to add a link to your posts on GitHub, there are 4 functions WordPre
 * `get_the_github_edit_url` - returns the URL on GitHub to edit the current post
 * `get_the_github_edit_link` - returns an anchor tag (`<a>`) with its href set the the edit url
 
-All four of these functions must be used in the loop. If you'd like to retrieve these URLs outside of the loop, instantiate a new `WordPress_GitHub_Sync_Post` object and call `github_edit_url` or `github_view_url` respectively on it:
+All four of these functions must be used in the loop. If you'd like to retrieve these URLs outside of the loop, instantiate a new `Writing_On_GitHub_Post` object and call `github_edit_url` or `github_view_url` respectively on it:
 
     // $id can be retrieved from a query or elsewhere
-    $wpghs_post = new WordPress_GitHub_Sync_Post( $id );
+    $wpghs_post = new Writing_On_GitHub_Post( $id );
     $url = $wpghs_post->github_view_url();
 
 If you'd like to include an edit link without modifying your theme directly, you can add one of these functions to `the_content` like so:

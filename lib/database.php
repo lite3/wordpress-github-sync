@@ -1,18 +1,18 @@
 <?php
 /**
  * Database interface.
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Database
+ * Class Writing_On_GitHub_Database
  */
-class WordPress_GitHub_Sync_Database {
+class Writing_On_GitHub_Database {
 
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	protected $app;
 
@@ -33,16 +33,16 @@ class WordPress_GitHub_Sync_Database {
 	/**
 	 * Instantiates a new Database object.
 	 *
-	 * @param WordPress_GitHub_Sync $app Application container.
+	 * @param Writing_On_GitHub $app Application container.
 	 */
-	public function __construct( WordPress_GitHub_Sync $app ) {
+	public function __construct( Writing_On_GitHub $app ) {
 		$this->app = $app;
 	}
 
 	/**
 	 * Queries the database for all of the supported posts.
 	 *
-	 * @return WordPress_GitHub_Sync_Post[]|WP_Error
+	 * @return Writing_On_GitHub_Post[]|WP_Error
 	 */
 	public function fetch_all_supported() {
 		$args  = array(
@@ -69,7 +69,7 @@ class WordPress_GitHub_Sync_Database {
 			if ( ! get_post_meta( $post_id, '_wogh_sha', true ) ||
 				 ! get_post_meta( $post_id, '_wogh_github_path', true) ) {
 
-				$results[] = new WordPress_GitHub_Sync_Post( $post_id, $this->app->api() );
+				$results[] = new Writing_On_GitHub_Post( $post_id, $this->app->api() );
 			}
 		}
 
@@ -81,10 +81,10 @@ class WordPress_GitHub_Sync_Database {
 	 *
 	 * @param int $post_id Post ID to fetch.
 	 *
-	 * @return WP_Error|WordPress_GitHub_Sync_Post
+	 * @return WP_Error|Writing_On_GitHub_Post
 	 */
 	public function fetch_by_id( $post_id ) {
-		$post = new WordPress_GitHub_Sync_Post( $post_id, $this->app->api() );
+		$post = new Writing_On_GitHub_Post( $post_id, $this->app->api() );
 
 		if ( ! $this->is_post_supported( $post ) ) {
 			return new WP_Error(
@@ -106,7 +106,7 @@ class WordPress_GitHub_Sync_Database {
 	 * Saves an array of Post objects to the database
 	 * and associates their author as well as their latest
 	 *
-	 * @param WordPress_GitHub_Sync_Post[] $posts Array of Posts to save.
+	 * @param Writing_On_GitHub_Post[] $posts Array of Posts to save.
 	 * @param string                       $email Author email.
 	 *
 	 * @return string|WP_Error
@@ -322,11 +322,11 @@ class WordPress_GitHub_Sync_Database {
 	 * Verifies that both the post's status & type
 	 * are currently whitelisted
 	 *
-	 * @param  WordPress_GitHub_Sync_Post $post Post to verify.
+	 * @param  Writing_On_GitHub_Post $post Post to verify.
 	 *
 	 * @return boolean                          True if supported, false if not.
 	 */
-	protected function is_post_supported( WordPress_GitHub_Sync_Post $post ) {
+	protected function is_post_supported( Writing_On_GitHub_Post $post ) {
 		if ( wp_is_post_revision( $post->id ) ) {
 			return false;
 		}
@@ -474,7 +474,7 @@ class WordPress_GitHub_Sync_Database {
 	/**
 	 * Update the provided post's blob sha.
 	 *
-	 * @param WordPress_GitHub_Sync_Post $post Post to update.
+	 * @param Writing_On_GitHub_Post $post Post to update.
 	 * @param string                     $sha Sha to update to.
 	 *
 	 * @return bool|int

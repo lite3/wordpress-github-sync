@@ -3,11 +3,11 @@
 /**
  * @group controller
  */
-class WordPress_GitHub_Sync_Controller_Test extends WordPress_GitHub_Sync_TestCase {
+class Writing_On_GitHub_Controller_Test extends Writing_On_GitHub_TestCase {
 
 	public function setUp() {
 		parent::setUp();
-		$this->controller = new WordPress_GitHub_Sync_Controller( $this->app );
+		$this->controller = new Writing_On_GitHub_Controller( $this->app );
 
 		$this->semaphore
 			->shouldReceive( 'is_open' )

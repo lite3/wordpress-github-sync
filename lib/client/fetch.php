@@ -1,13 +1,13 @@
 <?php
 /**
  * Fetch API client class.
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Fetch_Client
+ * Class Writing_On_GitHub_Fetch_Client
  */
-class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Client {
+class Writing_On_GitHub_Fetch_Client extends Writing_On_GitHub_Base_Client {
 
 	/**
 	 * Compare a commit by sha with master from the GitHub API
@@ -39,7 +39,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 *
 	 * Returns Object the response from the API
 	 *
-	 * @param WordPress_GitHub_Sync_Post $post Post to retrieve remote contents for.
+	 * @param Writing_On_GitHub_Post $post Post to retrieve remote contents for.
 	 *
 	 * @return mixed
 	 */
@@ -60,7 +60,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 *
 	 * @param string $sha Commit sha to retrieve tree from.
 	 *
-	 * @return WordPress_GitHub_Sync_Tree|WP_Error
+	 * @return Writing_On_GitHub_Tree|WP_Error
 	 */
 	public function tree_recursive( $sha = 'root' ) {
 
@@ -94,7 +94,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 *
 	 * @param stdClass[] $blobs Array of tree blob data.
 	 *
-	 * @return WordPress_GitHub_Sync_Blob[]
+	 * @return Writing_On_GitHub_Blob[]
 	 */
 	protected function blobs( array $blobs ) {
 		$results = array();
@@ -115,7 +115,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 	 *
 	 * @param stdClass $blob Tree blob data.
 	 *
-	 * @return WordPress_GitHub_Sync_Blob|WP_Error
+	 * @return Writing_On_GitHub_Blob|WP_Error
 	 */
 	public function blob( $blob ) {
 		if ( $cache = $this->app->cache()->fetch_blob( $blob->sha ) ) {
@@ -129,7 +129,7 @@ class WordPress_GitHub_Sync_Fetch_Client extends WordPress_GitHub_Sync_Base_Clie
 		}
 
 		$data->path = $blob->path;
-		$obj = new WordPress_GitHub_Sync_Blob( $data );
+		$obj = new Writing_On_GitHub_Blob( $data );
 
 		return $this->app->cache()->set_blob( $obj->sha(), $obj );
 	}

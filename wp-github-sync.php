@@ -36,9 +36,9 @@ if ( ! function_exists( 'get_the_github_view_link' ) && file_exists( $path ) ) {
 
 require_once(dirname(__FILE__) . '/lib/fileinfo.php');
 
-add_action( 'plugins_loaded', array( new WordPress_GitHub_Sync, 'boot' ) );
+add_action( 'plugins_loaded', array( new Writing_On_GitHub, 'boot' ) );
 
-class WordPress_GitHub_Sync {
+class Writing_On_GitHub {
 
 	/**
 	 * Object instance
@@ -60,76 +60,76 @@ class WordPress_GitHub_Sync {
 
 	/**
 	 * Controller object
-	 * @var WordPress_GitHub_Sync_Controller
+	 * @var Writing_On_GitHub_Controller
 	 */
 	public $controller;
 
 	/**
 	 * Controller object
-	 * @var WordPress_GitHub_Sync_Admin
+	 * @var Writing_On_GitHub_Admin
 	 */
 	public $admin;
 
 	/**
 	 * CLI object.
 	 *
-	 * @var WordPress_GitHub_Sync_CLI
+	 * @var Writing_On_GitHub_CLI
 	 */
 	protected $cli;
 
 	/**
 	 * Request object.
 	 *
-	 * @var WordPress_GitHub_Sync_Request
+	 * @var Writing_On_GitHub_Request
 	 */
 	protected $request;
 
 	/**
 	 * Response object.
 	 *
-	 * @var WordPress_GitHub_Sync_Response
+	 * @var Writing_On_GitHub_Response
 	 */
 	protected $response;
 
 	/**
 	 * Api object.
 	 *
-	 * @var WordPress_GitHub_Sync_Api
+	 * @var Writing_On_GitHub_Api
 	 */
 	protected $api;
 
 	/**
 	 * Import object.
 	 *
-	 * @var WordPress_GitHub_Sync_Import
+	 * @var Writing_On_GitHub_Import
 	 */
 	protected $import;
 
 	/**
 	 * Export object.
 	 *
-	 * @var WordPress_GitHub_Sync_Export
+	 * @var Writing_On_GitHub_Export
 	 */
 	protected $export;
 
 	/**
 	 * Semaphore object.
 	 *
-	 * @var WordPress_GitHub_Sync_Semaphore
+	 * @var Writing_On_GitHub_Semaphore
 	 */
 	protected $semaphore;
 
 	/**
 	 * Database object.
 	 *
-	 * @var WordPress_GitHub_Sync_Database
+	 * @var Writing_On_GitHub_Database
 	 */
 	protected $database;
 
 	/**
 	 * Cache object.
 	 *
-	 * @var WordPress_GitHub_Sync_Cache
+	 * @var Writing_On_GitHub_Cache
 	 */
 	protected $cache;
 
@@ -140,10 +140,10 @@ class WordPress_GitHub_Sync {
 		self::$instance = $this;
 
 		if ( is_admin() ) {
-			$this->admin = new WordPress_GitHub_Sync_Admin;
+			$this->admin = new Writing_On_GitHub_Admin;
 		}
 
-		$this->controller = new WordPress_GitHub_Sync_Controller( $this );
+		$this->controller = new Writing_On_GitHub_Controller( $this );
 
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			WP_CLI::add_command( 'wogh', $this->cli() );
@@ -172,7 +172,7 @@ class WordPress_GitHub_Sync {
 
 	public function edit_post_link($link, $postID, $context) {
 		if ( ! wp_is_post_revision( $postID ) ) {
-			$post = new WordPress_GitHub_Sync_Post( $postID, WordPress_GitHub_Sync::$instance->api() );
+			$post = new Writing_On_GitHub_Post( $postID, Writing_On_GitHub::$instance->api() );
 			if ( $post->is_on_github() ) {
 				return $post->github_edit_url();
 			}
@@ -237,7 +237,7 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Get the Controller object.
 	 *
-	 * @return WordPress_GitHub_Sync_Controller
+	 * @return Writing_On_GitHub_Controller
 	 */
 	public function controller() {
 		return $this->controller;
@@ -246,11 +246,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the CLI object.
 	 *
-	 * @return WordPress_GitHub_Sync_CLI
+	 * @return Writing_On_GitHub_CLI
 	 */
 	public function cli() {
 		if ( ! $this->cli ) {
-			$this->cli = new WordPress_GitHub_Sync_CLI;
+			$this->cli = new Writing_On_GitHub_CLI;
 		}
 
 		return $this->cli;
@@ -259,11 +259,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the Request object.
 	 *
-	 * @return WordPress_GitHub_Sync_Request
+	 * @return Writing_On_GitHub_Request
 	 */
 	public function request() {
 		if ( ! $this->request ) {
-			$this->request = new WordPress_GitHub_Sync_Request( $this );
+			$this->request = new Writing_On_GitHub_Request( $this );
 		}
 
 		return $this->request;
@@ -272,11 +272,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the Response object.
 	 *
-	 * @return WordPress_GitHub_Sync_Response
+	 * @return Writing_On_GitHub_Response
 	 */
 	public function response() {
 		if ( ! $this->response ) {
-			$this->response = new WordPress_GitHub_Sync_Response( $this );
+			$this->response = new Writing_On_GitHub_Response( $this );
 		}
 
 		return $this->response;
@@ -285,11 +285,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the Api object.
 	 *
-	 * @return WordPress_GitHub_Sync_Api
+	 * @return Writing_On_GitHub_Api
 	 */
 	public function api() {
 		if ( ! $this->api ) {
-			$this->api = new WordPress_GitHub_Sync_Api( $this );
+			$this->api = new Writing_On_GitHub_Api( $this );
 		}
 
 		return $this->api;
@@ -298,11 +298,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the Import object.
 	 *
-	 * @return WordPress_GitHub_Sync_Import
+	 * @return Writing_On_GitHub_Import
 	 */
 	public function import() {
 		if ( ! $this->import ) {
-			$this->import = new WordPress_GitHub_Sync_Import( $this );
+			$this->import = new Writing_On_GitHub_Import( $this );
 		}
 
 		return $this->import;
@@ -311,11 +311,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the Export object.
 	 *
-	 * @return WordPress_GitHub_Sync_Export
+	 * @return Writing_On_GitHub_Export
 	 */
 	public function export() {
 		if ( ! $this->export ) {
-			$this->export = new WordPress_GitHub_Sync_Export( $this );
+			$this->export = new Writing_On_GitHub_Export( $this );
 		}
 
 		return $this->export;
@@ -324,11 +324,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the Semaphore object.
 	 *
-	 * @return WordPress_GitHub_Sync_Semaphore
+	 * @return Writing_On_GitHub_Semaphore
 	 */
 	public function semaphore() {
 		if ( ! $this->semaphore ) {
-			$this->semaphore = new WordPress_GitHub_Sync_Semaphore;
+			$this->semaphore = new Writing_On_GitHub_Semaphore;
 		}
 
 		return $this->semaphore;
@@ -337,11 +337,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the Database object.
 	 *
-	 * @return WordPress_GitHub_Sync_Database
+	 * @return Writing_On_GitHub_Database
 	 */
 	public function database() {
 		if ( ! $this->database ) {
-			$this->database = new WordPress_GitHub_Sync_Database( $this );
+			$this->database = new Writing_On_GitHub_Database( $this );
 		}
 
 		return $this->database;
@@ -350,11 +350,11 @@ class WordPress_GitHub_Sync {
 	/**
 	 * Lazy-load the Cache object.
 	 *
-	 * @return WordPress_GitHub_Sync_Cache
+	 * @return Writing_On_GitHub_Cache
 	 */
 	public function cache() {
 		if ( ! $this->cache ) {
-			$this->cache = new WordPress_GitHub_Sync_Cache;
+			$this->cache = new Writing_On_GitHub_Cache;
 		}
 
 		return $this->cache;

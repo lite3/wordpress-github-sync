@@ -8,7 +8,7 @@ require_once $_tests_dir . '/includes/functions.php';
 
 function _manually_load_plugin() {
 	require dirname( __FILE__ ) . '/../../wp-github-sync.php';
-	remove_action( 'plugins_loaded', array( WordPress_GitHub_Sync::$instance, 'boot' ) );
+	remove_action( 'plugins_loaded', array( Writing_On_GitHub::$instance, 'boot' ) );
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );

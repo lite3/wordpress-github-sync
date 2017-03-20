@@ -2,13 +2,13 @@
 /**
  * GitHub Export Manager.
  *
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Export
+ * Class Writing_On_GitHub_Export
  */
-class WordPress_GitHub_Sync_Export {
+class Writing_On_GitHub_Export {
 
 	/**
 	 * Option key for export user.
@@ -18,16 +18,16 @@ class WordPress_GitHub_Sync_Export {
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	protected $app;
 
 	/**
 	 * Initializes a new export manager.
 	 *
-	 * @param WordPress_GitHub_Sync $app Application container.
+	 * @param Writing_On_GitHub $app Application container.
 	 */
-	public function __construct( WordPress_GitHub_Sync $app ) {
+	public function __construct( Writing_On_GitHub $app ) {
 		$this->app = $app;
 	}
 
@@ -116,7 +116,7 @@ class WordPress_GitHub_Sync_Export {
 	/**
 	 * Updates GitHub-created posts with latest WordPress data.
 	 *
-	 * @param array<WordPress_GitHub_Sync_Post> $posts Array of Posts to create.
+	 * @param array<Writing_On_GitHub_Post> $posts Array of Posts to create.
 	 *
 	 * @return string|WP_Error
 	 */

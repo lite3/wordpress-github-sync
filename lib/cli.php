@@ -1,18 +1,18 @@
 <?php
 /**
  * WP_CLI Commands
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_CLI
+ * Class Writing_On_GitHub_CLI
  */
-class WordPress_GitHub_Sync_CLI extends WP_CLI_Command {
+class Writing_On_GitHub_CLI extends WP_CLI_Command {
 
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	protected $app;
 
@@ -20,7 +20,7 @@ class WordPress_GitHub_Sync_CLI extends WP_CLI_Command {
 	 * Grab the Application container on instantiation.
 	 */
 	public function __construct() {
-		$this->app = WordPress_GitHub_Sync::$instance;
+		$this->app = Writing_On_GitHub::$instance;
 	}
 
 	/**

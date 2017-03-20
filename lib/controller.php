@@ -1,27 +1,27 @@
 <?php
 /**
  * Controller object manages tree retrieval, manipulation and publishing
- * @package WordPress_GitHub_Sync
+ * @package Writing_On_GitHub
  */
 
 /**
- * Class WordPress_GitHub_Sync_Controller
+ * Class Writing_On_GitHub_Controller
  */
-class WordPress_GitHub_Sync_Controller {
+class Writing_On_GitHub_Controller {
 
 	/**
 	 * Application container.
 	 *
-	 * @var WordPress_GitHub_Sync
+	 * @var Writing_On_GitHub
 	 */
 	public $app;
 
 	/**
 	 * Instantiates a new Controller object
 	 *
-	 * @param WordPress_GitHub_Sync $app Applicatio container.
+	 * @param Writing_On_GitHub $app Applicatio container.
 	 */
-	public function __construct( WordPress_GitHub_Sync $app ) {
+	public function __construct( Writing_On_GitHub $app ) {
 		$this->app = $app;
 	}
 
