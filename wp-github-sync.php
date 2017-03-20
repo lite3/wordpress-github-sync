@@ -146,7 +146,7 @@ class WordPress_GitHub_Sync {
 		$this->controller = new WordPress_GitHub_Sync_Controller( $this );
 
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
-			WP_CLI::add_command( 'wpghs', $this->cli() );
+			WP_CLI::add_command( 'wogh', $this->cli() );
 		}
 	}
 
@@ -162,12 +162,12 @@ class WordPress_GitHub_Sync {
 		// Controller actions.
 		add_action( 'save_post', array( $this->controller, 'export_post' ) );
 		add_action( 'delete_post', array( $this->controller, 'delete_post' ) );
-		add_action( 'wp_ajax_nopriv_wpghs_sync_request', array( $this->controller, 'pull_posts' ) );
-		add_action( 'wpghs_export', array( $this->controller, 'export_all' ) );
-		add_action( 'wpghs_import', array( $this->controller, 'import_master' ) );
+		add_action( 'wp_ajax_nopriv_wogh_sync_request', array( $this->controller, 'pull_posts' ) );
+		add_action( 'wogh_export', array( $this->controller, 'export_all' ) );
+		add_action( 'wogh_import', array( $this->controller, 'import_master' ) );
 		add_filter( 'get_edit_post_link', array( $this, 'edit_post_link' ), 10, 3 );
 
-		do_action( 'wpghs_boot', $this );
+		do_action( 'wogh_boot', $this );
 	}
 
 	public function edit_post_link($link, $postID, $context) {
@@ -391,7 +391,7 @@ class WordPress_GitHub_Sync {
 	 */
 	protected function start_cron( $type ) {
 		update_option( '_wogh_' . $type . '_started', 'yes' );
-		wp_schedule_single_event( time(), 'wpghs_' . $type . '' );
+		wp_schedule_single_event( time(), 'wogh_' . $type . '' );
 		spawn_cron();
 	}
 }
