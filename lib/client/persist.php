@@ -16,8 +16,8 @@ class WordPress_GitHub_Sync_Persist_Client extends WordPress_GitHub_Sync_Base_Cl
 	 */
 	protected function export_user() {
 		// @todo constant/abstract out?
-		if ( $user_id = (int) get_option( '_wpghs_export_user_id' ) ) {
-			delete_option( '_wpghs_export_user_id' );
+		if ( $user_id = (int) get_option( '_wogh_export_user_id' ) ) {
+			delete_option( '_wogh_export_user_id' );
 		} else {
 			$user_id = get_current_user_id();
 		}

@@ -167,8 +167,6 @@ class WordPress_GitHub_Sync {
 		add_action( 'wpghs_import', array( $this->controller, 'import_master' ) );
 		add_filter( 'get_edit_post_link', array( $this, 'edit_post_link' ), 10, 3 );
 
-		add_shortcode( 'wpghs', 'write_wpghs_link' );
-
 		do_action( 'wpghs_boot', $this );
 	}
 
@@ -209,8 +207,8 @@ class WordPress_GitHub_Sync {
 	 * Enables the admin notice on initial activation
 	 */
 	public function activate() {
-		if ( 'yes' !== get_option( '_wpghs_fully_exported' ) ) {
-			set_transient( '_wpghs_activated', 'yes' );
+		if ( 'yes' !== get_option( '_wogh_fully_exported' ) ) {
+			set_transient( '_wogh_activated', 'yes' );
 		}
 	}
 
@@ -218,11 +216,11 @@ class WordPress_GitHub_Sync {
 	 * Displays the activation admin notice
 	 */
 	public function activation_notice() {
-		if ( ! get_transient( '_wpghs_activated' ) ) {
+		if ( ! get_transient( '_wogh_activated' ) ) {
 			return;
 		}
 
-		delete_transient( '_wpghs_activated' );
+		delete_transient( '_wogh_activated' );
 
 		?><div class="updated">
 			<p>
@@ -392,7 +390,7 @@ class WordPress_GitHub_Sync {
 	 * @param $type
 	 */
 	protected function start_cron( $type ) {
-		update_option( '_wpghs_' . $type . '_started', 'yes' );
+		update_option( '_wogh_' . $type . '_started', 'yes' );
 		wp_schedule_single_event( time(), 'wpghs_' . $type . '' );
 		spawn_cron();
 	}

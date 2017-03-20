@@ -13,7 +13,7 @@ class WordPress_GitHub_Sync_Export {
 	/**
 	 * Option key for export user.
 	 */
-	const EXPORT_USER_OPTION = '_wpghs_export_user_id';
+	const EXPORT_USER_OPTION = '_wogh_export_user_id';
 
 	/**
 	 * Application container.

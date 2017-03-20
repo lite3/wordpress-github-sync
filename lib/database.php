@@ -178,7 +178,7 @@ class WordPress_GitHub_Sync_Database {
 	 */
 	public function delete_post_by_path( $path ) {
 		$query = new WP_Query( array(
-			'meta_key'       => '_wpghs_github_path',
+			'meta_key'       => '_wogh_github_path',
 			'meta_value'     => $path,
 			'meta_compare'   => '=',
 			'posts_per_page' => 1,

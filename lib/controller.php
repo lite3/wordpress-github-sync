@@ -109,12 +109,12 @@ class WordPress_GitHub_Sync_Controller {
 		$this->app->semaphore()->unlock();
 
 		if ( is_wp_error( $result ) ) {
-			update_option( '_wpghs_import_error', $result->get_error_message() );
+			update_option( '_wogh_import_error', $result->get_error_message() );
 
 			return $this->app->response()->error( $result );
 		}
 
-		update_option( '_wpghs_import_complete', 'yes' );
+		update_option( '_wogh_import_complete', 'yes' );
 
 		return $this->app->response()->success( $result );
 	}
@@ -138,12 +138,12 @@ class WordPress_GitHub_Sync_Controller {
 
 		// Maybe move option updating out of this class/upgrade message display?
 		if ( is_wp_error( $result ) ) {
-			update_option( '_wpghs_export_error', $result->get_error_message() );
+			update_option( '_wogh_export_error', $result->get_error_message() );
 
 			return $this->app->response()->error( $result );
 		} else {
-			update_option( '_wpghs_export_complete', 'yes' );
-			update_option( '_wpghs_fully_exported', 'yes' );
+			update_option( '_wogh_export_complete', 'yes' );
+			update_option( '_wogh_fully_exported', 'yes' );
 
 			return $this->app->response()->success( $result );
 		}

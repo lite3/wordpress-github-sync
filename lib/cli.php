@@ -93,7 +93,7 @@ class WordPress_GitHub_Sync_CLI extends WP_CLI_Command {
 			WP_CLI::error( __( 'Invalid user ID', 'wp-github-sync' ) );
 		}
 
-		update_option( '_wpghs_export_user_id', (int) $user_id );
+		update_option( '_wogh_export_user_id', (int) $user_id );
 
 		WP_CLI::line( __( 'Starting import from GitHub.', 'wp-github-sync' ) );
 

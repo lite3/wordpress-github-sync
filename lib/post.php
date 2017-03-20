@@ -321,7 +321,7 @@ class WordPress_GitHub_Sync_Post {
 
 		// If we've done a full export and we have no sha
 		// then we should try a live check to see if it exists.
-		// if ( ! $sha && 'yes' === get_option( '_wpghs_fully_exported' ) ) {
+		// if ( ! $sha && 'yes' === get_option( '_wogh_fully_exported' ) ) {
 
 		// 	// @todo could we eliminate this by calling down the full tree and searching it
 		// 	$data = $this->api->fetch()->remote_contents( $this );

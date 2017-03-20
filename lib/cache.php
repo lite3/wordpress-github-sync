@@ -36,8 +36,8 @@ class WordPress_GitHub_Sync_Cache {
 	 */
 	public function __construct() {
 		// Clear out previously saved information.
-		if ( get_option( '_wpghs_api_cache' ) ) {
-			delete_option( '_wpghs_api_cache' );
+		if ( get_option( '_wogh_api_cache' ) ) {
+			delete_option( '_wogh_api_cache' );
 		}
 	}
 

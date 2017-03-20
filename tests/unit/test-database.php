@@ -374,7 +374,7 @@ class WordPress_GitHub_Sync_Database_Test extends WordPress_GitHub_Sync_TestCase
 	public function test_should_delete_post_matching_path() {
 		$path    = '_posts/2015-10-22-post-title.md';
 		$post_id = $this->factory->post->create();
-		update_post_meta( $post_id, '_wpghs_github_path', $path );
+		update_post_meta( $post_id, '_wogh_github_path', $path );
 
 		$result = $this->database->delete_post_by_path( $path );
 

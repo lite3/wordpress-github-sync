@@ -103,46 +103,46 @@ class WordPress_GitHub_Sync_Admin {
 			return;
 		}
 
-		if ( 'yes' === get_option( '_wpghs_export_started' ) ) { ?>
+		if ( 'yes' === get_option( '_wogh_export_started' ) ) { ?>
 			<div class="updated">
 				<p><?php esc_html_e( 'Export to GitHub started.', 'wp-github-sync' ); ?></p>
 			</div><?php
-			delete_option( '_wpghs_export_started' );
+			delete_option( '_wogh_export_started' );
 		}
 
-		if ( $message = get_option( '_wpghs_export_error' ) ) { ?>
+		if ( $message = get_option( '_wogh_export_error' ) ) { ?>
 			<div class="error">
 				<p><?php esc_html_e( 'Export to GitHub failed with error:', 'wp-github-sync' ); ?> <?php echo esc_html( $message );?></p>
 			</div><?php
-			delete_option( '_wpghs_export_error' );
+			delete_option( '_wogh_export_error' );
 		}
 
-		if ( 'yes' === get_option( '_wpghs_export_complete' ) ) { ?>
+		if ( 'yes' === get_option( '_wogh_export_complete' ) ) { ?>
 			<div class="updated">
 				<p><?php esc_html_e( 'Export to GitHub completed successfully.', 'wp-github-sync' );?></p>
 			</div><?php
-			delete_option( '_wpghs_export_complete' );
+			delete_option( '_wogh_export_complete' );
 		}
 
-		if ( 'yes' === get_option( '_wpghs_import_started' ) ) { ?>
+		if ( 'yes' === get_option( '_wogh_import_started' ) ) { ?>
 			<div class="updated">
 			<p><?php esc_html_e( 'Import from GitHub started.', 'wp-github-sync' ); ?></p>
 			</div><?php
-			delete_option( '_wpghs_import_started' );
+			delete_option( '_wogh_import_started' );
 		}
 
-		if ( $message = get_option( '_wpghs_import_error' ) ) { ?>
+		if ( $message = get_option( '_wogh_import_error' ) ) { ?>
 			<div class="error">
 			<p><?php esc_html_e( 'Import from GitHub failed with error:', 'wp-github-sync' ); ?> <?php echo esc_html( $message );?></p>
 			</div><?php
-			delete_option( '_wpghs_import_error' );
+			delete_option( '_wogh_import_error' );
 		}
 
-		if ( 'yes' === get_option( '_wpghs_import_complete' ) ) { ?>
+		if ( 'yes' === get_option( '_wogh_import_complete' ) ) { ?>
 			<div class="updated">
 			<p><?php esc_html_e( 'Import from GitHub completed successfully.', 'wp-github-sync' );?></p>
 			</div><?php
-			delete_option( '_wpghs_import_complete' );
+			delete_option( '_wogh_import_complete' );
 		}
 	}
 

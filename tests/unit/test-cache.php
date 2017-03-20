@@ -10,7 +10,7 @@ class WordPress_GitHub_Sync_Cache_Test extends WordPress_GitHub_Sync_TestCase {
 	public function setUp() {
 		parent::setUp();
 
-		update_option( '_wpghs_api_cache', 'data' );
+		update_option( '_wogh_api_cache', 'data' );
 		$this->api_cache = new WordPress_GitHub_Sync_Cache;
 		$this->sha       = '1234567890qwertyuiop';
 	}
@@ -88,6 +88,6 @@ class WordPress_GitHub_Sync_Cache_Test extends WordPress_GitHub_Sync_TestCase {
 	public function tearDown() {
 		parent::tearDown();
 
-		$this->assertFalse( get_option( '_wpghs_api_cache' ) );
+		$this->assertFalse( get_option( '_wogh_api_cache' ) );
 	}
 }

@@ -602,6 +602,6 @@ class WordPress_GitHub_Sync_Export_Test extends WordPress_GitHub_Sync_TestCase {
 
 		$this->export->set_user( $id );
 
-		$this->assertEquals( $id, get_option( '_wpghs_export_user_id' ) );
+		$this->assertEquals( $id, get_option( '_wogh_export_user_id' ) );
 	}
 }

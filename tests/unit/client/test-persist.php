@@ -201,7 +201,7 @@ class WordPress_GitHub_Sync_Persist_Client_Test extends WordPress_GitHub_Sync_Ba
 				'parents' => array( 'c0d2cb90b51826096c826b61a0e74d2c973d7ad8' )
 			) );
 		$this->set_post_trees( true );
-		update_option( '_wpghs_export_user_id', $this->factory->user->create( array(
+		update_option( '_wogh_export_user_id', $this->factory->user->create( array(
 			'display_name' => 'James DiGioia',
 			'user_email'   => 'jamesorodig@gmail.com',
 		) ) );
