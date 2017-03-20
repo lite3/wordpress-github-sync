@@ -57,7 +57,7 @@ class Writing_On_GitHub_Base_Client {
 		}
 
 		$tmpbody = isset($args['body']) ? $args['body'] : '';
-		error_log("writing-on-github-call method:$method endpoint:$endpoint body:$tmpbody");
+		error_log("writing-on-github-call $method $endpoint $tmpbody");
 
 		$response = wp_remote_request( $endpoint, $args );
 		$status   = wp_remote_retrieve_header( $response, 'status' );
