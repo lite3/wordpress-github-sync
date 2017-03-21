@@ -88,7 +88,7 @@ class Writing_On_GitHub_Base_Client {
 		if ( ! $this->oauth_token() ) {
 			return new WP_Error(
 				'missing_token',
-				__( 'WordPress-GitHub-Sync needs an auth token. Please update your settings.', 'writing-on-github' )
+				__( 'Writing On GitHub needs an auth token. Please update your settings.', 'writing-on-github' )
 			);
 		}
 
@@ -97,7 +97,7 @@ class Writing_On_GitHub_Base_Client {
 		if ( ! $repo ) {
 			return new WP_Error(
 				'missing_repository',
-				__( 'WordPress-GitHub-Sync needs a repository. Please update your settings.', 'writing-on-github' )
+				__( 'Writing On GitHub needs a repository. Please update your settings.', 'writing-on-github' )
 			);
 		}
 
@@ -106,7 +106,7 @@ class Writing_On_GitHub_Base_Client {
 		if ( 2 !== count( $parts ) ) {
 			return new WP_Error(
 				'malformed_repository',
-				__( 'WordPress-GitHub-Sync needs a properly formed repository. Please update your settings.', 'writing-on-github' )
+				__( 'Writing On GitHub needs a properly formed repository. Please update your settings.', 'writing-on-github' )
 			);
 		}
 

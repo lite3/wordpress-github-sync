@@ -114,23 +114,23 @@ msgid "Starting import from GitHub."
 msgstr "Starte einen Import von GitHub."
 
 #: lib/client/base.php:84
-msgid "WordPress-GitHub-Sync needs an auth token. Please update your settings."
+msgid "Writing On GitHub needs an auth token. Please update your settings."
 msgstr ""
-"WordPress-GitHub-Sync benötigt ein OAuth Token. Bitte überprüfe Deine "
+"Writing On GitHub benötigt ein OAuth Token. Bitte überprüfe Deine "
 "Einstellungen."
 
 #: lib/client/base.php:93
-msgid "WordPress-GitHub-Sync needs a repository. Please update your settings."
+msgid "Writing On GitHub needs a repository. Please update your settings."
 msgstr ""
-"WordPress-GitHub-Sync benötigt ein Repository. Bitte überprüfe Deine "
+"Writing On GitHub benötigt ein Repository. Bitte überprüfe Deine "
 "Einstellungen."
 
 #: lib/client/base.php:102
 msgid ""
-"WordPress-GitHub-Sync needs a properly formed repository. Please update your "
+"Writing On GitHub needs a properly formed repository. Please update your "
 "settings."
 msgstr ""
-"WordPress-GitHub-Sync benötigt ein geeignetes Repository. Bitte überprüfe "
+"Writing On GitHub benötigt ein geeignetes Repository. Bitte überprüfe "
 "Deine Einstellungen."
 
 #: lib/client/persist.php:23
