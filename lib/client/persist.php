@@ -15,27 +15,17 @@ class Writing_On_GitHub_Persist_Client extends Writing_On_GitHub_Base_Client {
 	 * @return array
 	 */
 	protected function export_user() {
-		// @todo constant/abstract out?
-		if ( $user_id = (int) get_option( '_wogh_export_user_id' ) ) {
-			delete_option( '_wogh_export_user_id' );
-		} else {
-			$user_id = get_current_user_id();
-		}
-
+		$user_id = get_current_user_id();
 		$user = get_userdata( $user_id );
 
-		if ( ! $user ) {
-			// @todo is this what we want to include here?
+		if ( $user ) {
 			return array(
-				'name'  => 'Anonymous',
-				'email' => 'anonymous@users.noreply.github.com',
+				'name'  => $user->display_name,
+				'email' => $user->user_email,
 			);
 		}
 
-		return array(
-			'name'  => $user->display_name,
-			'email' => $user->user_email,
-		);
+		return false;
 	}
 
 	/**
