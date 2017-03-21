@@ -16,5 +16,6 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 require $_tests_dir . '/includes/bootstrap.php';
 
 require dirname( __FILE__ ) . '/../../vendor/jdgrimes/wp-http-testcase/wp-http-testcase.php';
+require dirname( __FILE__ ) . '/../../tests/include/testcase.php';
 
 error_reporting( E_ALL ^ E_DEPRECATED );
