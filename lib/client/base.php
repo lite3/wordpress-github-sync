@@ -9,10 +9,10 @@
  */
 class Writing_On_GitHub_Base_Client {
 
-	const HOST_OPTION_KEY 	= 'wogh_branch';
+	const HOST_OPTION_KEY 	= 'wogh_host';
 	const TOKEN_OPTION_KEY 	= 'wogh_oauth_token';
 	const REPO_OPTION_KEY 	= 'wogh_repository';
-	const BRANCH_OPTION_KEY = 'wogh_oauth_token';
+	const BRANCH_OPTION_KEY = 'wogh_branch';
 
 	/**
 	 * Application container.
