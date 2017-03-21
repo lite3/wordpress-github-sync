@@ -191,6 +191,10 @@ class Writing_On_GitHub_Controller {
 	 * @return boolean
 	 */
 	public function delete_post( $post_id ) {
+		if ( wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+
 		if ( ! $this->app->semaphore()->is_open() ) {
 			return $this->app->response()->error( new WP_Error(
 				'semaphore_locked',
