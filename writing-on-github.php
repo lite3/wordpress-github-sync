@@ -29,9 +29,9 @@
 
 // If the functions have already been autoloaded, don't reload.
 // This fixes function duplication during unit testing.
-// $path = dirname( __FILE__ ) . '/vendor/autoload_52.php';
+$path = dirname( __FILE__ ) . '/vendor/autoload_52.php';
 // if ( ! function_exists( 'get_the_github_view_link' ) && file_exists( $path ) ) {
-// 	require_once $path;
+	require_once $path;
 // }
 
 
