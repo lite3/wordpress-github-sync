@@ -197,7 +197,6 @@ class Writing_On_GitHub {
 	 * Sets and kicks off the export cronjob
 	 */
 	public function start_export() {
-		// $this->export()->set_user( get_current_user_id() );
 		$this->start_cron( 'export' );
 	}
 
