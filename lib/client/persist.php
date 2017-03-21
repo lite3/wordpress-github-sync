@@ -47,7 +47,7 @@ class Writing_On_GitHub_Persist_Client extends Writing_On_GitHub_Base_Client {
 		$body = new stdClass();
 		$body->message = $message;
 		$body->sha = $sha;
-		$body->branch = $this->master();
+		$body->branch = $this->branch();
 
 		if ( $author = $this->export_user() ) {
 			$body->author = $author;
