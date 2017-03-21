@@ -62,22 +62,6 @@ class Writing_On_GitHub_Fetch_Client_Test extends Writing_On_GitHub_Base_Client_
 				'2d73165945b0ccbe4932f1363457986b0ed49f19'
 			) )
 			->andReturn( $this->blob );
-		$this->blob
-			->shouldReceive( 'sha' )
-			->times( 3 )
-			->andReturnUsing( function () {
-				static $count = 0;
-
-				return $count ++;
-			} );
-		$this->blob
-			->shouldReceive( 'path' )
-			->times( 3 )
-			->andReturnUsing( function () {
-				static $count = 0;
-
-				return $count ++ . '.md';
-			} );
 
 		$this->assertCount( 3, $files = $this->fetch->tree_recursive() );
 
