@@ -90,27 +90,6 @@ class Writing_On_GitHub_Fetch_Client extends Writing_On_GitHub_Base_Client {
 	}
 
 	/**
-	 * Generates blobs for recursive tree blob data.
-	 *
-	 * @param stdClass[] $blobs Array of tree blob data.
-	 *
-	 * @return Writing_On_GitHub_Blob[]
-	 */
-	protected function blobs( array $blobs ) {
-		$results = array();
-
-		foreach ( $blobs as $blob ) {
-			$obj = $this->blob( $blob );
-
-			if ( ! is_wp_error( $obj ) ) {
-				$results[] = $obj;
-			}
-		}
-
-		return $results;
-	}
-
-	/**
 	 * Retrieves the blob data for a given sha
 	 *
 	 * @param stdClass $blob Tree blob data.

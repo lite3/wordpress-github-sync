@@ -79,19 +79,22 @@ class Writing_On_GitHub_Fetch_Client_Test extends Writing_On_GitHub_Base_Client_
 				return $count ++ . '.md';
 			} );
 
-		$files = $this->fetch->tree_recursive();
-		$this->assertCount( 3, $blobs = $this->fetch->blobs( $files ) );
+		$this->assertCount( 3, $files = $this->fetch->tree_recursive() );
 
-		foreach ( $blobs as $blob ) {
-			$this->assertSame( $this->blob, $blob );
+		foreach ( $files as $file ) {
+			$this->assertSame( $this->blob, $this->fetch->blob( $file ) );
 		}
 	}
 
 	public function test_should_return_commit_with_no_blobs_if_api_fails() {
 		$this->set_get_trees( true, 'master' );
 
-		$files = $this->fetch->tree_recursive();
-		$this->assertCount( 3, $this->fetch->blobs( $files ) );
+		$this->assertCount( 3, $files = $this->fetch->tree_recursive() );
+
+		foreach ( $files as $file ) {
+			$this->assertInstanceOf( 'WP_Error', $error = $this->fetch->blob( $file ) );
+			$this->assertInstanceOf( '422_unprocessable_entity', $error->get_error_code() );
+		}
 	}
 
 	// public function test_should_return_and_validate_full_commit() {
