@@ -18,7 +18,7 @@ if ( defined( 'WRITING_ON_GITHUB_TEST' ) && WRITING_ON_GITHUB_TEST ) {
 }
 
 
-require_once(dirname(__FILE__) . '/vendor/mustangostang/spyc/Spyc.php');
+require_once(dirname(__FILE__) . '/Spyc.php');
 require_once(dirname(__FILE__) . '/lib/cache.php');
 require_once(dirname(__FILE__) . '/lib/database.php');
 require_once(dirname(__FILE__) . '/lib/admin.php');
