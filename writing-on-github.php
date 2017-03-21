@@ -2,12 +2,11 @@
 /**
  * Plugin Name: Writing on GitHub
  * Plugin URI: https://github.com/litefeel/writing-on-github
- * Description: A WordPress plugin to sync content with a GitHub repository (or Jekyll site).
- * Version: 1.7.5
- * Author:  James DiGioia, Ben Balter
- * Author URI: http://jamesdigioia.com
+ * Description: A WordPress plugin to allow you writing on GitHub (or Jekyll site).
+ * Version: 1.0
+ * Author:  lite3
+ * Author URI: https://www.litefeel.com
  * License: GPLv2
- * Domain Path: /languages
  * Text Domain: writing-on-github
  */
 

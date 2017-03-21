@@ -1,15 +1,15 @@
 # Writing On GitHub #
-**Contributors:** JamesDiGioia, benbalter  
+**Contributors:** lite3  
 **Tags:** github, git, version control, content, collaboration, publishing  
 **Requires at least:** 3.9  
 **Tested up to:** 4.7  
-**Stable tag:** 1.7.5  
+**Stable tag:** 1.0  
 **License:** GPLv2  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
 ## Description ##
 
-*A WordPress plugin to sync content with a GitHub repository (or Jekyll site)*
+*A WordPress plugin to allow you writing on GitHub (or Jekyll site).*
 
 [![Build Status](https://scrutinizer-ci.com/g/mAAdhaTTah/wordpress-github-sync/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mAAdhaTTah/wordpress-github-sync/build-status/master) [![Code Coverage](https://scrutinizer-ci.com/g/mAAdhaTTah/wordpress-github-sync/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/mAAdhaTTah/wordpress-github-sync/?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mAAdhaTTah/wordpress-github-sync/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mAAdhaTTah/wordpress-github-sync/?branch=master)
 

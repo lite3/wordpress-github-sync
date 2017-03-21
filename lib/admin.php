@@ -160,7 +160,7 @@ class Writing_On_GitHub_Admin {
 	public function add_admin_menu() {
 		add_options_page(
 			__( 'Writing On GitHub', 'writing-on-github' ),
-			__( 'GitHub Sync', 'writing-on-github' ),
+			__( 'Writing On GitHub', 'writing-on-github' ),
 			'manage_options',
 			Writing_On_GitHub::$text_domain,
 			array( $this, 'settings_page' )
