@@ -191,7 +191,7 @@ class Writing_On_GitHub {
 	 * Init i18n files
 	 */
 	public function l10n() {
-		load_plugin_textdomain( self::$text_domain, false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( self::$text_domain );
 	}
 
 	/**
