@@ -53,6 +53,7 @@ class Writing_On_GitHub_Fetch_Client_Test extends Writing_On_GitHub_Base_Client_
 
 	public function test_should_return_commit_with_blobs_from_cache() {
 		$this->set_get_trees( true, 'master' );
+		$this->set_get_blobs( true );
 		$this->api_cache
 			->shouldReceive( 'fetch_blob' )
 			->times( 3 )
@@ -72,6 +73,7 @@ class Writing_On_GitHub_Fetch_Client_Test extends Writing_On_GitHub_Base_Client_
 
 	public function test_should_return_commit_with_no_blobs_if_api_fails() {
 		$this->set_get_trees( true, 'master' );
+		$this->set_get_blobs( false );
 
 		$this->assertCount( 3, $files = $this->fetch->tree_recursive() );
 
