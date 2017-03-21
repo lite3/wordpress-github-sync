@@ -9,9 +9,10 @@
  */
 class Writing_On_GitHub_Base_Client {
 
-	const TOKEN_OPTION_KEY = 'wogh_oauth_token';
-	const REPO_OPTION_KEY = 'wogh_repository';
-	const HOST_OPTION_KEY = 'wogh_host';
+	const HOST_OPTION_KEY 	= 'wogh_branch';
+	const TOKEN_OPTION_KEY 	= 'wogh_oauth_token';
+	const REPO_OPTION_KEY 	= 'wogh_repository';
+	const BRANCH_OPTION_KEY = 'wogh_oauth_token';
 
 	/**
 	 * Application container.
@@ -137,18 +138,16 @@ class Writing_On_GitHub_Base_Client {
 		return get_option( self::HOST_OPTION_KEY );
 	}
 
+	public function branch() {
+		return get_option( self::BRANCH_OPTION_KEY );
+	}
+
 	/**
 	 * API endpoint for the master branch reference
 	 */
 	public function reference_endpoint() {
-		$sync_branch = apply_filters( 'wogh_sync_branch', 'master' );
-
-		if ( ! $sync_branch ) {
-			throw new Exception( __( 'Sync branch not set. Filter `wogh_sync_branch` misconfigured.', 'writing-on-github' ) );
-		}
-
 		$url = $this->api_base() . '/repos/';
-		$url = $url . $this->repository() . '/git/refs/heads/' . $sync_branch;
+		$url = $url . $this->repository() . '/git/refs/heads/' . $this->branch();
 
 		return $url;
 	}

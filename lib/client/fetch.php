@@ -17,9 +17,10 @@ class Writing_On_GitHub_Fetch_Client extends Writing_On_GitHub_Base_Client {
 	 * @return array[Writing_On_GitHub_File_Info]|WP_Error
 	 */
 	public function compare( $sha ) {
-		// https://api.github.com/repos/lite3/testwpsync/compare/861f87e8851b8debb78db548269d29f8da4d94ac...master
+		// https://api.github.com/repos/litefeel/testwpsync/compare/861f87e8851b8debb78db548269d29f8da4d94ac...master
 		$endpoint = $this->compare_endpoint();
-		$data = $this->call( 'GET', "$endpoint/$sha...master" );
+		$branch = $this->branch();
+		$data = $this->call( 'GET', "$endpoint/$sha...$branch" );
 
 		if ( is_wp_error( $data ) ) {
 			return $data;
@@ -62,10 +63,10 @@ class Writing_On_GitHub_Fetch_Client extends Writing_On_GitHub_Base_Client {
 	 *
 	 * @return Writing_On_GitHub_Tree|WP_Error
 	 */
-	public function tree_recursive( $sha = 'root' ) {
+	public function tree_recursive( $sha = '_default' ) {
 
-		if ( 'root' === $sha ) {
-			$sha = 'master';
+		if ( '_default' === $sha ) {
+			$sha = $this->branch();
 		}
 
 		$data = $this->call( 'GET', $this->tree_endpoint() . '/' . $sha . '?recursive=1' );

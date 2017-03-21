@@ -52,6 +52,14 @@ class Writing_On_GitHub_Admin {
 			)
 		);
 
+		register_setting( Writing_On_GitHub::$text_domain, 'wogh_branch' );
+		add_settings_field( 'wogh_branch', __( 'Branch', 'writing-on-github' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
+				'default'   => 'master',
+				'name'      => 'wogh_branch',
+				'help_text' => __( 'The GitHub branch to commit to, default is master.', 'writing-on-github' ),
+			)
+		);
+
 		register_setting( Writing_On_GitHub::$text_domain, 'wogh_oauth_token' );
 		add_settings_field( 'wogh_oauth_token', __( 'Oauth Token', 'writing-on-github' ), array( $this, 'field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
