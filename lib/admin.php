@@ -80,7 +80,7 @@ class Writing_On_GitHub_Admin {
 		add_settings_field( 'wogh_default_user', __( 'Default Import User', 'writing-on-github' ), array( &$this, 'user_field_callback' ), Writing_On_GitHub::$text_domain, 'general', array(
 				'default'   => '',
 				'name'      => 'wogh_default_user',
-				'help_text' => __( 'The fallback user for import, in case WordPress <--> GitHub Sync cannot find the committer in the database.', 'writing-on-github' ),
+				'help_text' => __( 'The fallback user for import, in case Writing On GitHub cannot find the committer in the database.', 'writing-on-github' ),
 			)
 		);
 	}
@@ -159,7 +159,7 @@ class Writing_On_GitHub_Admin {
 	 */
 	public function add_admin_menu() {
 		add_options_page(
-			__( 'WordPress <--> GitHub Sync', 'writing-on-github' ),
+			__( 'Writing On GitHub', 'writing-on-github' ),
 			__( 'GitHub Sync', 'writing-on-github' ),
 			'manage_options',
 			Writing_On_GitHub::$text_domain,

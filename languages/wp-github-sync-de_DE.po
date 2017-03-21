@@ -67,10 +67,10 @@ msgstr "Default-Benutzer für Import"
 
 #: lib/admin.php:75
 msgid ""
-"The fallback user for import, in case WordPress <--> GitHub Sync cannot find "
+"The fallback user for import, in case Writing On GitHub cannot find "
 "the committer in the database."
 msgstr ""
-"Der Benutzer, der verwendet wird, falls WordPress <--> GitHub Sync keinen "
+"Der Benutzer, der verwendet wird, falls Writing On GitHub keinen "
 "Committer in der Datenbank finden kann."
 
 #: lib/admin.php:108
@@ -86,8 +86,8 @@ msgid "Export to GitHub completed successfully."
 msgstr "Der Export zu GitHub war erfolgreich."
 
 #: lib/admin.php:134 views/options.php:9
-msgid "WordPress <--> GitHub Sync"
-msgstr "WordPress <--> GitHub Synchronisation"
+msgid "Writing On GitHub"
+msgstr "Writing On GitHub"
 
 #: lib/admin.php:135
 msgid "GitHub Sync"

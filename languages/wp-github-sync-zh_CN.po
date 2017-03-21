@@ -52,7 +52,7 @@ msgid "Default Import User"
 msgstr "默认导入人"
 
 #: lib/admin.php:75
-msgid "The fallback user for import, in case WordPress <--> GitHub Sync cannot find the committer in the database."
+msgid "The fallback user for import, in case Writing On GitHub cannot find the committer in the database."
 msgstr "如果WordPress <--> GitHub在数据库中无法查找到提交者，将默认以该用户作为文章的作者。"
 
 #: lib/admin.php:108
@@ -68,8 +68,8 @@ msgid "Export to GitHub completed successfully."
 msgstr "成功导出到GitHub。"
 
 #: lib/admin.php:134 views/options.php:9
-msgid "WordPress <--> GitHub Sync"
-msgstr "WordPress <--> GitHub Sync"
+msgid "Writing On GitHub"
+msgstr "Writing On GitHub"
 
 #: lib/admin.php:135
 msgid "GitHub Sync"

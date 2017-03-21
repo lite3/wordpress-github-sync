@@ -1,4 +1,4 @@
-# WordPress <--> GitHub Sync #
+# Writing On GitHub #
 **Contributors:** JamesDiGioia, benbalter  
 **Tags:** github, git, version control, content, collaboration, publishing  
 **Requires at least:** 3.9  
@@ -17,15 +17,15 @@ Ever wish you could collaboratively author content for your WordPress site (or e
 
 Looking to tinker with Jekyll, but wish you could use WordPress's best-of-breed web editing interface instead of Atom? (gasp!)
 
-Well, now you can! Introducing [WordPress <--> GitHub Sync](https://github.com/mAAdhaTTah/wordpress-github-sync)!
+Well, now you can! Introducing [Writing On GitHub](https://github.com/mAAdhaTTah/wordpress-github-sync)!
 
-### WordPress <--> GitHub Sync does three things: ###
+### Writing On GitHub does three things: ###
 
 1.  Allows content publishers to version their content in GitHub, exposing "who made what change when" to readers
 2.  Allows readers to submit proposed improvements to WordPress-served content via GitHub's Pull Request model
 3.  Allows non-technical writers to draft and edit a Jekyll site in WordPress's best-of-breed editing interface
 
-### WordPress <--> GitHub sync might be able to do some other cool things: ###
+### Writing On GitHub might be able to do some other cool things: ###
 
 * Allow teams to collaboratively write and edit posts using GitHub (e.g., pull requests, issues, comments)
 * Allow you to sync the content of two different WordPress installations via GitHub
@@ -75,7 +75,7 @@ Install the plugin and activate it via WordPress's plugin settings page.
 ### Configuring the plugin ###
 
 1. [Create a personal oauth token](https://github.com/settings/tokens/new) with the `public_repo` scope. If you'd prefer not to use your account, you can create another GitHub account for this.
-2. Configure your GitHub host, repository, secret (defined in the next step),  and OAuth Token on the WordPress <--> GitHub sync settings page within WordPress's administrative interface. Make sure the repository has an initial commit or the export will fail.
+2. Configure your GitHub host, repository, secret (defined in the next step),  and OAuth Token on the Writing On GitHub settings page within WordPress's administrative interface. Make sure the repository has an initial commit or the export will fail.
 3. Create a WebHook within your repository with the provided callback URL and callback secret, using `application/json` as the content type. To set up a webhook on GitHub, head over to the **Settings** page of your repository, and click on **Webhooks & services**. After that, click on **Add webhook**.
 4. Click `Export to GitHub` or if you use WP-CLI, run `wp wogh export all #` from the command line, where # = the user ID you'd like to commit as.
 
@@ -83,13 +83,13 @@ Install the plugin and activate it via WordPress's plugin settings page.
 
 ### Markdown Support ###
 
-WordPress <--> GitHub Sync exports all posts as `.md` files for better display on GitHub, but all content is exported and imported as its original HTML. To enable writing, importing, and exporting in Markdown, please install and enable [WP-Markdown](https://wordpress.org/plugins/wp-markdown/), and WordPress <--> GitHub Sync will use it to convert your posts to and from Markdown.
+Writing On GitHub exports all posts as `.md` files for better display on GitHub, but all content is exported and imported as its original HTML. To enable writing, importing, and exporting in Markdown, please install and enable [WP-Markdown](https://wordpress.org/plugins/wp-markdown/), and Writing On GitHub will use it to convert your posts to and from Markdown.
 
 You can also activate the Markdown module from [Jetpack](https://wordpress.org/plugins/jetpack/) or the standalone [JP Markdown](https://wordpress.org/plugins/jetpack-markdown/) to save in Markdown and export that version to GitHub.
 
 ### Importing from GitHub ###
 
-WordPress <--> GitHub Sync is also capable of importing posts directly from GitHub, without creating them in WordPress before hand. In order to have your post imported into GitHub, add this YAML Frontmatter to the top of your .md document:
+Writing On GitHub is also capable of importing posts directly from GitHub, without creating them in WordPress before hand. In order to have your post imported into GitHub, add this YAML Frontmatter to the top of your .md document:
 
     ---
     post_title: 'Post Title'
@@ -100,13 +100,13 @@ WordPress <--> GitHub Sync is also capable of importing posts directly from GitH
 
 and fill it out with the data related to the post you're writing. Save the post and commit it directly to the repository. After the post is added to WordPress, an additional commit will be added to the repository, updating the new post with the new information from the database.
 
-Note that WordPress <--> GitHub Sync will *only* import posts from the `master` branch. Changes on other branches will be ignored.
+Note that Writing On GitHub will *only* import posts from the `master` branch. Changes on other branches will be ignored.
 
-If WordPress <--> GitHub Sync cannot find the author for a given import, it will fallback to the default user as set on the settings page. **Make sure you set this user before you begin importing posts from GitHub.** Without it set, WordPress <--> GitHub Sync will default to no user being set for the author as well as unknown-author revisions.
+If Writing On GitHub cannot find the author for a given import, it will fallback to the default user as set on the settings page. **Make sure you set this user before you begin importing posts from GitHub.** Without it set, Writing On GitHub will default to no user being set for the author as well as unknown-author revisions.
 
 ### Custom Post Type & Status Support ###
 
-By default, WordPress <--> GitHub Sync only exports published posts and pages. However, it provides a number of [hooks](https://codex.wordpress.org/Plugin_API) in order to customize its functionality. Check out the [wiki](https://github.com/mAAdhaTTah/wordpress-github-sync/wiki) for complete documentation for these actions and filters.
+By default, Writing On GitHub only exports published posts and pages. However, it provides a number of [hooks](https://codex.wordpress.org/Plugin_API) in order to customize its functionality. Check out the [wiki](https://github.com/mAAdhaTTah/wordpress-github-sync/wiki) for complete documentation for these actions and filters.
 
 If you want to export additional post types or draft posts, you'll have to hook into the filters `wogh_whitelisted_post_types` or `wogh_whitelisted_post_statuses` respectively.
 
@@ -188,7 +188,7 @@ Any or all of the attributes can be left out; defaults will take their place.
 
 ### Additional Customizations ###
 
-There are a number of other customizations available in WordPress <--> GitHub Sync, including the commit message and YAML front-matter. Want more detail? Check out the [wiki](https://github.com/mAAdhaTTah/wordpress-github-sync/wiki).
+There are a number of other customizations available in Writing On GitHub, including the commit message and YAML front-matter. Want more detail? Check out the [wiki](https://github.com/mAAdhaTTah/wordpress-github-sync/wiki).
 
 ### Contributing ###
 
