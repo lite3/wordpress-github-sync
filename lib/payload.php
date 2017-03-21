@@ -48,13 +48,10 @@ class Writing_On_GitHub_Payload {
 		// The last term in the ref is the payload_branch name.
 		$refs   = explode( '/', $this->data->ref );
 		$payload_branch = array_pop( $refs );
-		$sync_branch = apply_filters( 'wogh_sync_branch', 'master' );
 
-		if ( ! $sync_branch ) {
-			throw new Exception( __( 'Sync branch not set. Filter `wogh_sync_branch` misconfigured.', 'writing-on-github' ) );
-		}
+		$branch = $this->app->api()->fetch()->branch();
 
-		if ( $sync_branch !== $payload_branch ) {
+		if ( $branch !== $payload_branch ) {
 			return false;
 		}
 

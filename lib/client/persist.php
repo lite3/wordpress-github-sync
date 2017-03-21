@@ -47,7 +47,7 @@ class Writing_On_GitHub_Persist_Client extends Writing_On_GitHub_Base_Client {
 		$body = new stdClass();
 		$body->message = $message;
 		$body->sha = $sha;
-		$body->branch = 'master';
+		$body->branch = $this->master();
 
 		if ( $author = $this->export_user() ) {
 			$body->author = $author;
@@ -64,7 +64,7 @@ class Writing_On_GitHub_Persist_Client extends Writing_On_GitHub_Base_Client {
 	public function create_file( $blob, $message ) {
 		$body = $blob->to_body();
 		$body->message = $message;
-		$body->branch = 'master';
+		$body->branch = $this->branch();
 		unset($body->sha);
 
 		if ( $author = $this->export_user() ) {
@@ -82,7 +82,7 @@ class Writing_On_GitHub_Persist_Client extends Writing_On_GitHub_Base_Client {
 	public function update_file( $blob, $message ) {
 		$body = $blob->to_body();
 		$body->message = $message;
-		$body->branch = 'master';
+		$body->branch = $this->branch();
 
 		if ( $author = $this->export_user() ) {
 			$body->author = $author;

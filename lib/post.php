@@ -263,8 +263,9 @@ class Writing_On_GitHub_Post {
 	public function github_view_url() {
 		$github_path = get_post_meta( $this->id, '_wogh_github_path', true );
 		$repository = $this->api->fetch()->repository();
+		$branch = $this->api->fetch()->branch();
 
-		return "https://github.com/$repository/blob/master/$github_path";
+		return "https://github.com/$repository/blob/$branch/$github_path";
 	}
 
 	/**
@@ -275,8 +276,9 @@ class Writing_On_GitHub_Post {
 	public function github_edit_url() {
 		$github_path = get_post_meta( $this->id, '_wogh_github_path', true );
 		$repository = $this->api->fetch()->repository();
+		$branch = $this->api->fetch()->branch();
 
-		return "https://github.com/$repository/edit/master/$github_path";
+		return "https://github.com/$repository/edit/$branch/$github_path";
 	}
 
 	/**
