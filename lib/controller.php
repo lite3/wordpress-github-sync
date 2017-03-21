@@ -92,7 +92,7 @@ class Writing_On_GitHub_Controller {
 	 *
 	 * @return boolean
 	 */
-	public function import_master() {
+	public function import_master( $user_id ) {
 		if ( ! $this->app->semaphore()->is_open() ) {
 			return $this->app->response()->error( new WP_Error(
 				'semaphore_locked',
@@ -103,6 +103,10 @@ class Writing_On_GitHub_Controller {
 		$this->app->semaphore()->lock();
 		remove_action( 'save_post', array( $this, 'export_post' ) );
 		remove_action( 'save_post', array( $this, 'delete_post' ) );
+
+		if ( $user_id ) {
+			wp_set_current_user( $user_id );
+		}
 
 		$result = $this->app->import()->master();
 
@@ -124,7 +128,7 @@ class Writing_On_GitHub_Controller {
 	 *
 	 * @return boolean
 	 */
-	public function export_all() {
+	public function export_all( $user_id ) {
 		if ( ! $this->app->semaphore()->is_open() ) {
 			return $this->app->response()->error( new WP_Error(
 				'semaphore_locked',
@@ -133,6 +137,11 @@ class Writing_On_GitHub_Controller {
 		}
 
 		$this->app->semaphore()->lock();
+
+		if ( $user_id ) {
+			wp_set_current_user( $user_id );
+		}
+
 		$result = $this->app->export()->full();
 		$this->app->semaphore()->unlock();
 

@@ -169,8 +169,8 @@ class Writing_On_GitHub {
 		add_action( 'save_post', array( $this->controller, 'export_post' ) );
 		add_action( 'delete_post', array( $this->controller, 'delete_post' ) );
 		add_action( 'wp_ajax_nopriv_wogh_push_request', array( $this->controller, 'pull_posts' ) );
-		add_action( 'wogh_export', array( $this->controller, 'export_all' ) );
-		add_action( 'wogh_import', array( $this->controller, 'import_master' ) );
+		add_action( 'wogh_export', array( $this->controller, 'export_all' ), 10, 1 );
+		add_action( 'wogh_import', array( $this->controller, 'import_master' ), 10, 1 );
 		add_filter( 'get_edit_post_link', array( $this, 'edit_post_link' ), 10, 3 );
 
 		do_action( 'wogh_boot', $this );
@@ -198,7 +198,7 @@ class Writing_On_GitHub {
 	 * Sets and kicks off the export cronjob
 	 */
 	public function start_export() {
-		$this->export()->set_user( get_current_user_id() );
+		// $this->export()->set_user( get_current_user_id() );
 		$this->start_cron( 'export' );
 	}
 
@@ -397,7 +397,8 @@ class Writing_On_GitHub {
 	 */
 	protected function start_cron( $type ) {
 		update_option( '_wogh_' . $type . '_started', 'yes' );
-		wp_schedule_single_event( time(), 'wogh_' . $type . '' );
+		$user_id = get_current_user_id();
+		wp_schedule_single_event( time(), 'wogh_' . $type . '', array( $user_id ) );
 		spawn_cron();
 	}
 }
