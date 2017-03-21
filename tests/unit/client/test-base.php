@@ -102,7 +102,7 @@ abstract class Writing_On_GitHub_Base_Client_Test extends Writing_On_GitHub_Test
 		);
 	}
 
-	protected function set_get_trees( $succeed ) {
+	protected function set_get_trees( $succeed, $sha = '' ) {
 		$this->set_endpoint(
 			function ( $request ) {
 				if ( '[]' === $request['body'] ) {
@@ -110,7 +110,8 @@ abstract class Writing_On_GitHub_Base_Client_Test extends Writing_On_GitHub_Test
 				}
 
 				return true;
-			}, $succeed ? '200 OK' : '422 Unprocessable Entity', $succeed, '9108868e3800bec6763e51beb0d33e15036c3626'
+			}, $succeed ? '200 OK' : '422 Unprocessable Entity', $succeed,
+			$sha ? $sha : '9108868e3800bec6763e51beb0d33e15036c3626'
 		);
 	}
 

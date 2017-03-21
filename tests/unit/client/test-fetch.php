@@ -39,20 +39,20 @@ class Writing_On_GitHub_Fetch_Client_Test extends Writing_On_GitHub_Base_Client_
 	public function test_should_return_files_with_tree() {
 		// $this->set_get_refs_heads_master( true );
 		// $this->set_get_commits( true );
-		$this->set_get_trees( true );
+		$this->set_get_trees( true, 'master' );
 
 		$this->assertCount( 3, $this->fetch->tree_recursive() );
 	}
 
 	public function test_should_fail_if_cant_fetch_tree() {
-		$this->set_get_trees( false );
+		$this->set_get_trees( false, 'master' );
 
 		$this->assertInstanceOf( 'WP_Error', $error = $this->fetch->tree_recursive() );
 		$this->assertSame( '422_unprocessable_entity', $error->get_error_code() );
 	}
 
 	public function test_should_return_commit_with_blobs_from_cache() {
-		$this->set_get_trees( true );
+		$this->set_get_trees( true, 'master' );
 		$this->api_cache
 			->shouldReceive( 'fetch_blob' )
 			->times( 3 )
@@ -88,7 +88,7 @@ class Writing_On_GitHub_Fetch_Client_Test extends Writing_On_GitHub_Base_Client_
 	}
 
 	public function test_should_return_commit_with_no_blobs_if_api_fails() {
-		$this->set_get_trees( true );
+		$this->set_get_trees( true, 'master' );
 
 		$files = $this->fetch->tree_recursive();
 		$this->assertCount( 3, $this->fetch->blobs( $files ) );
