@@ -29,10 +29,10 @@
 
 // If the functions have already been autoloaded, don't reload.
 // This fixes function duplication during unit testing.
-$path = dirname( __FILE__ ) . '/vendor/autoload_52.php';
-// if ( ! function_exists( 'get_the_github_view_link' ) && file_exists( $path ) ) {
-	require_once $path;
-// }
+if ( defined( 'WRITING_ON_GITHUB_TEST' ) && WRITING_ON_GITHUB_TEST ) {
+	$path = dirname( __FILE__ ) . '/vendor/autoload_52.php';
+	include_once $path;
+}
 
 
 require_once(dirname(__FILE__) . '/vendor/mustangostang/spyc/Spyc.php');

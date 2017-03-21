@@ -4,6 +4,8 @@ if ( ! $_tests_dir ) {
 	$_tests_dir = '/tmp/wordpress-tests-lib';
 }
 
+define( 'WRITING_ON_GITHUB_TEST', true );
+
 require_once $_tests_dir . '/includes/functions.php';
 
 function _manually_load_plugin() {
