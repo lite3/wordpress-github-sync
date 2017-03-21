@@ -11,11 +11,6 @@
 class Writing_On_GitHub_Export {
 
 	/**
-	 * Option key for export user.
-	 */
-	const EXPORT_USER_OPTION = '_wogh_export_user_id';
-
-	/**
 	 * Application container.
 	 *
 	 * @var Writing_On_GitHub
@@ -121,22 +116,12 @@ class Writing_On_GitHub_Export {
 	 * @return string|WP_Error
 	 */
 	public function new_posts( array $posts ) {
-
-		$message = apply_filters(
-			'wogh_commit_msg_new_posts',
-			sprintf(
-				'Updating new posts from WordPress at %s (%s)',
-				site_url(),
-				get_bloginfo( 'name' )
-			)
-		) . $this->get_commit_msg_tag();
-
 		$error = false;
 
 		$persist = $this->app->api()->persist();
 
 		foreach ( $posts as $post ) {
-			$result = $this->new_post( $post, $message, $persist );
+			$result = $this->new_post( $post, $persist );
 			if ( is_wp_error( $result ) ) {
 				if ( $error ) {
 					$error->add( $result->get_error_code(), $result->get_error_message() );
@@ -158,31 +143,59 @@ class Writing_On_GitHub_Export {
 		return true;
 	}
 
-	protected function new_post( $post, $message, $persist ) {
+	protected function new_post( $post, $persist ) {
 		$github_path = $post->github_path();
 		$old_github_path = $post->old_github_path();
 		$blob = $post->to_blob();
 		$result = false;
 
-		// delete old file
 		if ( $old_github_path && $old_github_path != $github_path ) {
+			// rename
+			$message = apply_filters(
+				'wogh_commit_msg_move_post',
+				sprintf(
+					'Moving %s to %s via WordPress at %s (%s)',
+					$old_github_path, $github_path,
+					site_url(),
+					get_bloginfo( 'name' )
+				)
+			) . $this->get_commit_msg_tag();
+
 			$result = $persist->delete_file( $post->old_github_path(), $blob->sha(), $message );
 			if ( is_wp_error( $result ) ) {
 				return $result;
 			}
-			$old_github_path = false;
-		}
 
-		// create file
-		if ( ! $old_github_path ) {
 			$result = $persist->create_file( $blob, $message );
 			if ( is_wp_error( $result ) ) {
 				return $result;
 			}
-		}
-
-		// update file
-		if ( $old_github_path ) {
+		} elseif ( ! $old_github_path ) {
+			// create new
+			$message = apply_filters(
+				'wogh_commit_msg_new_post',
+				sprintf(
+					'Creating new posts %s from WordPress at %s (%s)',
+					$github_path,
+					site_url(),
+					get_bloginfo( 'name' )
+				)
+			) . $this->get_commit_msg_tag();
+			$result = $persist->create_file( $blob, $message );
+			if ( is_wp_error( $result ) ) {
+				return $result;
+			}
+		} elseif ( $old_github_path && $old_github_path == $github_path ) {
+			// update
+			$message = apply_filters(
+				'wogh_commit_msg_update_post',
+				sprintf(
+					'Creating new posts %s from WordPress at %s (%s)',
+					$github_path,
+					site_url(),
+					get_bloginfo( 'name' )
+				)
+			) . $this->get_commit_msg_tag();
 			$result = $persist->update_file( $blob, $message );
 			if ( is_wp_error( $result ) ) {
 				return $result;
