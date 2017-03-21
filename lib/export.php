@@ -223,18 +223,18 @@ class Writing_On_GitHub_Export {
 			return $post;
 		}
 
+		$github_path = get_post_meta( $post_id, '_wogh_github_path', true );
+
 		$message = apply_filters(
 			'wogh_commit_msg_delete',
 			sprintf(
 				'Deleting %s via WordPress at %s (%s)',
-				$post->github_path(),
+				$github_path,
 				site_url(),
 				get_bloginfo( 'name' )
 			),
 			$post
 		) . $this->get_commit_msg_tag();
-
-		$github_path = get_post_meta( $post_id, '_wogh_github_path', true );
 
 		$result = $this->app->api()->persist()->delete_file( $github_path, $post->sha(), $message );
 
