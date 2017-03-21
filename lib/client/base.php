@@ -139,7 +139,8 @@ class Writing_On_GitHub_Base_Client {
 	}
 
 	public function branch() {
-		return get_option( self::BRANCH_OPTION_KEY );
+		$branch = get_option( self::BRANCH_OPTION_KEY );
+		return $branch ? $branch : 'master';
 	}
 
 	/**
