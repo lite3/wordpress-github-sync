@@ -121,7 +121,7 @@ class Writing_On_GitHub_Database {
 		$error = false;
 
 		foreach ( $posts as $post ) {
-			$args    = apply_filters( 'wogh_pre_import_args', $post->get_args(), $post );
+			$args = apply_filters( 'wogh_pre_import_args', $this->post_args( $post ), $post );
 
 			remove_filter('content_save_pre', 'wp_filter_post_kses');
 			$post_id = $post->is_new() ?
@@ -157,6 +157,13 @@ class Writing_On_GitHub_Database {
 
 			$meta = apply_filters( 'wogh_pre_import_meta', $post->get_meta(), $post );
 
+			unset( $meta['tags'] );
+			unset( $meta['categories'] );
+			unset( $meta['author'] );
+			unset( $meta['post_date'] );
+			unset( $meta['post_excerpt'] );
+			unset( $meta['permalink'] );
+
 			foreach ( $meta as $key => $value ) {
 				update_post_meta( $post_id, $key, $value );
 			}
@@ -167,6 +174,56 @@ class Writing_On_GitHub_Database {
 		}
 
 		return __( 'Successfully saved posts.', 'writing-on-github' );
+	}
+
+	protected function post_args( $post ) {
+		$args = $post->get_args();
+		$meta = $post->get_meta();
+
+		// update tags
+		if ( isset( $meta['tags'] ) && $meta['tags'] ) {
+		    $args['tags_input'] = $meta['tags'];
+		}
+
+		// update categories
+		if ( isset( $meta['categories'] ) && $meta['categories'] ) {
+		    $categories = $meta['categories'];
+		    if (!is_array($categories)) {
+		        $categories = array($categories);
+		    }
+		    $terms = get_terms(array(
+		        'taxonomy' => 'category',
+		        'fields' => 'id=>name',
+		        'hide_empty' => 0,
+		        'name' => $categories
+		        )
+		    );
+		    $map = array();
+		    foreach ($categories as $name) {
+		        $map[$name] = 1;
+		    }
+
+		    $ids = array();
+		    if (!empty($terms)) {
+		        foreach ($terms as $id => $name) {
+		            $ids[] = $id;
+		            unset($map[$name]);
+		        }
+		    }
+
+		    // create new terms
+		    if (!empty($map)) {
+		        foreach ($map as $name => $value) {
+		            $term = wp_insert_term($name, 'category', array('parent' => 0));
+		            // array('term_id' => $term_id, 'term_taxonomy_id' => $tt_id);
+		            $ids[] = $term['term_id'];
+		        }
+		    }
+
+		    $args['post_category'] = $ids;
+		}
+
+		return $args;
 	}
 
 	/**
